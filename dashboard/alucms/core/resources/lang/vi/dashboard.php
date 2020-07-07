@@ -10,6 +10,9 @@ return [
     'error' => 'Có lỗi !',
     'title' => 'Bảng điều khiển',
     'sidebar.navigation' => 'Thanh điều hướng',
-    'sidebar.dashboard' => 'Bảng điều khiển'
+    'sidebar.dashboard' => 'Bảng điều khiển',
+    'form.name' => 'Tiêu đề',
+    'form.buttonCreate' => 'Tạo mới',
+    'form.actionTitle' => 'Thao tác'
 ];
 

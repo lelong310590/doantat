@@ -10,6 +10,8 @@
 namespace AluCMS\Core\Providers;
 
 use AluCMS\Core\Supports\Helper;
+use AluCMS\Core\View\Components\Button;
+use AluCMS\Core\View\Components\Input;
 use Illuminate\Support\ServiceProvider;
 
 class ModuleProvider extends ServiceProvider
@@ -17,6 +19,10 @@ class ModuleProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'dashboard');
+        $this->loadViewComponentsAs('alucms-form', [
+            Input::class,
+            Button::class
+        ]);
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'dashboard');
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
