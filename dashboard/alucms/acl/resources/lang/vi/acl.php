@@ -10,5 +10,9 @@ return [
     'sidebar.group' => 'Vai trò & Phân quyền',
     'sidebar.role.index' => 'Danh sách vai trò',
     'sidebar.role.create' => 'Tạo vai trò',
-    'sidebar.permission.index' => 'Danh sách quyền'
+    'sidebar.role.edit' => 'Sửa vai trò',
+    'sidebar.permission.index' => 'Danh sách quyền',
+    'role.create.name.required' => 'Tên quyền không được bỏ trống',
+    'role.create.name.unique' => 'Quyền này đã tồn tại',
+    'assign.role.to.permission' => 'Gán quyền cho nhóm'
 ];

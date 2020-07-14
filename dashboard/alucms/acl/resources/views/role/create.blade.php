@@ -14,6 +14,7 @@
 @section('content')
 
 <form action="{{route('alucms::role.create.post')}}" method="post">
+    {{csrf_field()}}
     <div class="row">
         <div class="col-8 col-xs-12">
             <div class="card">
@@ -26,17 +27,26 @@
                 </div>
                 <div id="cardCollpaseLeft" class="collapse show">
                     <div class="card-body">
-                        <x-alucms-form-input
+                        <x-alucms-component-alert/>
+
+                        <x-alucms-component-input
                             :title="trans('dashboard::dashboard.form.name')"
                             name="name"
                             status="required"
                         />
 
-                        <x-alucms-form-input
+                        <x-alucms-component-input
                             title="Guard Name"
                             name="guard_name"
                             status="readonly"
-                            defaultValue="web"
+                            defaultValue="core"
+                        />
+
+                        <label for="">@lang('acl::acl.assign.role.to.permission')</label>
+                        <x-alucms-component-table
+                            :tabledata="$permissions"
+                            :head="['Tiêu đề', 'Guard Name', 'Ngày khởi tạo']"
+                            :tablefield="['name', 'guard_name', 'created_at']"
                         />
                     </div>
                 </div>
@@ -54,7 +64,7 @@
                 </div>
                 <div id="cardCollpaseRight" class="collapse show">
                     <div class="card-body">
-                        <x-alucms-form-button
+                        <x-alucms-component-button
                             :title="trans('dashboard::dashboard.form.buttonCreate')"
                         />
                     </div>
@@ -65,4 +75,3 @@
 </form>
 
 @endsection
-

@@ -7,4 +7,5 @@
 
 return [
     'admin_route' => env('SOURCE_ADMIN_ROUTE', 'admincp'),
+    'paginate' => 20
 ];

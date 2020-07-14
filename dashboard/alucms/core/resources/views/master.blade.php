@@ -29,6 +29,9 @@
     <!-- icons -->
     <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 
+    @yield('css')
+    @stack('css')
+
 </head>
 
 <body>
@@ -116,6 +119,11 @@
 
 <!-- Dashboard init JS -->
 <script src="{{asset('assets/js/pages/dashboard-3.init.js')}}"></script>
+
+@yield('js')
+@yield('js-init')
+@stack('js')
+@stack('js-init')
 
 <!-- App js-->
 <script src="{{asset('assets/js/app.min.js')}}"></script>

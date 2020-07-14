@@ -16,13 +16,13 @@
     <div class="collapse" id="sidebarAcl">
         <ul class="nav-second-level">
             <li>
-                <a href="ecommerce-dashboard.html">@lang('acl::acl.sidebar.role.index')</a>
+                <a href="{{route('alucms::role.index.get')}}">@lang('acl::acl.sidebar.role.index')</a>
             </li>
             <li>
                 <a href="{{route('alucms::role.create.post')}}">@lang('acl::acl.sidebar.role.create')</a>
             </li>
             <li>
-                <a href="ecommerce-dashboard.html">@lang('acl::acl.sidebar.permission.index')</a>
+                <a href="{{route('alucms::permission.index.get')}}">@lang('acl::acl.sidebar.permission.index')</a>
             </li>
         </ul>
     </div>

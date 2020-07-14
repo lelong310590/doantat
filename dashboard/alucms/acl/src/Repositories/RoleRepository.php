@@ -19,4 +19,27 @@ class RoleRepository extends BaseRepository
         // TODO: Implement model() method.
         return Role::class;
     }
+
+    public function search($keywords)
+    {
+        return $this->scopeQuery(function ($e) use ($keywords) {
+            return $e->where('name', 'LIKE', '%'.$keywords.'%');
+        })->paginate(config('core.paginate'));
+    }
+
+    /**
+     * @param $data
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function createRoleWithPermission($data)
+    {
+        $role = $this->create([
+            'name' => $data['name'],
+            'guard_name' => $data['guard_name']
+        ]);
+        if (isset($data['listItems'])) {
+            $permissions = $data['listItems'];
+            $role->syncPermissions($permissions);
+        }
+    }
 }
