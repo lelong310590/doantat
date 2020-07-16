@@ -9,6 +9,7 @@
 return [
     'sidebar.group' => 'Vai trò & Phân quyền',
     'sidebar.role.index' => 'Danh sách vai trò',
+    'sidebar.role.search' => 'Tìm kiếm vai trò',
     'sidebar.role.create' => 'Tạo vai trò',
     'sidebar.role.edit' => 'Sửa vai trò',
     'sidebar.permission.index' => 'Danh sách quyền',

@@ -19,9 +19,15 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
+    <link href="{{asset('assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+    @yield('css')
+    @stack('css')
+
     <!-- App css -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
 
     <link href="{{asset('assets/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" disabled />
     <link href="{{asset('assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet"  disabled />
@@ -29,8 +35,11 @@
     <!-- icons -->
     <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 
-    @yield('css')
-    @stack('css')
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 500px !important;
+        }
+    </style>
 
 </head>
 
@@ -120,6 +129,10 @@
 <!-- Dashboard init JS -->
 <script src="{{asset('assets/js/pages/dashboard-3.init.js')}}"></script>
 
+<script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
+
+<script src="{{asset('assets/libs/ckeditor5/build/ckeditor.js')}}"></script>
+
 @yield('js')
 @yield('js-init')
 @stack('js')
@@ -127,6 +140,22 @@
 
 <!-- App js-->
 <script src="{{asset('assets/js/app.min.js')}}"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready((function ($) {
+        $('[data-toggle="select2"]').select2({});
+    }))
+
+    function responsive_filemanager_callback(field_id){
+        console.log(field_id);
+        var url = $('#'+field_id).val();
+        var previewElem = $('.'+field_id + '-preview');
+        previewElem.attr('src', url);
+        console.log(previewElem);
+        console.log(url);
+        //your code
+    }
+</script>
 
 </body>
 </html>

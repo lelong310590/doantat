@@ -19,14 +19,16 @@ class Input extends Component
     public $id;
     public $defaultValue;
     public $status;
+    public $type;
 
-    public function __construct($title, $name, $id = '', $defaultValue = '', $status = '')
+    public function __construct($title, $name, $id = '', $defaultValue = '', $status = '', $type = 'text')
     {
         $this->title = $title;
         $this->name = $name;
         $this->id = $id != '' ? $id : Str::slug($name);
         $this->defaultValue = $defaultValue;
         $this->status = $status;
+        $this->type = $type;
     }
 
     public function render()

@@ -8,5 +8,6 @@
 
 return [
     'error' => 'Lỗi !',
-    'error.delete_role_has_user' => 'Quyền này đã được gán cho tài khoản sử dụng'
+    'error.delete_role_has_user' => 'Quyền này đã được gán cho tài khoản sử dụng',
+    'error.delete_current_user' => 'Không thể xoá tài khoản này'
 ];

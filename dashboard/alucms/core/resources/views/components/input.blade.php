@@ -7,7 +7,25 @@
  */
 ?>
 
-<div class="form-group mb-3">
-    <label for="{{$id}}">{{$title}}</label>
-    <input type="text" id="{{$id}}" class="form-control" name="{{$name}}" value="{{$defaultValue}}" {{$status}}>
-</div>
+@switch ($type)
+    @case('password')
+        <div class="form-group mb-3">
+            <label for="{{$id}}">{{$title}}</label>
+            <div class="input-group input-group-merge">
+                <input type="{{$type}}" id="{{$id}}" class="form-control" name="{{$name}}" value="{{$defaultValue}}" {{$status}}>
+                <div class="input-group-append" data-password="false">
+                    <div class="input-group-text">
+                        <span class="password-eye"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @break
+
+    @default
+        <div class="form-group mb-3">
+            <label for="{{$id}}">{{$title}}</label>
+            <input type="{{$type}}" id="{{$id}}" class="form-control" name="{{$name}}" value="{{$defaultValue}}" {{$status}}>
+        </div>
+@endswitch
+

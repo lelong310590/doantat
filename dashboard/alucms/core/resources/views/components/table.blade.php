@@ -53,7 +53,7 @@
         <tbody>
             @foreach($tabledata as $k => $d)
                 <tr>
-                    <th scope="row" width="50">
+                    <th scope="row" width="50" class="align-middle">
                         <div class="checkbox checkbox-single">
                             <input
                                 type="checkbox"
@@ -67,10 +67,47 @@
                         </div>
                     </th>
                     @foreach($tablefield as $t => $f)
-                        <td>{{$d->$f}}</td>
+                        @if (is_array($f))
+                            @php
+                                $value = $f[0]
+                            @endphp
+                            @switch($f[1])
+                                @case('image')
+                                    <td class="align-middle">
+                                        @php
+                                            $thumbnail = ($d->$value != null) ? $d->$value : 'https://via.placeholder.com/100x100?text=image';
+                                        @endphp
+                                        <img src="{{$thumbnail}}" alt="" class="img-fluid avatar-md rounded">
+                                    </td>
+                                    @break
+                                @case('label')
+                                    <td class="align-middle">
+                                        @if ($d->status == 'active')
+                                            <span class="badge badge-success">{{$d ->$value}}</span>
+                                        @elseif ($d->status == 'disable')
+                                            <span class="badge badge-danger">{{$d ->$value}}</span>
+                                        @endif
+                                    </td>
+                                    @break
+                                @case('array')
+                                    @php
+                                        $arrayItem = $d->$value
+                                    @endphp
+                                    <td class="align-middle">
+                                        @foreach($arrayItem as $subValue)
+                                            <span class="badge badge-primary">{{$subValue->name}}</span>
+                                        @endforeach
+                                    </td>
+                                    @break
+                                @default
+                                    <td class="align-middle">{{$d ->$value}}</td>
+                            @endswitch
+                        @else
+                            <td class="align-middle">{{$d->$f}}</td>
+                        @endif
                     @endforeach
                     @if (!empty($action))
-                        <td width="130">
+                        <td width="130" class="align-middle">
                             <a href="{{route($action[0], $d->id)}}" class="tabledit-edit-button btn btn-success">
                                 <i class="mdi mdi-pencil"></i>
                             </a>

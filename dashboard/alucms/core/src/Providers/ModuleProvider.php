@@ -11,9 +11,12 @@ namespace AluCMS\Core\Providers;
 
 use AluCMS\Core\Supports\Helper;
 use AluCMS\Core\View\Components\Button;
+use AluCMS\Core\View\Components\Editor;
 use AluCMS\Core\View\Components\Input;
 use AluCMS\Core\View\Components\Alert;
+use AluCMS\Core\View\Components\Select;
 use AluCMS\Core\View\Components\Table;
+use AluCMS\Core\View\Components\Upload;
 use Illuminate\Support\ServiceProvider;
 
 class ModuleProvider extends ServiceProvider
@@ -25,7 +28,10 @@ class ModuleProvider extends ServiceProvider
             Input::class,
             Button::class,
             Alert::class,
-            Table::class
+            Table::class,
+            Select::class,
+            Editor::class,
+            Upload::class
         ]);
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'dashboard');
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');

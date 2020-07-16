@@ -33,6 +33,7 @@
                             :title="trans('dashboard::dashboard.form.name')"
                             name="name"
                             status="required"
+                            :defaultValue="old('name')"
                         />
 
                         <x-alucms-component-input
@@ -45,7 +46,11 @@
                         <label for="">@lang('acl::acl.assign.role.to.permission')</label>
                         <x-alucms-component-table
                             :tabledata="$permissions"
-                            :head="['Tiêu đề', 'Guard Name', 'Ngày khởi tạo']"
+                            :head="[
+                                trans('dashboard::table.th_title'),
+                                trans('dashboard::table.th_guard_name'),
+                                trans('dashboard::table.th_created_at'),
+                            ]"
                             :tablefield="['name', 'guard_name', 'created_at']"
                         />
                     </div>
