@@ -108,6 +108,11 @@
       <path value="$PROJECT_DIR$/dashboard/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/dashboard/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/dashboard/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/dashboard/vendor/fabpot/goutte" />
+      <path value="$PROJECT_DIR$/dashboard/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/dashboard/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/dashboard/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/dashboard/vendor/symfony/dom-crawler" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

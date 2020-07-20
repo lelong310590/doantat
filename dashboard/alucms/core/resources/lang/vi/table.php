@@ -16,5 +16,7 @@ return [
     'th_created_at' => 'Ngày khởi tạo',
     'th_updated_at' => 'Ngày cập nhật',
     'th_action' => 'Thao tác',
-    'th_role' => 'Vai trò'
+    'th_role' => 'Vai trò',
+    'th_amount' => 'Số tiền',
+    'th_wallet_user' => 'Tên sở hữu'
 ];

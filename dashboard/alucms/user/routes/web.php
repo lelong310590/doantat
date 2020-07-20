@@ -12,7 +12,7 @@ use Illuminate\Routing\Router;
 $adminRoute = config('core.admin_route');
 $moduleRoute = 'users';
 
-Route::group(['prefix' => $adminRoute.'/'.$moduleRoute], function (Router $router) use ($moduleRoute) {
+Route::group(['prefix' => $adminRoute], function (Router $router) use ($moduleRoute) {
     $router->group(['prefix' => $moduleRoute], function (Router $router) {
         $router->get('index', 'UserController@getIndex')
             ->name('alucms::user.index.get')

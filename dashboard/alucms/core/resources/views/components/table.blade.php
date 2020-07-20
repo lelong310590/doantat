@@ -80,6 +80,29 @@
                                         <img src="{{$thumbnail}}" alt="" class="img-fluid avatar-md rounded">
                                     </td>
                                     @break
+                                @case('relation')
+                                    @php
+                                        $relationName = $f[2];
+                                        $attributeName = $f[0];
+                                        $attributeType = $f[3];
+                                    @endphp
+                                        <td class="align-middle">
+                                            @if ($attributeType == 'image')
+                                                @php
+                                                    $thumbnail = ($d->$relationName->$attributeName != null) ? $d->$relationName->$attributeName : 'https://via.placeholder.com/100x100?text=image';
+                                                @endphp
+                                                <img src="{{$thumbnail}}" alt="" class="img-fluid avatar-md rounded">
+                                            @else
+                                                {{$d->$relationName->$attributeName}}
+                                            @endif
+                                        </td>
+                                    @break
+                                @case('money')
+                                    @php
+                                        $sign = $f[2];
+                                    @endphp
+                                    <td class="align-middle">{{number_format($d->$value)}} {{$sign}}</td>
+                                    @break
                                 @case('label')
                                     <td class="align-middle">
                                         @if ($d->status == 'active')
@@ -111,9 +134,11 @@
                             <a href="{{route($action[0], $d->id)}}" class="tabledit-edit-button btn btn-success">
                                 <i class="mdi mdi-pencil"></i>
                             </a>
+                            @isset($action[1])
                             <a href="{{route($action[1], $d->id)}}" class="tabledit-edit-button btn btn-danger">
                                 <i class="mdi mdi-delete-forever-outline"></i>
                             </a>
+                            @endisset
                         </td>
                     @endif
                 </tr>

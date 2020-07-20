@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "fabpot/goutte": "^4.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -44,7 +45,9 @@
             "AluCMS\\Core\\": "alucms/core/src",
             "AluCMS\\Auth\\": "alucms/auth/src",
             "AluCMS\\User\\": "alucms/user/src",
-            "AluCMS\\Acl\\": "alucms/acl/src"
+            "AluCMS\\Acl\\": "alucms/acl/src",
+            "AluCMS\\Lottery\\": "alucms/lottery/src",
+            "AluCMS\\Wallet\\": "alucms/wallet/src"
         },
         "classmap": [
             "database/seeds",

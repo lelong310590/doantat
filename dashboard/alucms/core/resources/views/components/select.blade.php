@@ -11,7 +11,9 @@
     <label for="{{$id}}">{{$title}}</label>
     <select class="form-control " data-toggle="select2" id="{{$id}}" name="{{$name}}" {{$status}}>
         @foreach($datavalue as $d)
-            <option value="{{$d['id']}}" {{$d['id'] == $defaultValue ? 'checked' : ''}}>{{$d['name']}}</option>
+            <option value="{{$d['id']}}" {{$d['id'] == $defaultValue ? 'checked' : ''}}>
+                {{$field != '' ? $d[$field] : $d['name']}}
+            </option>
         @endforeach
     </select>
 </div>

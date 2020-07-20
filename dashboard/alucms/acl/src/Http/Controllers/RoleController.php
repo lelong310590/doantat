@@ -15,6 +15,7 @@ use AluCMS\Acl\Repositories\PermissionRepository;
 use AluCMS\Acl\Repositories\RoleRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use AluCMS\Core\Supports\FlashMessages;
+use Barryvdh\Debugbar\LaravelDebugbar;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,8 +24,9 @@ class RoleController extends BaseController
 {
     protected $role;
 
-    public function __construct(RoleRepository $roleRepository)
+    public function __construct(Request $request, LaravelDebugbar $debugbar, RoleRepository $roleRepository)
     {
+        parent::__construct($request, $debugbar);
         $this->role = $roleRepository;
     }
 

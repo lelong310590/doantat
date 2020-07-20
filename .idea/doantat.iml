@@ -2,11 +2,13 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/lottery/src" isTestSource="false" packagePrefix="AluCMS\Lottery\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/user/src" isTestSource="false" packagePrefix="AluCMS\User\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/hook/src" isTestSource="false" packagePrefix="AluCMS\Hook\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/core/src" isTestSource="false" packagePrefix="AluCMS\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/auth/src" isTestSource="false" packagePrefix="AluCMS\Auth\" />
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/wallet/src" isTestSource="false" packagePrefix="AluCMS\Wallet\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/acl/src" isTestSource="false" packagePrefix="AluCMS\Acl\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
@@ -21,6 +23,7 @@
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/dragonmantank/cron-expression" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/fabpot/goutte" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/facade/flare-client-php" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/facade/ignition" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/facade/ignition-contracts" />
@@ -85,14 +88,18 @@
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/sebastian/version" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/spatie/laravel-permission" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/swiftmailer/swiftmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/browser-kit" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/debug" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/dom-crawler" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/event-dispatcher-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/http-client-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/http-foundation" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/http-kernel" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/symfony/mime" />

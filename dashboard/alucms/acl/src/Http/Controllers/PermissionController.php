@@ -19,8 +19,9 @@ class PermissionController extends BaseController
 {
     protected $permission;
 
-    public function __construct(PermissionRepository $permissionRepository)
+    public function __construct(Request $request, LaravelDebugbar $debugbar, PermissionRepository $permissionRepository)
     {
+        parent::__construct($request, $debugbar);
         $this->permission = $permissionRepository;
     }
 
@@ -28,13 +29,10 @@ class PermissionController extends BaseController
      * @param Request $request
      * @return View
      */
-    public function getIndex(Request $request) : View
+    public function getIndex() : View
     {
-        $keywords = $request->get('keywords');
         $permission = $this->permission->paginate(config('core.paginate'));
-        if ($keywords) {
-            $permission = $this->permission->search($keywords);
-        }
+
         return view('acl::permission.index', [
             'permission' => $permission
         ]);

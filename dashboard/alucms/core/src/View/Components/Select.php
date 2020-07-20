@@ -20,8 +20,9 @@ class Select extends Component
     public $datavalue;
     public $defaultValue;
     public $status;
+    public $field;
 
-    public function __construct($title, $name, $id = '', $datavalue, $defaultValue = '', $status = '')
+    public function __construct($title, $name, $id = '', $datavalue, $defaultValue = '', $status = '', $field = '')
     {
         $this->title = $title;
         $this->name = $name;
@@ -29,6 +30,7 @@ class Select extends Component
         $this->datavalue = $datavalue;
         $this->defaultValue = $defaultValue;
         $this->status = $status;
+        $this->field = $field;
     }
 
     public function render()

@@ -16,6 +16,7 @@ use AluCMS\User\Http\Requests\UserEditRequest;
 use AluCMS\User\Models\User;
 use AluCMS\User\Repositories\UserRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
+use Barryvdh\Debugbar\LaravelDebugbar;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -24,8 +25,9 @@ class UserController extends BaseController
 {
     protected $user;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(Request $request, LaravelDebugbar $debugbar, UserRepository $userRepository)
     {
+        parent::__construct($request, $debugbar);
         $this->user = $userRepository;
     }
 

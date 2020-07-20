@@ -144,6 +144,12 @@
 <script type="text/javascript">
     jQuery(document).ready((function ($) {
         $('[data-toggle="select2"]').select2({});
+
+        $('[data-toggle="touchspin"]').TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            prefix: 'đ'
+        });
     }))
 
     function responsive_filemanager_callback(field_id){
