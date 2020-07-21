@@ -20,6 +20,7 @@
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
     <link href="{{asset('assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" type="text/css" />
 
     @yield('css')
     @stack('css')
@@ -127,11 +128,12 @@
 <script src="{{asset('assets/js/pages/jquery.todo.js')}}"></script>
 
 <!-- Dashboard init JS -->
-<script src="{{asset('assets/js/pages/dashboard-3.init.js')}}"></script>
 
 <script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
 
 <script src="{{asset('assets/libs/ckeditor5/build/ckeditor.js')}}"></script>
+
+<script src="{{asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
 
 @yield('js')
 @yield('js-init')

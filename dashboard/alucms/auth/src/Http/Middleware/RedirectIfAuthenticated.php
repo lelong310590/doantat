@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect()->to(route('dashboard::index.get'));
+            return redirect()->to(route('alucms::dashboard.index.get'));
         }
 
         return $next($request);

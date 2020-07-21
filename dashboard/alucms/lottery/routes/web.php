@@ -18,4 +18,11 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($moduleRo
             ->name('alucms::lottery.index.get')
             ->middleware('permission:lottery_index');
     });
+
+    $router->group(['prefix' => 'ticket'], function (Router $router) {
+        $router->get('index', 'TicketController@getIndex')
+            ->name('alucms::ticket.index.get')
+            ->middleware('permission:ticket_index');
+
+    });
 });

@@ -7,5 +7,7 @@
  */
 
 return [
-    'sidebar_lottery_index' => 'Kết quả sổ xố'
+    'sidebar_lottery_index' => 'Kết quả sổ xố',
+    'sidebar_ticket_index' => 'Vé số',
+    'sidebar_ticket_index_search' => 'Tìm kiếm vé số'
 ];

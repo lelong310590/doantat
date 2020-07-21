@@ -28,14 +28,6 @@
             <input data-toggle="touchspin" type="{{$type}}" id="{{$id}}" name="{{$name}}" value="{{$defaultValue ? $defaultValue : 0}}" {{$status}} data-bts-prefix="$">
         </div>
 
-        @push('css')
-            <link href="{{asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" type="text/css" />
-        @endpush
-
-        @push('js')
-            <script src="{{asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
-        @endpush
-
         @break
 
     @default

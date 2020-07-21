@@ -61,5 +61,6 @@ class ModuleProvider extends ServiceProvider
         $this->app->register(\AluCMS\Acl\Providers\ModuleProvider::class);
         $this->app->register(\AluCMS\Lottery\Providers\ModuleProvider::class);
         $this->app->register(\AluCMS\Wallet\Providers\ModuleProvider::class);
+        $this->app->register(\AluCMS\Award\Providers\ModuleProvider::class);
     }
 }

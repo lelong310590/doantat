@@ -92,6 +92,12 @@
                                                     $thumbnail = ($d->$relationName->$attributeName != null) ? $d->$relationName->$attributeName : 'https://via.placeholder.com/100x100?text=image';
                                                 @endphp
                                                 <img src="{{$thumbnail}}" alt="" class="img-fluid avatar-md rounded">
+                                            @elseif ($attributeType == 'ticket')
+                                                @foreach($d->$relationName as $k => $t)
+                                                    <button type="button" class="btn btn-outline-danger waves-effect waves-light">
+                                                        {{$t->$attributeName}}
+                                                    </button>
+                                                @endforeach
                                             @else
                                                 {{$d->$relationName->$attributeName}}
                                             @endif
@@ -106,9 +112,9 @@
                                 @case('label')
                                     <td class="align-middle">
                                         @if ($d->status == 'active')
-                                            <span class="badge badge-success">{{$d ->$value}}</span>
+                                            <span class="badge bg-soft-success text-success">{{$d ->$value}}</span>
                                         @elseif ($d->status == 'disable')
-                                            <span class="badge badge-danger">{{$d ->$value}}</span>
+                                            <span class="badge bg-soft-danger text-dangerr">{{$d ->$value}}</span>
                                         @endif
                                     </td>
                                     @break
@@ -131,12 +137,13 @@
                     @endforeach
                     @if (!empty($action))
                         <td width="130" class="align-middle">
-                            <a href="{{route($action[0], $d->id)}}" class="tabledit-edit-button btn btn-success">
-                                <i class="mdi mdi-pencil"></i>
+                            <a href="{{route($action[0], $d->id)}}" class="action-icon">
+                                <i class="mdi mdi-square-edit-outline"></i>
                             </a>
+
                             @isset($action[1])
-                            <a href="{{route($action[1], $d->id)}}" class="tabledit-edit-button btn btn-danger">
-                                <i class="mdi mdi-delete-forever-outline"></i>
+                            <a href="{{route($action[1], $d->id)}}" class="action-icon">
+                                <i class="mdi mdi-delete"></i>
                             </a>
                             @endisset
                         </td>

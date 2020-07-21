@@ -18,7 +18,7 @@
             <ul id="side-menu">
                 <li class="menu-title">@lang('dashboard::dashboard.sidebar.navigation')</li>
                 <li>
-                    <a href="#sidebarDashboards" data-toggle="collapse">
+                    <a href="{{route('alucms::dashboard.index.get')}}">
                         <i data-feather="airplay"></i>
                         <span> @lang('dashboard::dashboard.sidebar.dashboard') </span>
                     </a>

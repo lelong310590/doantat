@@ -9,61 +9,74 @@
 
 @extends('dashboard::master')
 
+@section('pageTitle', trans('dashboard::dashboard.title'))
+
 @section('content')
     <!-- Start Content-->
-    <div class="container-fluid">
-
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box">
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                            <li class="breadcrumb-item active">Dashboard 3</li>
-                        </ol>
-                    </div>
-                    <h4 class="page-title">Dashboard 3</h4>
-                </div>
-            </div>
-        </div>
-        <!-- end page title -->
-
+    <div class="col-xs-12">
 
         <div class="row">
             <div class="col-md-6 col-xl-3">
                 <div class="card-box">
-                    <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="More Info"></i>
-                    <h4 class="mt-0 font-16">Income Status</h4>
-                    <h2 class="text-primary my-3 text-center">$<span data-plugin="counterup">31,570</span></h2>
-                    <p class="text-muted mb-0">Total income: $22506 <span class="float-right"><i class="fa fa-caret-up text-success mr-1"></i>10.25%</span></p>
+                    <h4 class="mt-0 font-16">Người chơi mới</h4>
+                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{number_format($monthUser)}}</span></h2>
+                    <p class="text-muted mb-0">Tổng người chơi: {{number_format($totalUser)}}
+                        <span class="float-right">
+                            @if ($monthUser > $lastMonthUser)
+                                <i class="fa fa-caret-up text-success mr-1"></i>{{$grownUserPercent}} %
+                            @else
+                                <i class="fa fa-caret-down text-danger mr-1"></i>{{$grownUserPercent}} %
+                            @endif
+                        </span>
+                    </p>
                 </div>
             </div>
 
             <div class="col-md-6 col-xl-3">
                 <div class="card-box">
-                    <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="More Info"></i>
-                    <h4 class="mt-0 font-16">Sales Status</h4>
-                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">683</span></h2>
-                    <p class="text-muted mb-0">Total sales: 2398 <span class="float-right"><i class="fa fa-caret-down text-danger mr-1"></i>7.85%</span></p>
+                    <h4 class="mt-0 font-16">Lượng vé trong tháng</h4>
+                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{number_format($currentMonthTicket)}}</span></h2>
+                    <p class="text-muted mb-0">Vé tháng trước: {{number_format($lastMonthTicket)}}
+                        <span class="float-right">
+                            @if ($currentMonthTicket > $lastMonthTicket)
+                                <i class="fa fa-caret-up text-success mr-1"></i>{{$grownTicketPercent}} %
+                            @else
+                                <i class="fa fa-caret-down text-danger mr-1"></i>{{$grownTicketPercent}} %
+                            @endif
+                        </span>
+                    </p>
                 </div>
             </div>
 
             <div class="col-md-6 col-xl-3">
                 <div class="card-box">
-                    <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="More Info"></i>
-                    <h4 class="mt-0 font-16">Recent Users</h4>
-                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">3.2</span>M</h2>
-                    <p class="text-muted mb-0">Total users: 121 M <span class="float-right"><i class="fa fa-caret-up text-success mr-1"></i>3.64%</span></p>
+                    <h4 class="mt-0 font-16">Doanh số tháng</h4>
+                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{number_format($currentMonthTicket * config('core.price_per_ticket'))}}</span>đ</h2>
+                    <p class="text-muted mb-0">Doanh số tháng trước: {{number_format($lastMonthTicket * config('core.price_per_ticket'))}}đ
+                        <span class="float-right">
+                            @if ($currentMonthTicket > $lastMonthTicket)
+                                <i class="fa fa-caret-up text-success mr-1"></i>{{$grownTicketPercent}} %
+                            @else
+                                <i class="fa fa-caret-down text-danger mr-1"></i>{{$grownTicketPercent}} %
+                            @endif
+                        </span>
+                    </p>
                 </div>
             </div>
 
             <div class="col-md-6 col-xl-3">
                 <div class="card-box">
-                    <i class="fa fa-info-circle text-muted float-right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="More Info"></i>
-                    <h4 class="mt-0 font-16">Total Revenue</h4>
-                    <h2 class="text-primary my-3 text-center">$<span data-plugin="counterup">68,541</span></h2>
-                    <p class="text-muted mb-0">Total revenue: $1.2 M <span class="float-right"><i class="fa fa-caret-up text-success mr-1"></i>17.48%</span></p>
+                    <h4 class="mt-0 font-16">Giải thưởng kỳ</h4>
+                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{number_format($currentAward)}}</span>đ</h2>
+                    <p class="text-muted mb-0">Doanh số kỳ: {{number_format($valueFromStartToNow)}}đ
+                        <span class="float-right">
+                            @if ($valueFromStartToNow > config('core.start_award'))
+                                <i class="fa fa-caret-up text-success mr-1"></i>{{number_format($valueFromStartToNow - config('core.start_award'))}}đ
+                            @else
+                                <i class="fa fa-caret-down text-danger mr-1"></i>{{number_format($valueFromStartToNow - config('core.start_award'))}}đ
+                            @endif
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -71,302 +84,260 @@
 
         <div class="row">
             <div class="col-xl-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="float-right d-none d-md-inline-block">
-                            <div class="btn-group mb-2">
-                                <button type="button" class="btn btn-xs btn-secondary">Today</button>
-                                <button type="button" class="btn btn-xs btn-light">Weekly</button>
-                                <button type="button" class="btn btn-xs btn-light">Monthly</button>
-                            </div>
-                        </div>
-                        <h4 class="header-title">Revenue</h4>
-                        <div class="row mt-4 text-center">
-                            <div class="col-4">
-                                <p class="text-muted font-15 mb-1 text-truncate">Target</p>
-                                <h4><i class="fe-arrow-down text-danger mr-1"></i>$7.8k</h4>
-                            </div>
-                            <div class="col-4">
-                                <p class="text-muted font-15 mb-1 text-truncate">Last week</p>
-                                <h4><i class="fe-arrow-up text-success mr-1"></i>$1.4k</h4>
-                            </div>
-                            <div class="col-4">
-                                <p class="text-muted font-15 mb-1 text-truncate">Last Month</p>
-                                <h4><i class="fe-arrow-down text-danger mr-1"></i>$15k</h4>
-                            </div>
-                        </div>
-                        <div class="mt-3 chartjs-chart">
-                            <canvas id="revenue-chart" data-colors="#1fa083,#f1556c" height="300"></canvas>
-                        </div>
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
+                <div class="card-box">
+                    <h4 class="header-title mb-3">Bộ số được chọn nhiều</h4>
+                    <x-alucms-component-table
+                        :tabledata="$dangerNumber"
+                        :head="['Bộ số', 'Lượt đánh']"
+                        :tablefield="['value', 'count(value)']"
+                    />
+                </div> <!-- end card-box-->
             </div> <!-- end col -->
 
             <div class="col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="float-right d-none d-md-inline-block">
-                            <div class="btn-group mb-2">
-                                <button type="button" class="btn btn-xs btn-secondary">Today</button>
-                                <button type="button" class="btn btn-xs btn-light">Weekly</button>
-                                <button type="button" class="btn btn-xs btn-light">Monthly</button>
-                            </div>
-                        </div>
-                        <h4 class="header-title">Projections Vs Actuals</h4>
+                        <h4 class="header-title">Doanh thu hàng tháng (ngàn đồng)</h4>
                         <div class="row mt-4 text-center">
                             <div class="col-4">
-                                <p class="text-muted font-15 mb-1 text-truncate">Target</p>
-                                <h4><i class="fe-arrow-down text-danger mr-1"></i>$3.8k</h4>
-                            </div>
-                            <div class="col-4">
-                                <p class="text-muted font-15 mb-1 text-truncate">Last week</p>
-                                <h4><i class="fe-arrow-up text-success mr-1"></i>$1.1k</h4>
-                            </div>
-                            <div class="col-4">
-                                <p class="text-muted font-15 mb-1 text-truncate">Last Month</p>
-                                <h4><i class="fe-arrow-down text-danger mr-1"></i>$25k</h4>
+                                <p class="text-muted font-15 mb-1 text-truncate">Cùng kỳ tháng trước</p>
+                                @if ($currentMonthTicket > $lastMonthTicket)
+                                    <h4><i class="fe-arrow-up text-success mr-1"></i>{{($currentMonthTicket - $lastMonthTicket) * config('core.price_per_ticket')}}đ</h4>
+                                @else
+                                    <h4><i class="fe-arrow-down text-danger mr-1"></i>{{($currentMonthTicket - $lastMonthTicket) * config('core.price_per_ticket')}}đ</h4>
+                                @endif
                             </div>
                         </div>
                         <div class="mt-3 chartjs-chart">
-                            <canvas id="projections-actuals-chart" data-colors="#4a81d4,#e3eaef" height="300"></canvas>
+                            <canvas id="projections-actuals-chart" data-colors="#4a81d4,#e3eaef" height="261"></canvas>
                         </div>
                     </div>
                 </div> <!-- end card-->
             </div> <!-- end col -->
         </div>
         <!-- end row -->
-
-        <div class="row">
-            <!-- INBOX -->
-            <div class="col-xl-4 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dropdown float-right">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Settings</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                            </div>
-                        </div>
-                        <h4 class="header-title mb-3">Inbox</h4>
-
-                        <div class="inbox-widget" data-simplebar style="max-height: 407px;">
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="../assets/images/users/user-2.jpg" class="rounded-circle" alt=""></div>
-                                <p class="inbox-item-author">Tomaslau</p>
-                                <p class="inbox-item-text">I've finished it! See you so...</p>
-                                <p class="inbox-item-date">
-                                    <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                                </p>
-                            </div>
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="../assets/images/users/user-3.jpg" class="rounded-circle" alt=""></div>
-                                <p class="inbox-item-author">Stillnotdavid</p>
-                                <p class="inbox-item-text">This theme is awesome!</p>
-                                <p class="inbox-item-date">
-                                    <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                                </p>
-                            </div>
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="../assets/images/users/user-4.jpg" class="rounded-circle" alt=""></div>
-                                <p class="inbox-item-author">Kurafire</p>
-                                <p class="inbox-item-text">Nice to meet you</p>
-                                <p class="inbox-item-date">
-                                    <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                                </p>
-                            </div>
-
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="../assets/images/users/user-5.jpg" class="rounded-circle" alt=""></div>
-                                <p class="inbox-item-author">Shahedk</p>
-                                <p class="inbox-item-text">Hey! there I'm available...</p>
-                                <p class="inbox-item-date">
-                                    <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                                </p>
-                            </div>
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="../assets/images/users/user-6.jpg" class="rounded-circle" alt=""></div>
-                                <p class="inbox-item-author">Adhamdannaway</p>
-                                <p class="inbox-item-text">This theme is awesome!</p>
-                                <p class="inbox-item-date">
-                                    <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                                </p>
-                            </div>
-
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="../assets/images/users/user-3.jpg" class="rounded-circle" alt=""></div>
-                                <p class="inbox-item-author">Stillnotdavid</p>
-                                <p class="inbox-item-text">This theme is awesome!</p>
-                                <p class="inbox-item-date">
-                                    <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                                </p>
-                            </div>
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="../assets/images/users/user-4.jpg" class="rounded-circle" alt=""></div>
-                                <p class="inbox-item-author">Kurafire</p>
-                                <p class="inbox-item-text">Nice to meet you</p>
-                                <p class="inbox-item-date">
-                                    <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                                </p>
-                            </div>
-                        </div> <!-- end inbox-widget -->
-                    </div>
-                </div> <!-- end card -->
-            </div> <!-- end col -->
-
-            <!-- Todos app -->
-            <div class="col-xl-4 col-lg-6">
-                <!-- Todo-->
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dropdown float-right">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Settings</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                            </div>
-                        </div>
-                        <h4 class="header-title mb-3">Todo</h4>
-
-                        <div class="todoapp">
-                            <div class="row">
-                                <div class="col">
-                                    <h5 id="todo-message"><span id="todo-remaining"></span> of <span id="todo-total"></span> remaining</h5>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="" class="float-right btn btn-light btn-sm" id="btn-archive">Archive</a>
-                                </div>
-                            </div>
-
-                            <div style="max-height: 310px;" data-simplebar>
-                                <ul class="list-group list-group-flush todo-list" id="todo-list"></ul>
-                            </div>
-
-                            <form name="todo-form" id="todo-form" class="needs-validation mt-3" novalidate>
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="text" id="todo-input-text" name="todo-input-text" class="form-control"
-                                               placeholder="Add new todo" required>
-                                        <div class="invalid-feedback">
-                                            Please enter your task name
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <button class="btn-primary btn-md btn-block btn waves-effect waves-light" type="submit" id="todo-btn-submit">Add</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div> <!-- end .todoapp-->
-
-                    </div> <!-- end card-body -->
-                </div> <!-- end card-->
-            </div> <!-- end col -->
-
-            <!-- CHAT -->
-            <div class="col-xl-4 col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dropdown float-right">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Settings</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                            </div>
-                        </div>
-                        <h4 class="header-title mb-3">Chat</h4>
-
-                        <div class="chat-conversation">
-                            <div data-simplebar style="height: 370px;">
-                                <ul class="conversation-list">
-                                    <li class="clearfix">
-                                        <div class="chat-avatar">
-                                            <img src="../assets/images/users/user-5.jpg" alt="male">
-                                            <i>10:00</i>
-                                        </div>
-                                        <div class="conversation-text">
-                                            <div class="ctext-wrap">
-                                                <i>Geneva</i>
-                                                <p>
-                                                    Hello!
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix odd">
-                                        <div class="chat-avatar">
-                                            <img src="../assets/images/users/user-1.jpg" alt="Female">
-                                            <i>10:01</i>
-                                        </div>
-                                        <div class="conversation-text">
-                                            <div class="ctext-wrap">
-                                                <i>Dominic</i>
-                                                <p>
-                                                    Hi, How are you? What about our next meeting?
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <div class="chat-avatar">
-                                            <img src="../assets/images/users/user-5.jpg" alt="male">
-                                            <i>10:01</i>
-                                        </div>
-                                        <div class="conversation-text">
-                                            <div class="ctext-wrap">
-                                                <i>Geneva</i>
-                                                <p>
-                                                    Yeah everything is fine
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix odd">
-                                        <div class="chat-avatar">
-                                            <img src="../assets/images/users/user-1.jpg" alt="male">
-                                            <i>10:02</i>
-                                        </div>
-                                        <div class="conversation-text">
-                                            <div class="ctext-wrap">
-                                                <i>Dominic</i>
-                                                <p>
-                                                    Wow that's great
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <form class="needs-validation" novalidate name="chat-form" id="chat-form">
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="text" class="form-control chat-input" placeholder="Enter your text" required>
-                                        <div class="invalid-feedback">
-                                            Please enter your messsage
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-danger chat-send btn-block waves-effect waves-light">Send</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div> <!-- end .chat-conversation-->
-                    </div>
-                </div> <!-- end card-->
-            </div> <!-- end col-->
-        </div> <!-- end row -->
 
     </div> <!-- container -->
 @endsection
+
+@push('js-init')
+    <script type="text/javascript">
+        ! function ($) {
+            "use strict";
+
+            var ChartJs = function () {
+                this.$body = $("body"),
+                    this.charts = []
+            };
+
+            ChartJs.prototype.respChart = function (selector, type, data, options) {
+
+                // get selector by context
+                var ctx = selector.get(0).getContext("2d");
+
+                //default config
+                Chart.defaults.global.defaultFontColor = "#8391a2";
+                Chart.defaults.scale.gridLines.color = "#8391a2";
+
+                // pointing parent container to make chart js inherit its width
+                var container = $(selector).parent();
+
+                // this function produce the responsive Chart JS
+
+                function generateChart() {
+                    // make chart width fit with its container
+                    var ww = selector.attr('width', $(container).width());
+                    var chart;
+                    switch (type) {
+                        case 'Line':
+                            chart = new Chart(ctx, { type: 'line', data: data, options: options });
+                            break;
+                        case 'Doughnut':
+                            chart = new Chart(ctx, { type: 'doughnut', data: data, options: options });
+                            break;
+                        case 'Pie':
+                            chart = new Chart(ctx, { type: 'pie', data: data, options: options });
+                            break;
+                        case 'Bar':
+                            chart = new Chart(ctx, { type: 'bar', data: data, options: options });
+                            break;
+                        case 'Radar':
+                            chart = new Chart(ctx, { type: 'radar', data: data, options: options });
+                            break;
+                        case 'PolarArea':
+                            chart = new Chart(ctx, { data: data, type: 'polarArea', options: options });
+                            break;
+                    }
+                    return chart;
+                };
+                // run function - render chart at first load
+                return generateChart();
+            },
+                // init various charts and returns
+                ChartJs.prototype.initCharts = function () {
+                    var charts = [];
+                    var defaultColors = ["#1abc9c", "#f1556c", "#4a81d4", "#e3eaef"];
+
+                    if ($('#revenue-chart').length > 0) {
+                        var dataColors = $("#revenue-chart").data('colors');
+                        var colors = dataColors? dataColors.split(",") : defaultColors.concat();
+
+                        var lineChart = {
+                            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                            datasets: [{
+                                label: "Current Week",
+                                backgroundColor: hexToRGB(colors[0], 0.3),
+                                borderColor: colors[0],
+                                data: [32, 42, 42, 62, 52, 75, 62]
+                            }, {
+                                label: "Previous Week",
+                                fill: true,
+                                backgroundColor: 'transparent',
+                                borderColor: colors[1],
+                                borderDash: [5, 5],
+                                data: [42, 58, 66, 93, 82, 105, 92]
+                            }]
+                        };
+
+                        var lineOpts = {
+                            maintainAspectRatio: false,
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                intersect: false
+                            },
+                            hover: {
+                                intersect: true
+                            },
+                            plugins: {
+                                filler: {
+                                    propagate: false
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    reverse: true,
+                                    gridLines: {
+                                        color: "rgba(0,0,0,0.05)"
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        stepSize: 20
+                                    },
+                                    display: true,
+                                    borderDash: [5, 5],
+                                    gridLines: {
+                                        color: "rgba(0,0,0,0)",
+                                        fontColor: '#fff'
+                                    }
+                                }]
+                            }
+                        };
+                        charts.push(this.respChart($("#revenue-chart"), 'Line', lineChart, lineOpts));
+                    }
+
+                    //barchart
+                    if ($('#projections-actuals-chart').length > 0) {
+                        var dataColors = $("#projections-actuals-chart").data('colors');
+                        var colors = dataColors? dataColors.split(",") : defaultColors.concat();
+
+                        var barChart = {
+                            // labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+                            labels: ["T 01", "T 02", "T 03", "T 04", "T 05", "T 06", "T 07", "T 08", "T 09", "T 10", "T 11", "T 12"],
+                            datasets: [
+                                {
+                                    label: "Doanh thu vé",
+                                    backgroundColor: colors[0],
+                                    borderColor: colors[0],
+                                    hoverBackgroundColor: colors[0],
+                                    hoverBorderColor: colors[0],
+                                    data: [
+                                        @foreach($chartDataTickets as $c)
+                                            {{$c / 1000}}
+                                            @if(!$loop->last)
+                                           ,
+                                            @endif
+                                        @endforeach
+                                    ],
+                                    barPercentage: 0.7,
+                                    categoryPercentage: 0.5,
+                                }
+                            ]
+                        };
+                        var barOpts = {
+                            maintainAspectRatio: false,
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                yAxes: [{
+                                    gridLines: {
+                                        display: false
+                                    },
+                                    stacked: false,
+                                    ticks: {
+                                        stepSize: 20
+                                    }
+                                }],
+                                xAxes: [{
+                                    stacked: false,
+                                    gridLines: {
+                                        color: "rgba(0,0,0,0.01)"
+                                    }
+                                }]
+                            }
+                        };
+
+                        charts.push(this.respChart($("#projections-actuals-chart"), 'Bar', barChart, barOpts));
+                    }
+                    return charts;
+                },
+                //initializing various components and plugins
+                ChartJs.prototype.init = function () {
+                    var $this = this;
+                    // font
+                    Chart.defaults.global.defaultFontFamily = 'Nunito,sans-serif';
+
+                    // init charts
+                    $this.charts = this.initCharts();
+
+                    // enable resizing matter
+                    $(window).on('resize', function (e) {
+                        $.each($this.charts, function (index, chart) {
+                            try {
+                                chart.destroy();
+                            }
+                            catch (err) {
+                            }
+                        });
+                        $this.charts = $this.initCharts();
+                    });
+                },
+
+                //init flotchart
+                $.ChartJs = new ChartJs, $.ChartJs.Constructor = ChartJs
+        }(window.jQuery),
+
+//initializing ChartJs
+            function ($) {
+                "use strict";
+                $.ChartJs.init()
+            }(window.jQuery);
+
+        /* utility function */
+
+        function hexToRGB(hex, alpha) {
+            var r = parseInt(hex.slice(1, 3), 16),
+                g = parseInt(hex.slice(3, 5), 16),
+                b = parseInt(hex.slice(5, 7), 16);
+
+            if (alpha) {
+                return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+            } else {
+                return "rgb(" + r + ", " + g + ", " + b + ")";
+            }
+        }
+    </script>
+@endpush

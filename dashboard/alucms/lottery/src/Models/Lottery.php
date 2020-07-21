@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lottery extends Model
 {
-    protected $table = 'lottery_result';
+    protected $table = 'lottery_results';
 
     protected $fillable = ['result_value', 'result_date' ,'created_at', 'deleted_at'];
 }

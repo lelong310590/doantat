@@ -12,6 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/dashboard/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/acl/src" isTestSource="false" packagePrefix="AluCMS\Acl\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/award/src" isTestSource="false" packagePrefix="AluCMS\Award\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/barryvdh/laravel-debugbar" />

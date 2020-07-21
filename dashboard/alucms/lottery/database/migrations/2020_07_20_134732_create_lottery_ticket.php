@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWalletsTable extends Migration
+class CreateLotteryTicket extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateWalletsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wallets', function (Blueprint $table) {
+        Schema::create('lottery_tickets', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('username')->unique()->nullable();
-            $table->double('amount')->default(0);
-            $table->enum('status', ['active', 'disable'])->default('active');
+            $table->string('date')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateWalletsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wallet');
+        Schema::dropIfExists('lottery_ticket');
     }
 }

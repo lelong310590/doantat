@@ -18,5 +18,8 @@ return [
     'th_action' => 'Thao tác',
     'th_role' => 'Vai trò',
     'th_amount' => 'Số tiền',
-    'th_wallet_user' => 'Tên sở hữu'
+    'th_wallet_user' => 'Tên sở hữu',
+    'th_ticket_user' => 'Chủ vé số',
+    'th_ticket_detail' => 'Dãy số đánh',
+    'th_ticket_date' => 'Ngày ghi'
 ];

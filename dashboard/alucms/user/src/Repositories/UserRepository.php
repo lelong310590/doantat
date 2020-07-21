@@ -10,6 +10,7 @@
 namespace AluCMS\User\Repositories;
 
 use AluCMS\User\Models\User;
+use AluCMS\Wallet\Models\Wallet;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class UserRepository extends BaseRepository
@@ -24,6 +25,7 @@ class UserRepository extends BaseRepository
     {
         return $this->scopeQuery(function ($e) use ($keywords) {
             return $e->with('roles')->where('username', 'LIKE', '%'.$keywords.'%');
-        })->paginate(config('core.paginate'));
+        })->orderBy('created_at', 'desc')->paginate(config('core.paginate'));
     }
+
 }

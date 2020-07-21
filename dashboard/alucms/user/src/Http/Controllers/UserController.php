@@ -13,7 +13,6 @@ use AluCMS\Acl\Repositories\RoleRepository;
 use AluCMS\Core\Supports\FlashMessages;
 use AluCMS\User\Http\Requests\UserCreateRequest;
 use AluCMS\User\Http\Requests\UserEditRequest;
-use AluCMS\User\Models\User;
 use AluCMS\User\Repositories\UserRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Barryvdh\Debugbar\LaravelDebugbar;
@@ -38,7 +37,7 @@ class UserController extends BaseController
     public function getIndex(Request $request) : View
     {
         $keywords = $request->get('keywords');
-        $user = $this->user->with('roles')->paginate(config('core.paginate'));
+        $user = $this->user->with('roles')->orderBy('created_at', 'desc')->paginate(config('core.paginate'));
         if ($keywords) {
             $user = $this->user->search($keywords);
         }

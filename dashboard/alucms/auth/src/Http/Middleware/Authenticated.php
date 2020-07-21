@@ -18,7 +18,7 @@ class Authenticated
 
     const LOGIN_ROUTE_NAME_POST = 'auth::login.post';
 
-    const DASHBOARD_ROUTE_NAME_GET = 'dashboard::index.get';
+    const DASHBOARD_ROUTE_NAME_GET = 'alucms::dashboard.index.get';
 
     /**
      * @param \Illuminate\Http\Request $request

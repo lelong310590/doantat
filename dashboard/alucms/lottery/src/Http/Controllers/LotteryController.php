@@ -29,7 +29,7 @@ class LotteryController extends BaseController
     public function getIndex()
     {
         return view('lottery::index', [
-            'result' => $this->lottery->paginate(config('core.paginate'))
+            'result' => $this->lottery->orderBy('created_at', 'desc')->paginate(config('core.paginate'))
         ]);
     }
 }
