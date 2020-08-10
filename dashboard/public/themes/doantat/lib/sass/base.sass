@@ -1,0 +1,131 @@
+body
+    font-family: 'Montserrat', sans-serif
+    font-size: 14px
+    font-weight: 400
+    line-height: 23px
+    background-image: url('../images/background.jpg')
+    background-size: cover
+
+form
+    .form-control
+        border-radius: 0
+        height: 40px
+        &:disabled
+            background: #ccc
+
+.main-banner
+    img
+        width: 80%
+.site-button
+    color: #fff
+    font-size: 18px
+    font-weight: 700
+    font-style: italic
+    border-radius: 50px
+    display: block
+    padding: 5px
+    background: rgb(255,229,126)
+    background: linear-gradient(180deg, rgba(255,229,126,1) 0%, rgba(252,234,165,1) 42%, rgba(234,184,126,1) 100%)
+    min-width: 190px
+    text-align: center
+    &:hover
+        color: #fff
+        text-decoration: none
+        box-shadow: 0 4px 4px rgba(0,0,0,.3)
+        outline: none
+    &:focus
+        color: #fff
+        text-decoration: none
+    .button-inner
+        padding: 8px 35px
+        border-radius: 50px
+    .button-blue
+        background: rgb(1,43,74)
+        background: linear-gradient(180deg, rgba(1,43,74,1) 0%, rgba(59,88,158,1) 50%, rgba(1,43,74,1) 100%)
+    .button-green
+        background: rgb(7,171,93)
+        background: linear-gradient(180deg, rgba(7,171,93,1) 0%, rgba(18,196,112,1) 50%, rgba(7,171,93,1) 100%)
+    .button-red
+        background: rgb(143,0,32)
+        background: linear-gradient(180deg, rgba(143,0,32,1) 0%, rgba(237,0,44,1) 50%, rgba(143,0,32,1) 100%)
+.popup-backdrop
+    background: rgba(0,0,0,.6)
+    display: none
+    .popup-content
+        display: none
+        min-width: 600px
+        padding: 6px
+        background: rgb(255,229,126)
+        background: linear-gradient(180deg, rgba(255,229,126,1) 0%, rgba(252,234,165,1) 42%, rgba(234,184,126,1) 100%)
+        border-radius: 10px
+        .popup-content-close
+            +createFlex(null, center, center)
+            padding: 5px
+            border-radius: 100%
+            background: rgb(255,229,126)
+            background: linear-gradient(180deg, rgba(255,229,126,1) 0%, rgba(252,234,165,1) 42%, rgba(234,184,126,1) 100%)
+            box-shadow: 0 2px 2px rgba(0,0,0,.3)
+            a
+                +createBox(35px, 35px)
+                +createFlex(null, center, center)
+                border-radius: 100%
+                color: #fff
+                background: rgb(7,171,93)
+                background: linear-gradient(180deg, rgba(7,171,93,1) 0%, rgba(18,196,112,1) 50%, rgba(7,171,93,1) 100%)
+                font-size: 20px
+            &:hover
+                box-shadow: 0 4px 4px rgba(0,0,0,.3)
+                cursor: pointer
+                a
+                    text-decoration: none
+        .popup-content-inner
+            background: rgb(237,0,44)
+            background: radial-gradient(circle, rgba(237,0,44,1) 0%, rgba(143,0,32,1) 33%, rgba(48,0,19,1) 100%)
+            padding: 40px
+            border-radius: 10px
+            form
+                .form-group
+                    margin-bottom: 20px
+                .form-control
+                    height: 40px
+                    border-radius: 0
+                .input-group
+                    display: block
+.user-button
+    img
+        background: #fff
+        border-radius: 100%
+        margin-right: 10px
+        border: 2px solid #fff
+
+.dialog-wrapper
+    background: rgb(255,229,126)
+    background: linear-gradient(180deg, rgba(255,229,126,1) 0%, rgba(252,234,165,1) 42%, rgba(234,184,126,1) 100%)
+    .dialog-wrapper-inner
+        background: rgb(237,0,44)
+        background: radial-gradient(circle, rgba(237,0,44,1) 0%, rgba(143,0,32,1) 33%, rgba(48,0,19,1) 100%)
+.user-avatar
+    border-radius: 100%
+    background: #fff
+    overflow: hidden
+.bg-primary
+    background: linear-gradient(180deg, rgba(143,0,32,1) 0%, rgba(237,0,44,1) 50%, rgba(143,0,32,1) 100%)
+.sidebar
+    background: rgb(255,229,126)
+    background: linear-gradient(180deg, rgba(255,229,126,1) 0%, rgba(252,234,165,1) 42%, rgba(234,184,126,1) 100%)
+    border-radius: 10px
+    .sidebar-inner
+        background: rgb(237,0,44)
+        background: radial-gradient(circle, rgba(237,0,44,1) 0%, rgba(143,0,32,1) 33%, rgba(48,0,19,1) 100%)
+        border-radius: 10px
+        padding: 10px 15px
+        .sidebar-item
+            padding: 15px 0
+            border-bottom: 1px solid #fff
+            &.active
+                a
+                    color: gold
+            &:last-child
+                border: none
+            a
+                color: #fff

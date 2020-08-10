@@ -1,0 +1,39 @@
+$primary: #971A1D
+$secondary: #C29852
+$text: #595959
+
+= createFlex($dir, $v, $h )
+	display: flex
+	@if ($dir != null)
+		flex-direction: $dir
+	@if ($v != null)
+		justify-content: $v
+	@if ($h != null)
+		align-items: $h
+
+= createBox ($w, $h)
+	@if ($w != null)
+		width: $w
+	@if ($h != null)
+		height: $h
+
+= createPosition ($type, $t, $r, $b, $l, $w, $h, $z)
+	@if ($type != null)
+		position: $type
+	@if ($w != null)
+		width: $w
+	@if ($h != null)
+		height: $h
+	@if ($t != null)
+		top: $t
+	@if ($r != null)
+		right: $r
+	@if ($b != null)
+		bottom: $b
+	@if ($l != null)
+		left: $l
+	@if ($z != null)
+		z-index: $z
+
+= transition ($time)
+	transition: all $time linear 0s

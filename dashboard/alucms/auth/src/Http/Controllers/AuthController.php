@@ -31,7 +31,7 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => ['getLogout']]);
         $this->redirectTo = route('alucms::dashboard.index.get');
         $this->redirectPath = route('alucms::dashboard.index.get');
-        $this->redirectToLoginPage = route('auth::login.get');
+        $this->redirectToLoginPage = route('alucms::auth.login.get');
     }
 
     /**

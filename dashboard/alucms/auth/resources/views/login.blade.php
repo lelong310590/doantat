@@ -46,7 +46,7 @@
                             <p class="text-muted mb-4 mt-3">@lang('auth::auth.text')</p>
                         </div>
 
-                        <form action="{{route('auth::login.post')}}" method="post">
+                        <form action="{{route('alucms::auth.login.post')}}" method="post">
 
                             {{csrf_field()}}
 

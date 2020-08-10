@@ -1,0 +1,69 @@
+$positionType: (absolute, fixed, relative)
+@each $position in $positionType
+	.po-#{$position}
+		position: $position
+
+@for $i from -200 through 200
+	.po-t-#{$i}
+		top: #{$i}px
+	.po-b-#{$i}
+		bottom: #{$i}px
+	.po-l-#{$i}
+		left: #{$i}px
+	.po-r-#{$i}
+		right: #{$i}px
+	.z-#{$i}
+		z-index: #{$i}
+
+@media screen and (max-width: 768px)
+	@each $position in $positionType
+		.m-po-#{$position}
+			position: $position
+	
+	@for $i from -200 through 200
+		.m-po-t-#{$i}
+			top: #{$i}px
+		.m-po-b-#{$i}
+			bottom: #{$i}px
+		.m-po-l-#{$i}
+			left: #{$i}px
+		.m-po-r-#{$i}
+			right: #{$i}px
+		.m-z-#{$i}
+			z-index: #{$i}
+			
+@media screen and (min-width: 768px) and (max-width: 992px)
+	
+	@each $position in $positionType
+		.t-po-#{$position}
+			position: $position
+	
+	@for $i from -200 through 200
+		.t-po-t-#{$i}
+			top: #{$i}px
+		.t-po-b-#{$i}
+			bottom: #{$i}px
+		.t-po-l-#{$i}
+			left: #{$i}px
+		.t-po-r-#{$i}
+			right: #{$i}px
+		.t-z-#{$i}
+			z-index: #{$i}
+			
+@media screen and (min-width: 992px)
+	
+	@each $position in $positionType
+		.d-po-#{$position}
+			position: $position
+	
+	@for $i from -200 through 200
+		.d-po-t-#{$i}
+			top: #{$i}px
+		.d-po-b-#{$i}
+			bottom: #{$i}px
+		.d-po-l-#{$i}
+			left: #{$i}px
+		.d-po-r-#{$i}
+			right: #{$i}px
+		.d-z-#{$i}
+			z-index: #{$i}

@@ -8,6 +8,6 @@
 return [
     'admin_route' => env('SOURCE_ADMIN_ROUTE', 'admincp'),
     'paginate' => 20,
-    'price_per_ticket' => 3000,
+    'price_per_ticket' => 5000,
     'start_award' => 5000000
 ];

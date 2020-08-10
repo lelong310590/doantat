@@ -89,7 +89,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        2015 - <script>document.write(new Date().getFullYear())</script> &copy; Alu Content Manager System by <a href="http://alusoft.vn">Alusoft</a>
+{{--                        2015 - <script>document.write(new Date().getFullYear())</script> &copy; Alu Content Manager System by <a href="http://alusoft.vn">Alusoft</a>--}}
+                        2015 - <script>document.write(new Date().getFullYear())</script> &copy; </a>
                     </div>
                     <div class="col-md-6">
                         <div class="text-md-right footer-links d-none d-sm-block">

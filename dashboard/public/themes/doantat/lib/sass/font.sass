@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,700&display=swap')
+
+$fontWeightCollection: (100, 200, 300, 400, 500, 600, 700, 800, 900)
+
+@each $weight in $fontWeightCollection
+	.fw-#{$weight}
+		font-weight: $weight
+
+@for $i from 1 through 200
+	.fz-#{$i}
+		font-size: #{$i}px
+	.lh-#{$i}
+		line-height: #{$i}px
+
+@media screen and (min-width: 992px)
+	@for $i from 1 through 200
+		.d-fz-#{$i}
+			font-size: #{$i}px
+		.d-lh-#{$i}
+			line-height: #{$i}px
+
+@media screen and (min-width: 768px) and (max-width: 992px)
+	@for $i from 1 through 200
+		.t-fz-#{$i}
+			font-size: #{$i}px
+		.t-lh-#{$i}
+			line-height: #{$i}px
+
+@media screen and (max-width: 768px)
+	@for $i from 1 through 200
+		.m-fz-#{$i}
+			font-size: #{$i}px
+		.m-lh-#{$i}
+			line-height: #{$i}px

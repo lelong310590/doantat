@@ -1,0 +1,14 @@
+.bg-primary
+	background-color: $primary
+
+.color-primary
+	color: $primary
+
+$colorGroup: (fff, ccc, eee, 333, BDBDBD)
+@each $color in $colorGroup
+	.color-#{$color}
+		color: #{'#'}#{$color}
+	.border-color-#{$color}
+		border-color: #{'#'}#{$color}
+	.bg-color-#{$color}
+		background-color: #{'#'}#{$color}

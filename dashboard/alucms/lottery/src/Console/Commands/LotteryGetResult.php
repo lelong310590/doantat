@@ -11,6 +11,7 @@ namespace AluCMS\Lottery\Console\Commands;
 use AluCMS\Lottery\Models\Lottery;
 use Goutte\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpClient\HttpClient;
 
 class LotteryGetResult extends Command
@@ -46,21 +47,21 @@ class LotteryGetResult extends Command
      */
     public function handle()
     {
-        $url = 'http://ketqua.net/';
-
+        $url = 'http://ketqua.net';
         $client = new Client(HttpClient::create(['timeout' => 60]));
         $lottery = new Lottery();
         $crawler = $client->request('GET', $url);
 
         $resultDate = $crawler->filter('span#result_date')->text();
 
-        $check = $lottery->where('result_date', $resultDate)->get();
+        $check = $lottery->where('result_date', $resultDate)->count();
 
-        if (count($check) == 0) {
+        if ($check < 1) {
             $result6 = $crawler->filter('td#rs_0_0')->text();
             $result3 = substr($result6, 2);
             $lottery->result_date = $resultDate;
             $lottery->result_value = $result3;
+            $lottery->save();
         }
 
         return false;

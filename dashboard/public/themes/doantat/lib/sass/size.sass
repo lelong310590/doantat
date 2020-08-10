@@ -1,0 +1,66 @@
+.w-auto
+	width: auto
+.w-100p
+	width: 100%
+.w-50p
+	width: 50%
+.h-100vh
+	height: 100vh
+.h-auto
+	height: auto
+.h-100p
+	height: 100%
+.h-50p
+	height: 50%
+
+@for $i from 0 through 800
+	.w-#{$i}
+		width: #{$i}px
+		min-width: #{$i}px
+	.h-#{$i}
+		height: #{$i}px
+
+@media screen and (max-width: 768px)
+	.m-h-100vh
+		height: 100vh
+	.m-w-100p
+		width: 100%
+	.m-w-50p
+		width: 50%
+
+	@for $i from 0 through 1000
+		.m-w-#{$i}
+			width: #{$i}px
+			min-width: #{$i}px
+		.m-h-#{$i}
+			height: #{$i}px
+
+@media screen and (min-width: 768px) and (max-width: 992px)
+	.t-h-100vh
+		height: 100vh
+	.t-w-100p
+		width: 100%
+	.t-w-50p
+		width: 50%
+
+	@for $i from 0 through 1000
+		.t-w-#{$i}
+			width: #{$i}px
+			min-width: #{$i}px
+		.t-h-#{$i}
+			height: #{$i}px
+
+@media screen and (min-width: 992px)
+	.d-h-100vh
+		height: 100vh
+	.d-w-100p
+		width: 100%
+	.d-w-50p
+		width: 50%
+
+	@for $i from 0 through 1000
+		.d-w-#{$i}
+			width: #{$i}px
+			min-width: #{$i}px
+		.d-h-#{$i}
+			height: #{$i}px

@@ -48,7 +48,8 @@
             "AluCMS\\Acl\\": "alucms/acl/src",
             "AluCMS\\Lottery\\": "alucms/lottery/src",
             "AluCMS\\Wallet\\": "alucms/wallet/src",
-            "AluCMS\\Award\\": "alucms/award/src"
+            "AluCMS\\Award\\": "alucms/award/src",
+            "AluCMS\\Theme\\": "alucms/theme/src"
         },
         "classmap": [
             "database/seeds",

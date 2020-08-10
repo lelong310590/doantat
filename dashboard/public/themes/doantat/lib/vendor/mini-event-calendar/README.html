@@ -1,0 +1,37 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="jquery-mini-event-calendar">jquery-mini-event-calendar</h1>
+<p>A mini calendar with events JQuery plugin.</p>
+<h2 id="how-to-use">How to use</h2>
+<ul>
+<li>Download <a href="/src/mini-event-calendar.min.js?raw=true">mini-event-calendar.min.js</a> and <a href="/src/mini-event-calendar.min.css?raw=true">mini-event-calendar.min.css</a> </li>
+<li>Include them in your html</li>
+<li>Copy and paste the code below.</li>
+</ul>
+<pre><code class="lang-javascript">    // TODO: Replace with real events, say from server.
+    var db_events = [{
+        title: &quot;Board members meeting&quot;,
+        date: new Date().getTime(),
+        link: &quot;events.com/ev2&quot;
+    }];
+
+    $(document).ready(function(){
+        $(&quot;#calendar&quot;).MEC({
+            calendar_link: &quot;example.com/myCalendar&quot;,
+            events: db_events
+        });
+    });
+</code></pre>
+<p>You can also use <a href="/example.html">example.html</a> as a reference point</p>
+<h2 id="screenshots">Screenshots</h2>
+<p>Event happening today</p>
+<p><img src="/screenshots/event-today.png?raw=true" alt="Event today" title="Event today screenshot"></p>
+<p>Calendar can be set to start on monday</p>
+<p><img src="/screenshots/calendar-starts-monday.png?raw=true" alt="Event other day" title="Calendar starts on monday screenshot"></p>
+
+      </body>
+    </html>

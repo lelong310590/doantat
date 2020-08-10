@@ -2,16 +2,17 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/lottery/src" isTestSource="false" packagePrefix="AluCMS\Lottery\" />
-      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/user/src" isTestSource="false" packagePrefix="AluCMS\User\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/hook/src" isTestSource="false" packagePrefix="AluCMS\Hook\" />
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/theme/src" isTestSource="false" packagePrefix="AluCMS\Theme\" />
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/acl/src" isTestSource="false" packagePrefix="AluCMS\Acl\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/lottery/src" isTestSource="false" packagePrefix="AluCMS\Lottery\" />
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/user/src" isTestSource="false" packagePrefix="AluCMS\User\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/core/src" isTestSource="false" packagePrefix="AluCMS\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/auth/src" isTestSource="false" packagePrefix="AluCMS\Auth\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/wallet/src" isTestSource="false" packagePrefix="AluCMS\Wallet\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/app" isTestSource="false" packagePrefix="App\" />
-      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/acl/src" isTestSource="false" packagePrefix="AluCMS\Acl\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/award/src" isTestSource="false" packagePrefix="AluCMS\Award\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/vendor/asm89/stack-cors" />

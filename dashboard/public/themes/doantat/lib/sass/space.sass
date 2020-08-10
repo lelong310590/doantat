@@ -1,0 +1,111 @@
+.m-0
+	margin: 0
+.p-0
+	padding: 0
+
+@for $i from -200 through 200
+	.ma-#{$i}
+		margin: #{$i}px
+	.mt-#{$i}
+		margin-top: #{$i}px
+	.mb-#{$i}
+		margin-bottom: #{$i}px
+	.ml-#{$i}
+		margin-left: #{$i}px
+	.mr-#{$i}
+		margin-right: #{$i}px
+	@if ($i >= 0)
+		.pa-#{$i}
+			padding: #{$i}px
+		.pt-#{$i}
+			padding-top: #{$i}px
+		.pb-#{$i}
+			padding-bottom: #{$i}px
+		.pl-#{$i}
+			padding-left: #{$i}px
+		.pr-#{$i}
+			padding-right: #{$i}px
+
+@media screen and (min-width: 992px)
+	.d-m-0
+		margin: 0
+	.d-p-0
+		padding: 0
+	@for $i from -200 through 200
+		.d-ma-#{$i}
+			margin: #{$i}px
+		.d-mt-#{$i}
+			margin-top: #{$i}px
+		.d-mb-#{$i}
+			margin-bottom: #{$i}px
+		.d-ml-#{$i}
+			margin-left: #{$i}px
+		.d-mr-#{$i}
+			margin-right: #{$i}px
+		@if ($i >= 0)
+			.d-pa-#{$i}
+				padding: #{$i}px
+			.d-pt-#{$i}
+				padding-top: #{$i}px
+			.d-pb-#{$i}
+				padding-bottom: #{$i}px
+			.d-pl-#{$i}
+				padding-left: #{$i}px
+			.d-pr-#{$i}
+				padding-right: #{$i}px
+
+@media screen and (min-width: 768px) and (max-width: 992px)
+	.t-m-0
+		margin: 0
+	.t-p-0
+		padding: 0
+	@for $i from -200 through 200
+		.t-ma-#{$i}
+			margin: #{$i}px
+		.t-mt-#{$i}
+			margin-top: #{$i}px
+		.t-mb-#{$i}
+			margin-bottom: #{$i}px
+		.t-ml-#{$i}
+			margin-left: #{$i}px
+		.t-mr-#{$i}
+			margin-right: #{$i}px
+		@if ($i >= 0)
+			.t-pa-#{$i}
+				padding: #{$i}px
+			.t-pt-#{$i}
+				padding-top: #{$i}px
+			.t-pb-#{$i}
+				padding-bottom: #{$i}px
+			.t-pl-#{$i}
+				padding-left: #{$i}px
+			.t-pr-#{$i}
+				padding-right: #{$i}px
+
+@media screen and (max-width: 768px)
+	.m-m-0
+		margin: 0
+	.m-p-0
+		padding: 0
+	@for $i from -200 through 200
+		.m-ma-#{$i}
+			margin: #{$i}px
+		.m-mt-#{$i}
+			margin-top: #{$i}px
+		.m-mb-#{$i}
+			margin-bottom: #{$i}px
+		.m-ml-#{$i}
+			margin-left: #{$i}px
+		.m-mr-#{$i}
+			margin-right: #{$i}px
+		@if ($i >= 0)
+			.m-pa-#{$i}
+				padding: #{$i}px
+			.m-pt-#{$i}
+				padding-top: #{$i}px
+			.m-pb-#{$i}
+				padding-bottom: #{$i}px
+			.m-pl-#{$i}
+				padding-left: #{$i}px
+			.m-pr-#{$i}
+				padding-right: #{$i}px

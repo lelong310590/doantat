@@ -67,7 +67,7 @@
             <div class="col-md-6 col-xl-3">
                 <div class="card-box">
                     <h4 class="mt-0 font-16">Giải thưởng kỳ</h4>
-                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{number_format($currentAward)}}</span>đ</h2>
+                    <h2 class="text-primary my-3 text-center"><span data-plugin="counterup">{{number_format($currentAward + $valueFromStartToNow)}}</span>đ</h2>
                     <p class="text-muted mb-0">Doanh số kỳ: {{number_format($valueFromStartToNow)}}đ
                         <span class="float-right">
                             @if ($valueFromStartToNow > config('core.start_award'))

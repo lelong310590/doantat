@@ -1,0 +1,52 @@
+@import 'variable'
+@import 'font'
+
+.bg-primary
+	background-color: $primary
+
+.no-border
+	border: none
+
+body
+	font:
+		family: 'Montserrat', sans-serif
+		size: 14px
+		weight: 400
+	color: #595959
+
+.title-with-line
+	position: relative
+	padding-left: 82px
+	&:before
+		+createPosition(absolute, 21%, null, null, 0, 70px, 1px, 3)
+		background: $primary
+		display: block
+		content: ''
+
+.owl-theme
+	.owl-nav
+		&.disabled+.owl-dots
+			margin-top: 35px
+	.owl-dots
+		.owl-dot
+			span
+				+createBox(8px, 8px)
+				background: #C4C4C4
+			&:hover, &:focus
+				border: none
+				box-shadow: none
+				outline: none
+			&.active
+				span
+					background: $primary
+
+@import 'color'
+@import 'size'
+@import 'space'
+@import 'position'
+@import 'background'
+@import 'display'
+@import 'base'
+@import 'desktop'
+@import 'tablet'
+@import 'mobile'

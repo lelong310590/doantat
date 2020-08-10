@@ -29,7 +29,11 @@ class ModuleProvider extends ServiceProvider
 
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
-            $schedule->command('get_lottery_result')->everyMinute();
+            $schedule->command('get_lottery_result')
+                    ->weekdays()
+                    ->everyMinute()
+                    ->timezone(config('app.timezone'))
+                    ->between('18:00', '18:05');
         });
     }
 

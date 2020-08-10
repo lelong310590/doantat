@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 
 class Authenticated
 {
-    const LOGIN_ROUTE_NAME_GET = 'auth::login.get';
+    const LOGIN_ROUTE_NAME_GET = 'alucms::auth.login.get';
 
-    const LOGIN_ROUTE_NAME_POST = 'auth::login.post';
+    const LOGIN_ROUTE_NAME_POST = 'alucms::auth.login.post';
 
     const DASHBOARD_ROUTE_NAME_GET = 'alucms::dashboard.index.get';
 
@@ -42,7 +42,9 @@ class Authenticated
                 return redirect()->guest(route($this::LOGIN_ROUTE_NAME_GET));
             }
         } else {
-
+//            if (!auth()->check()) {
+//                return redirect()->route('theme::home.get');
+//            }
         }
 
 //		if (auth('lito')->check()) {
