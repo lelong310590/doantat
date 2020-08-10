@@ -27,27 +27,27 @@
                                         <div class="col-xs-12 col-md-6">
                                             <div class="form-group">
                                                 <label for="">Tên đăng nhập</label>
-                                                <input type="text" class="form-control" name="" id="" value="{{auth()->user()->username}}" disabled>
+                                                <input type="text" class="form-control" name="username" value="{{auth()->user()->username}}" disabled>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Email</label>
-                                                <input type="text" class="form-control" name="" id="" value="{{auth()->user()->email}}" disabled>
+                                                <input type="text" class="form-control" name="email" value="{{auth()->user()->email}}" disabled>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Họ và tên</label>
-                                                <input type="text" class="form-control" name="" id="" value="{{auth()->user()->full_name}}">
+                                                <input type="text" class="form-control" name="full_name" value="{{auth()->user()->full_name}}">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Số điện thoại</label>
-                                                <input type="text" class="form-control" name="" id="" value="{{auth()->user()->phone}}">
+                                                <input type="text" class="form-control" name="phone" value="{{auth()->user()->phone}}">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Địa chỉ</label>
-                                                <input type="text" class="form-control" name="" id="" value="{{auth()->user()->address}}">
+                                                <input type="text" class="form-control" name="address" value="{{auth()->user()->address}}">
                                             </div>
                                         </div>
 

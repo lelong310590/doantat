@@ -19,6 +19,7 @@ use Barryvdh\Debugbar\LaravelDebugbar;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use File;
 
 class UserController extends BaseController
 {
@@ -65,9 +66,21 @@ class UserController extends BaseController
      */
     public function postCreate(UserCreateRequest $request) : RedirectResponse
     {
-        $user = $this->user->create($request->all());
-        $user->syncRoles($request->get('role'));
-        return redirect()->back()->with(FlashMessages::returnMessage('create'));
+        try {
+            $user = $this->user->create($request->all());
+            $user->syncRoles($request->get('role'));
+
+            $folderName = $user->username;
+            $folderPath = public_path('source/'.$folderName);
+
+            if (!File::isDirectory($folderPath)) {
+                File::makeDirectory($folderPath, 0777, true, true);
+            }
+
+            return redirect()->back()->with(FlashMessages::returnMessage('create'));
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(trans('dashboard::error.error.create'));
+        }
     }
 
     /**
