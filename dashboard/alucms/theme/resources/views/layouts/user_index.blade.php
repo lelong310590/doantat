@@ -21,7 +21,8 @@
                     <div class="dialog-wrapper color-fff pa-3">
                         <div class="dialog-wrapper-inner pa-40">
                             <div class="userinfo color-fff">
-                                <form action="" method="post" role="form">
+                                <form action="{{route('theme.user.post')}}" method="post" role="form">
+                                    {{csrf_field()}}
                                     <legend class="fz-15 color-fff">Thông tin tài khoản</legend>
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
@@ -53,11 +54,13 @@
 
                                         <div class="col-xs-12 col-md-6">
                                             <div class="user-avatar w-150 h-150 center-block d-flex justify-center align-center">
-                                                @if (auth()->user()->thumbnail != '')
-                                                    <img src="{{auth()->user()->thumbnail}}" alt="" class="img-responsive w-150 center-block">
-                                                @else
-                                                    <img src="https://via.placeholder.com/150x150?text={{auth()->user()->username}}" alt="" class="img-responsive w-150 center-block">
-                                                @endif
+                                                <a data-fancybox data-type="iframe" data-src="{{config('app.url')}}/filemanager/dialog.php?type=1&fldr={{auth()->user()->username}}&field_id=preview" href="javascript:;">
+                                                    @if (auth()->user()->thumbnail != '')
+                                                        <img src="{{auth()->user()->thumbnail}}" alt="" class="img-responsive w-150 center-block">
+                                                    @else
+                                                        <img src="https://via.placeholder.com/150x150?text={{auth()->user()->username}}" alt="" class="img-responsive w-150 center-block">
+                                                    @endif
+                                                </a>
                                             </div>
                                             <p class="text-center mt-15 color-fff fw-700 mt-15">Ảnh đại diện</p>
                                         </div>

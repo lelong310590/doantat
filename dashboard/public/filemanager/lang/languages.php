@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'az_AZ' => 'Azərbaycan dili',
     'bg_BG' => 'български език',
     'ca' => 'Català, valencià',

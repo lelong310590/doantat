@@ -8,10 +8,12 @@
 
 namespace AluCMS\Theme\Http\Controllers;
 
+use AluCMS\Core\Supports\FlashMessages;
 use AluCMS\User\Repositories\UserRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Barryvdh\Debugbar\LaravelDebugbar;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ThemeUserController extends BaseController
 {
@@ -23,8 +25,18 @@ class ThemeUserController extends BaseController
         $this->user = $userRepository;
     }
 
-    public function getIndex()
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getIndex() : View
     {
         return view('theme::layouts.user_index');
+    }
+
+    public function postIndex(Request $request)
+    {
+        $data = $request->except(['_token', 'email', 'username']);
+        $this->user->update($data, auth()->id());
+        return redirect()->back()->with(FlashMessages::returnMessage('edit'));
     }
 }

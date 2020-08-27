@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'Select' => 'Chọn',
     'Deselect_All' => 'Deselect All',
     'Select_All' => 'Select All',

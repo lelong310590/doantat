@@ -11,7 +11,7 @@ mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-setlocale(LC_CTYPE, 'vi_BN'); //correct transliteration
+setlocale(LC_CTYPE, 'vi'); //correct transliteration
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ setlocale(LC_CTYPE, 'vi_BN'); //correct transliteration
 |
 */
 
-define('USE_ACCESS_KEYS', false); // TRUE or FALSE
+define('USE_ACCESS_KEYS', true); // TRUE or FALSE
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ define('USE_ACCESS_KEYS', false); // TRUE or FALSE
 |--------------------------------------------------------------------------
 */
 
-define('DEBUG_ERROR_MESSAGE', false); // TRUE or FALSE
+define('DEBUG_ERROR_MESSAGE', true); // TRUE or FALSE
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +56,9 @@ define('DEBUG_ERROR_MESSAGE', false); // TRUE or FALSE
 |    |   |   |   |- responsivefilemanager
 |    |   |   |   |   |- plugin.min.js
 */
+
+//$userFolder = auth()->user()->username;
+//dump($userFolder);
 
 $config = array(
 
@@ -187,7 +190,9 @@ $config = array(
     |
     */
 
-    'access_keys' => array(),
+    'access_keys' => array(
+        md5('AluCMSsflFWR9u2xQa')
+    ),
 
     //--------------------------------------------------------------------------------------------------------
     // YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
@@ -228,7 +233,7 @@ $config = array(
     | default language file name
     |--------------------------------------------------------------------------
     */
-    'default_language' => "vi_VN",
+    'default_language' => "vi",
 
     /*
     |--------------------------------------------------------------------------
@@ -554,6 +559,33 @@ $config = array(
     'remember_text_filter'                    => false,
 
 );
+
+require __DIR__.'/../../../vendor/autoload.php';
+$app = require_once __DIR__. '/../../../bootstrap/app.php';
+
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+$user = $app->make('auth')->user();
+
+if ($user) {
+    $userFolder = $user->username;
+    if (!is_dir($config['current_path'] . $userFolder)) {
+        $file = $app->make('File');
+        $file::makeDirectory($config['current_path'] . $userFolder);
+        $file::makeDirectory($config['thumbs_base_path'] . $userFolder);
+    }
+
+    if (!is_in_dashboard()) {
+        $config['upload_dir'] .= $userFolder . '/';
+        $config['current_path'] .= $userFolder . '/';
+        $config['thumbs_base_path'] .= $userFolder . '/';
+    }
+}
+
+//dump($user);
 
 return array_merge(
     $config,

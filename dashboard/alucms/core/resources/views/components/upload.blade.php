@@ -36,7 +36,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe src="{{config('app.url')}}/filemanager/dialog.php?type={{$type}}&fldr=&field_id={{$id}}" frameborder="0" class="embed-responsive-item" height="500px"></iframe>
+                                <iframe src="{{config('app.url')}}/filemanager/dialog.php?type={{$type}}&lang=vi&field_id={{$id}}&akey={{md5('AluCMSsflFWR9u2xQa')}}" frameborder="0" class="embed-responsive-item" height="500px"></iframe>
                             </div>
                         </div>
                     </div><!-- /.modal-content -->

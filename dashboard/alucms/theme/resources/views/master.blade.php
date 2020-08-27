@@ -24,6 +24,7 @@
     <!-- App css -->
     <link href="{{asset('themes/doantat/lib/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link href="{{asset('themes/doantat/lib/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <link href="{{asset('themes/doantat/lib/css/style.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
 
 </head>
@@ -36,7 +37,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{asset('themes/doantat/lib/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     @stack('js')
 
     <script src="{{asset('themes/doantat/lib/js/main.min.js')}}"></script>
