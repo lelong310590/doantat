@@ -9,8 +9,29 @@
 
 namespace AluCMS\Notification\Models;
 
+use AluCMS\User\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
-class Notification
+class Notification extends Model
 {
+    protected $table = 'notification';
 
+    protected $fillable = ['content', 'type', 'status', 'user_id', 'amount', 'created_at', 'updated_at'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Order by name ASC
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
+
+    public function user()
+    {
+        $relation = $this->belongsTo(User::class, 'user_id', 'id');
+        return $relation->select('username', 'id', 'email', 'thumbnail');
+    }
 }

@@ -9,8 +9,25 @@
 
 namespace AluCMS\Notification\Providers;
 
+use AluCMS\Notification\Hook\NotificationHook;
+use Illuminate\Support\ServiceProvider;
 
-class HookProvider
+class HookProvider extends ServiceProvider
 {
+    public function boot()
+    {
+        $this->app->booted(function () {
+            $this->booted();
+        });
+    }
 
+    public function register()
+    {
+
+    }
+
+    private function booted()
+    {
+        add_action('alucms-register-menu', [NotificationHook::class, 'handle'], 6);
+    }
 }

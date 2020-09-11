@@ -20,11 +20,26 @@ Route::group(['prefix' => ''], function (Router $router) {
             ->name('theme::logout.get');
 });
 
+
 Route::group(['prefix' => 'user'], function (Router $router) {
+    $router->get('buy-ticket', 'ThemeBuyTicketController@getIndex')
+        ->name('theme.buyticket.get')
+        ->middleware('auth');
+    $router->post('buy-ticket', 'ThemeBuyTicketController@postIndex')
+        ->name('theme.buyticket.post')
+        ->middleware('auth');
+
     $router->get('info', 'ThemeUserController@getIndex')
         ->name('theme.user.get')
         ->middleware('auth');
     $router->post('info', 'ThemeUserController@postIndex')
         ->name('theme.user.post')
+        ->middleware('auth');
+
+    $router->get('pay', 'ThemePayController@getPay')
+        ->name('theme.pay.get')
+        ->middleware('auth');
+    $router->post('pay', 'ThemePayController@postPay')
+        ->name('theme.pay.post')
         ->middleware('auth');
 });

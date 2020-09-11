@@ -10,6 +10,7 @@
 namespace AluCMS\Award\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Award extends Model
 {
@@ -18,4 +19,15 @@ class Award extends Model
     protected $fillable = [
         'value', 'created_at', 'updated_at', 'status'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Order by name ASC
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
+
 }

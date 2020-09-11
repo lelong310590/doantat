@@ -49,6 +49,7 @@
             "AluCMS\\Lottery\\": "alucms/lottery/src",
             "AluCMS\\Wallet\\": "alucms/wallet/src",
             "AluCMS\\Award\\": "alucms/award/src",
+            "AluCMS\\Notification\\": "alucms/notification/src",
             "AluCMS\\Theme\\": "alucms/theme/src"
         },
         "classmap": [

@@ -38,7 +38,7 @@ class UserController extends BaseController
     public function getIndex(Request $request) : View
     {
         $keywords = $request->get('keywords');
-        $user = $this->user->with('roles')->orderBy('created_at', 'desc')->paginate(config('core.paginate'));
+        $user = $this->user->with('roles')->paginate(config('core.paginate'));
         if ($keywords) {
             $user = $this->user->search($keywords);
         }

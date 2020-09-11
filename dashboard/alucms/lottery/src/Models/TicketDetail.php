@@ -9,6 +9,7 @@
 
 namespace AluCMS\Lottery\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class TicketDetail extends Model

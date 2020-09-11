@@ -18,6 +18,10 @@ class Table extends Component
     public $tablefield;
     public $action;
     public $relations;
+    public $search;
+    public $icon;
+    public $toolbar;
+    public $delete;
 
     public function __construct(
         $type = 'light',
@@ -25,7 +29,11 @@ class Table extends Component
         $tabledata,
         $tablefield,
         $action = [],
-        $relations = []
+        $relations = [],
+        $search = true,
+        $toolbar = true,
+        $delete = true,
+        $icon = []
     )
     {
         $this->type = $type;
@@ -34,6 +42,10 @@ class Table extends Component
         $this->tablefield =  $tablefield;
         $this->action = $action;
         $this->relations = $relations;
+        $this->search = $search;
+        $this->icon = $icon;
+        $this->toolbar = $toolbar;
+        $this->delete = $delete;
     }
 
     public function render()

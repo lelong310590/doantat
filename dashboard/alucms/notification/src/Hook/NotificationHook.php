@@ -9,8 +9,15 @@
 
 namespace AluCMS\Notification\Hook;
 
+use AluCMS\Notification\Models\Notification;
 
 class NotificationHook
 {
-
+    public function handle()
+    {
+        $waiting = Notification::where('status', 'wait')->count();
+        echo view('notification::partials.sidebar', [
+            'waiting' => $waiting
+        ]);
+    }
 }

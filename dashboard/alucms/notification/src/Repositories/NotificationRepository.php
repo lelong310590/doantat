@@ -9,8 +9,23 @@
 
 namespace AluCMS\Notification\Repositories;
 
+use AluCMS\Notification\Models\Notification;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class NotificationRepository
+class NotificationRepository extends BaseRepository
 {
+    public function model()
+    {
+        // TODO: Implement model() method.
+        return Notification::class;
+    }
 
+    public function search($keyword)
+    {
+        return $this->scopeQuery(function ($e) use ($keyword) {
+            return $e->whereHas('user', function ($q) use ($keyword) {
+                return $q->where('username', 'LIKE', '%'.$keyword.'%');
+            });
+        })->paginate(config('core.paginate'));
+    }
 }

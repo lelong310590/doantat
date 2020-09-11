@@ -32,8 +32,7 @@ class TicketController extends BaseController
     public function getIndex(Request $request) : View
     {
         $keywords = $request->get('keywords');
-        $ticket = $this->ticket->with('user')->with('ticketDetail'
-        )->orderBy('created_at', 'desc')->paginate(config('core.paginate'));
+        $ticket = $this->ticket->with('user')->with('ticketDetail')->paginate(config('core.paginate'));
         if ($keywords) {
             $ticket = $this->ticket->search($keywords);
         }

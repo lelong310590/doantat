@@ -2,6 +2,16 @@
 
 jQuery(document).ready(($) => {
 
+    String.prototype.replaceAt = function(index, replacement) {
+        if (index >= this.length) {
+            return this.valueOf();
+        }
+
+        var chars = this.split('');
+        chars[index] = replacement;
+        return chars.join('');
+    }
+
     let body = $('body');
     let popupBackdrop = $('.popup-backdrop');
     let popupContent = $('.popup-content');
@@ -25,6 +35,41 @@ jQuery(document).ready(($) => {
             popupContent.hide();
         }
     });
+
+    body.on('click', '.ticket-item', function (e) {
+        let image = $(this).children('img');
+        let faceUp = $(this).children('.ticket-face-up-wrapper');
+        let ticketNumber = $(this).attr('data-ticket-number');
+        let ticketNumberElem = $('#'+ticketNumber);
+        ticketNumberElem.removeAttr('disabled');
+        image.hide();
+        faceUp.addClass('active');
+    });
+
+    body.on('click', '.ticket-facedown', function (e) {
+        e.stopPropagation();
+        let parent = $(this).parents('.ticket-face-up-wrapper');
+        let image = parent.prev();
+        let ticketNumberElem = image.prev();
+        image.show()
+        parent.removeClass('active');
+        ticketNumberElem.attr('disabled', 'disabled')
+    });
+
+    body.on('change', '.ticket-number-input', function (e) {
+        let position = $(this).attr('data-position');
+        let target = $(this).attr('data-target');
+        let targetElem = $('#'+target);
+        let targetValue = targetElem.val();
+        let value = $(this).val();
+
+        let newValue = targetValue.replaceAt(parseInt(position), value);
+        targetElem.val(newValue);
+    });
+
+    body.on('click', '#form-buy-ticket button', function (e) {
+        e.preventDefault();
+    })
 
     $('a[href*="#"]')
         // Remove links that don't actually link to anything

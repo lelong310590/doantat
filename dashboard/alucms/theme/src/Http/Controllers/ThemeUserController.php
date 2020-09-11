@@ -33,10 +33,17 @@ class ThemeUserController extends BaseController
         return view('theme::layouts.user_index');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
     public function postIndex(Request $request)
     {
         $data = $request->except(['_token', 'email', 'username']);
         $this->user->update($data, auth()->id());
         return redirect()->back()->with(FlashMessages::returnMessage('edit'));
     }
+
+
 }

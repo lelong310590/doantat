@@ -21,7 +21,9 @@ class Input extends Component
     public $status;
     public $type;
 
-    public function __construct($title, $name, $id = '', $defaultValue = '', $status = '', $type = 'text')
+    public function __construct(
+        $title = '', $name, $id = '', $defaultValue = '', $status = '', $type = 'text'
+    )
     {
         $this->title = $title;
         $this->name = $name;

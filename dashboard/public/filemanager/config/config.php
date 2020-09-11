@@ -572,11 +572,11 @@ $user = $app->make('auth')->user();
 
 if ($user) {
     $userFolder = $user->username;
-    if (!is_dir($config['current_path'] . $userFolder)) {
-        $file = $app->make('File');
-        $file::makeDirectory($config['current_path'] . $userFolder);
-        $file::makeDirectory($config['thumbs_base_path'] . $userFolder);
-    }
+//    if (!is_dir($config['current_path'] . $userFolder)) {
+//        $file = $app->make('File');
+//        $file::makeDirectory($config['current_path'] . $userFolder);
+//        $file::makeDirectory($config['thumbs_base_path'] . $userFolder);
+//    }
 
     if (!is_in_dashboard()) {
         $config['upload_dir'] .= $userFolder . '/';

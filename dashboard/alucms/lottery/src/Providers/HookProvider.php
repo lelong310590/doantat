@@ -28,6 +28,6 @@ class HookProvider extends ServiceProvider
 
     private function booted()
     {
-        add_action('alucms-register-menu', [LotteryHook::class, 'handle'], 3);
+        add_action('alucms-register-menu', [LotteryHook::class, 'handle'], 5);
     }
 }

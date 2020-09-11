@@ -2,6 +2,7 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/notification/src" isTestSource="false" packagePrefix="AluCMS\Notification\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/hook/src" isTestSource="false" packagePrefix="AluCMS\Hook\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/theme/src" isTestSource="false" packagePrefix="AluCMS\Theme\" />

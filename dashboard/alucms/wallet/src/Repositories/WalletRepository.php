@@ -35,4 +35,16 @@ class WalletRepository extends BaseRepository
         $data['username'] = $user->username;
         $this->create($data);
     }
+
+    public function increaseAmount($userId, $amount)
+    {
+        $wallet = $this->findWhere([
+            'user_id' => $userId
+        ])->first();
+
+        $currentAmount = $wallet->amount;
+        $this->update([
+            'amount' => $currentAmount + floatval($amount)
+        ], $wallet->id);
+    }
 }

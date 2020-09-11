@@ -11,6 +11,7 @@ namespace AluCMS\User\Models;
 
 use AluCMS\Lottery\Models\Ticket;
 use AluCMS\Wallet\Models\Wallet;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -29,6 +30,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Order by name ASC
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
 
     /**
      * @param $value

@@ -90,6 +90,7 @@
                         :tabledata="$dangerNumber"
                         :head="['Bộ số', 'Lượt đánh']"
                         :tablefield="['value', 'count(value)']"
+                        :toolbar=false
                     />
                 </div> <!-- end card-box-->
             </div> <!-- end col -->

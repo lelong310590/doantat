@@ -7,13 +7,21 @@
  */
 ?>
 
-@if (!empty($action))
+@if ($toolbar)
 <div class="d-flex justify-content-between pt-2 pb-2">
+    @if ($delete)
     <div class="col-md-4">
         <a href="" class="btn btn-danger waves-effect waves-light">
             <span class="btn-label"><i class="mdi mdi-delete-outline"></i></span>@lang('dashboard::dashboard.delete.checkbox')
         </a>
     </div>
+    @endif
+
+    @isset($filterSlot)
+        {{$filterSlot}}
+    @endisset
+
+    @if ($search)
     <form class="col-md-4" action="" method="get">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="@lang('dashboard::dashboard.search.placeholder')" name="keywords" value="{{request()->get('keywords')}}">
@@ -24,6 +32,7 @@
             </div>
         </div>
     </form>
+    @endif
 </div>
 @endif
 
@@ -39,12 +48,15 @@
         <thead class="thead-dark">
         @endif
         <tr>
+            @if ($delete)
             <th width="50">
                 <div class="checkbox checkbox-single">
                     <input type="checkbox" id="checkbox-all" value="" aria-label="">
                     <label></label>
                 </div>
             </th>
+            @endif
+
             @foreach ($head as $h)
                 <th>{{$h}}</th>
             @endforeach
@@ -53,6 +65,7 @@
         <tbody>
             @foreach($tabledata as $k => $d)
                 <tr>
+                    @if ($delete)
                     <th scope="row" width="50" class="align-middle">
                         <div class="checkbox checkbox-single">
                             <input
@@ -66,6 +79,8 @@
                             <label></label>
                         </div>
                     </th>
+                    @endif
+
                     @foreach($tablefield as $t => $f)
                         @if (is_array($f))
                             @php
@@ -113,8 +128,8 @@
                                     <td class="align-middle">
                                         @if ($d->status == 'active')
                                             <span class="badge bg-soft-success text-success">{{$d ->$value}}</span>
-                                        @elseif ($d->status == 'disable')
-                                            <span class="badge bg-soft-danger text-dangerr">{{$d ->$value}}</span>
+                                        @else
+                                            <span class="badge bg-soft-danger text-danger">{{$d ->$value}}</span>
                                         @endif
                                     </td>
                                     @break
@@ -135,18 +150,29 @@
                             <td class="align-middle">{{$d->$f}}</td>
                         @endif
                     @endforeach
-                    @if (!empty($action))
-                        <td width="130" class="align-middle">
-                            <a href="{{route($action[0], $d->id)}}" class="action-icon">
-                                <i class="mdi mdi-square-edit-outline"></i>
-                            </a>
+                    @if (!empty($action) && isset($action))
 
-                            @isset($action[1])
-                            <a href="{{route($action[1], $d->id)}}" class="action-icon">
-                                <i class="mdi mdi-delete"></i>
-                            </a>
-                            @endisset
+                        <td width="130" class="align-middle">
+                            @foreach($action as $a)
+                                <a href="{{route($a, $d->id)}}" class="action-icon">
+                                    @if (isset($icon) && !empty($icon))
+                                        @foreach($icon as $ic)
+                                            {!! $ic !!}
+                                        @endforeach
+                                    @else
+                                        @if ($loop->index == 0)
+                                            <i class="mdi mdi-square-edit-outline"></i>
+                                        @else
+                                            <i class="mdi mdi-delete"></i>
+                                        @endif
+                                    @endif
+                                </a>
+                            @endforeach
                         </td>
+                    @else
+                        @isset($actionSlot)
+                            {{$actionSlot}}
+                        @endisset
                     @endif
                 </tr>
             @endforeach

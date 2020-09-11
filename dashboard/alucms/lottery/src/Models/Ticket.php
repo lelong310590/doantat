@@ -10,6 +10,7 @@
 namespace AluCMS\Lottery\Models;
 
 use AluCMS\User\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
@@ -19,6 +20,16 @@ class Ticket extends Model
     protected $fillable = [
         'user_id', 'date', 'created_at', 'deleted_at'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Order by name ASC
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
 
     public function user()
     {

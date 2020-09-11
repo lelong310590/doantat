@@ -9,6 +9,7 @@
 
 namespace AluCMS\Lottery\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Lottery extends Model
@@ -16,4 +17,14 @@ class Lottery extends Model
     protected $table = 'lottery_results';
 
     protected $fillable = ['result_value', 'result_date' ,'created_at', 'deleted_at'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Order by name ASC
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
 }
