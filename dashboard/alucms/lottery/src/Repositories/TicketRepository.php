@@ -10,6 +10,7 @@
 namespace AluCMS\Lottery\Repositories;
 
 use AluCMS\Lottery\Models\Ticket;
+use Carbon\Carbon;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class TicketRepository extends BaseRepository
@@ -25,5 +26,19 @@ class TicketRepository extends BaseRepository
         return $this->with('user')->with('ticketDetail')->scopeQuery(function ($e) use ($keyword) {
             return $e->where('username', 'LIKE', '%'.$keyword.'%');
         })->orderBy('created_at', 'desc')->paginate(config('core.paginate'));
+    }
+
+
+    public function countAvaiableTicket($userId)
+    {
+        $ticket = $this->with('ticketDetail')->scopeQuery(function ($q) use ($userId) {
+            return $q->where('user_id', $userId)->whereDate('created_at', Carbon::now()->format('Y-m-d'));
+        })->first();
+
+        if ($ticket == null) {
+            return 0;
+        }
+
+        return count($ticket->ticketDetail);
     }
 }

@@ -12,9 +12,10 @@ jQuery(document).ready(($) => {
         return chars.join('');
     }
 
-    let body = $('body');
-    let popupBackdrop = $('.popup-backdrop');
-    let popupContent = $('.popup-content');
+    const body = $('body');
+    const popupBackdrop = $('.popup-backdrop');
+    const popupContent = $('.popup-content');
+    const ticketPopup = $('#buy-ticket-popup');
 
     body.on('click', '.popup-content-close a', function () {
         popupBackdrop.hide();
@@ -69,6 +70,19 @@ jQuery(document).ready(($) => {
 
     body.on('click', '#form-buy-ticket button', function (e) {
         e.preventDefault();
+        let ticketValue = $('.tickets-value[disabled]');
+        let maxTicket = parseInt($('input[name=limitTicket]').val());
+        let popupContentInner = ticketPopup.children('.popup-content-inner');
+
+        console.log('ticketValue: ', ticketValue)
+        console.log('maxTicket: ', maxTicket)
+
+        popupContentInner.empty();
+        if (ticketValue.length === maxTicket) {
+            popupContentInner.html('Chọn ít nhất một vé để đặt mua !');
+            popupBackdrop.css('display', 'flex');
+            ticketPopup.show();
+        }
     })
 
     $('a[href*="#"]')
