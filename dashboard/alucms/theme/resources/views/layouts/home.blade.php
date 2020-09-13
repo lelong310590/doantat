@@ -18,6 +18,12 @@
                     {{number_format($currentAward + $valueFromStartToNow)}}
                 </div>
             </div>
+
+            <div class="d-flex justify-center align-center">
+                <a class="site-button center-block mt-35" id="reject-buy-ticket" href="{{route('theme.buyticket.get')}}">
+                    <span class="button-red button-inner d-flex justify-center">Mua vé</span>
+                </a>
+            </div>
         </div>
     </main>
 @endsection

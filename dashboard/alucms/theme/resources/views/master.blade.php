@@ -35,6 +35,8 @@
 
     @yield('content')
 
+    @include('theme::partials.footer')
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{asset('themes/doantat/lib/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>

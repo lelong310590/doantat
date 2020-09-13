@@ -1,23 +1,33 @@
 'use strict';
 
-jQuery(document).ready(($) => {
+function checkIfDuplicateExists(w){
+    return new Set(w).size !== w.length
+}
 
-    String.prototype.replaceAt = function(index, replacement) {
-        if (index >= this.length) {
-            return this.valueOf();
-        }
+Number.prototype.format = function(n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
 
-        var chars = this.split('');
-        chars[index] = replacement;
-        return chars.join('');
+String.prototype.replaceAt = function(index, replacement) {
+    if (index >= this.length) {
+        return this.valueOf();
     }
+
+    var chars = this.split('');
+    chars[index] = replacement;
+    return chars.join('');
+}
+
+jQuery(document).ready(($) => {
 
     const body = $('body');
     const popupBackdrop = $('.popup-backdrop');
     const popupContent = $('.popup-content');
     const ticketPopup = $('#buy-ticket-popup');
+    const ticketResult = $('#buy-ticket-result');
 
-    body.on('click', '.popup-content-close a', function () {
+    body.on('click', '.popup-content-close, #reject-buy-ticket', function () {
         popupBackdrop.hide();
         popupContent.hide();
     })
@@ -38,6 +48,9 @@ jQuery(document).ready(($) => {
     });
 
     body.on('click', '.ticket-item', function (e) {
+        if ($(this).hasClass('ticket-item-result')) {
+            return false;
+        }
         let image = $(this).children('img');
         let faceUp = $(this).children('.ticket-face-up-wrapper');
         let ticketNumber = $(this).attr('data-ticket-number');
@@ -73,16 +86,49 @@ jQuery(document).ready(($) => {
         let ticketValue = $('.tickets-value[disabled]');
         let maxTicket = parseInt($('input[name=limitTicket]').val());
         let popupContentInner = ticketPopup.children('.popup-content-inner');
-
-        console.log('ticketValue: ', ticketValue)
-        console.log('maxTicket: ', maxTicket)
+        let html = '';
+        let popupContentResultElemWrapepr = ticketResult.find('.ticket-wrapper');
+        let logo = $('.site-logo').attr('src');
+        let pricePerTicket = $('#price_per_ticket').val();
+        let totalPriceOutput = $('#total-price');
 
         popupContentInner.empty();
+
         if (ticketValue.length === maxTicket) {
             popupContentInner.html('Chọn ít nhất một vé để đặt mua !');
             popupBackdrop.css('display', 'flex');
             ticketPopup.show();
+            return false;
         }
+
+        popupContentResultElemWrapepr.html();
+
+        let selectedTicket = $('.tickets-value[type=hidden]:not([disabled])');
+        selectedTicket.each(function() {
+            html += '<div class="ticket-item dir-column ticket-item-result w-130 h-200 d-flex justify-center align-center pa-5 ml-5 mr-5">\n' +
+                '         <img src="' + logo + '" alt="" class="img-responsive">\n' +
+                '         <div class="ticket-number-wrapper d-flex justify-center mt-20">\n' +
+                '         \n' + '<span>' + $(this).val() + '</span>\n' +
+                '         </div>\n' +
+                '    </div>'
+        })
+
+        let totalPrice = pricePerTicket * selectedTicket.length
+        //console.log('totalPrice:', totalPrice);
+
+
+        // checkIfDuplicateExists(seletecTicketArray);
+
+        popupBackdrop.css('display', 'flex');
+        ticketResult.show()
+
+
+        popupContentResultElemWrapepr.html(html);
+        totalPriceOutput.html(totalPrice.format());
+    })
+
+    body.on('click', '#confirm-buy-ticket', function (e) {
+        $('#form-buy-ticket').submit();
     })
 
     $('a[href*="#"]')

@@ -10,7 +10,11 @@
 namespace AluCMS\Lottery\Repositories;
 
 use AluCMS\Lottery\Models\Ticket;
-use Carbon\Carbon;
+use AluCMS\Lottery\Models\TicketDetail;
+use AluCMS\Wallet\Models\Wallet;
+use AluCMS\Wallet\Repositories\WalletRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class TicketRepository extends BaseRepository
@@ -32,7 +36,7 @@ class TicketRepository extends BaseRepository
     public function countAvaiableTicket($userId)
     {
         $ticket = $this->with('ticketDetail')->scopeQuery(function ($q) use ($userId) {
-            return $q->where('user_id', $userId)->whereDate('created_at', Carbon::now()->format('Y-m-d'));
+            return $q->where('user_id', $userId)->whereDate('created_at', date('Y-m-d'));
         })->first();
 
         if ($ticket == null) {
@@ -40,5 +44,42 @@ class TicketRepository extends BaseRepository
         }
 
         return count($ticket->ticketDetail);
+    }
+
+    public function boughtTicket($ticketValue)
+    {
+        DB::transaction(function () use ($ticketValue) {
+            $basePrice = config('core.price_per_ticket');
+
+            $wallet = new Wallet();
+            $walletId = $wallet->where('user_id', Auth::id())->first();
+
+            $ticket = $this->scopeQuery(function ($q) {
+                return $q->where('user_id', Auth::id())->whereDate('created_at', date('Y-m-d'));
+            })->first();
+
+            if ($ticket == null) {
+                $ticket = $this->create([
+                    'user_id' => Auth::id(),
+                    'username' => Auth::user()->username
+                ]);
+            }
+
+            foreach ($ticketValue as $t) {
+                $ticketDetail = new TicketDetail();
+                $ticketDetail->ticket_id = $ticket->id;
+                $ticketDetail->value = $t;
+                $ticketDetail->save();
+            }
+
+            //dd($basePrice * count($ticketValue));
+            if ($walletId->amount >= $basePrice * count($ticketValue)) {
+                $walletId->decrement('amount', $basePrice * count($ticketValue));
+            } else {
+                return 'Tài khoản của bạn không đủ tiền để thực hiện giao dịch';
+            }
+        });
+
+        return 'Bạn đã mua vé thành công, chúc bạn may mắn ! Cập nhật kết quả sau 18h30 ';
     }
 }

@@ -6,13 +6,12 @@
  * Contact me at: longlengoc90@gmail.com
  */
 ?>
-
 <header class="header" id="header">
     <div class="container">
         <div class="main-navigation d-flex justify-space align-center pt-10 pb-10">
             <div class="logo">
                 <a href="{{route('theme::home.get')}}">
-                    <img src="{{asset('themes/doantat/lib/images/logo-blank.png')}}" alt="" class="img-responsive w-222">
+                    <img src="{{asset('themes/doantat/lib/images/logo-blank.png')}}" alt="" class="img-responsive w-222 site-logo">
                 </a>
             </div>
 

@@ -14,12 +14,11 @@ use AluCMS\Lottery\Models\TicketDetail;
 use AluCMS\Lottery\Repositories\TicketRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use AluCMS\Theme\Http\Requests\BuyTicketRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ThemeBuyTicketController extends BaseController
 {
-
     public function getIndex(TicketRepository $ticketRepository)
     {
         $userId = Auth::id();
@@ -37,8 +36,17 @@ class ThemeBuyTicketController extends BaseController
         ]);
     }
 
-    public function postIndex(Request $request)
+    public function postIndex(BuyTicketRequest $request, TicketRepository $ticketRepository)
     {
-        dd($request->all());
+        $ticketValue = $request->get('tickets');
+
+        try {
+            $bought = $ticketRepository->boughtTicket($ticketValue);
+            return redirect()->route('theme::home.get')->with([
+                'message' => $bought
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors('Có lỗi xẩy ra trong quá trình thực thi');
+        }
     }
 }
