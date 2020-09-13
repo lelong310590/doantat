@@ -11,10 +11,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@yield('pageTitle') | AluCMS</title>
+    <title>@yield('pageTitle') | Doantat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="@lang('auth::auth.title') | AluCMS" name="description" />
-    <meta content="Alusoft JSC" name="author" />
+    <meta content="@lang('auth::auth.title') | Doantat" name="description" />
+    <meta content="Doantat" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">

@@ -9,9 +9,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@lang('auth::auth.title') | AluCMS</title>
+    <title>@lang('auth::auth.title') | Doantat CMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="@lang('auth::auth.title') | AluCMS" name="description" />
+    <meta content="@lang('auth::auth.title') | Doantat CMS" name="description" />
     <meta content="Alusoft JSC" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
@@ -103,7 +103,7 @@
 
 
 <footer class="footer footer-alt">
-    2018 - {{\Carbon\Carbon::now()->year}} &copy; Phát triển bởi <a href="" class="text-white-50">Alusoft</a>
+    2018 - {{\Carbon\Carbon::now()->year}} &copy; Phát triển bởi <a href="" class="text-white-50">Doantat</a>
 </footer>
 
 <!-- Vendor js -->
