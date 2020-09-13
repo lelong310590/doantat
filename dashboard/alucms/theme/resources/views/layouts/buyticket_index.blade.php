@@ -36,6 +36,7 @@
                                 <p>Kỳ quay thưởng: <span class="fz-14 lh-14 bg-color-fff pl-3 pr-3 pt-5 pb-5 ml-5" style="color: #222">{{\Carbon\Carbon::now()->format('d/m/Y')}}</span></p>
                                 <p>Số vé hôm nay bạn có thể mua: {{$limitTicket}}</p>
                             </div>
+
                             <div class="main-banner po-relative mt-30">
                                 <img src="{{asset('themes/doantat/lib/images/banner.png')}}" alt="" class="img-responsive center-block">
                                 <div id="main-award" class="main-award d-flex justify-center align-center color-fff fw-900 fz-35 po-absolute po-b-60 po-l-0 w-100p lh-35">
@@ -43,43 +44,47 @@
                                 </div>
                             </div>
 
+                            @if ($checkAllowTime)
+                                @if ($limitTicket > 0)
+                                    <p class="text-center mt-75 mb-25 fw-700 fz-16">Click vào vé để đặt mua</p>
 
-                            @if ($limitTicket > 0)
-                            <p class="text-center mt-75 mb-25 fw-700 fz-16">Click vào vé để đặt mua</p>
-
-                            <form action="{{route('theme.buyticket.post')}}" method="post" class="ticket-wrapper d-flex justify-center align-center" id="form-buy-ticket">
-                                {{csrf_field()}}
-                                <input type="hidden" name="limitTicket" value="{{$limitTicket}}">
-                                @for($i = 1; $i <= $limitTicket; $i++)
-                                    <div class="ticket-item w-130 h-200 d-flex justify-center align-center pa-5 ml-5 mr-5" data-ticket-number="ticket-{{$i}}">
-                                        <input type="hidden" id="ticket-{{$i}}" class="tickets-value" value="000" name="tickets[]" disabled>
-                                        <img src="{{asset('themes/doantat/lib/images/logo-blank.png')}}" alt="" class="img-responsive">
-                                        <div class="ticket-face-up-wrapper d-flex justify-center align-center">
-                                            <p class="fz-10 fw-700">Nhập số bạn chọn</p>
-                                            <div class="ticket-number-wrapper d-flex justify-center">
-                                                <input type="text" maxlength="1" value="0" pattern="[0-9]+" class="w-32 h-58 ml-2 mr-2 text-center ticket-number-input fw-700 bg-color-fff" data-position="0" data-target="ticket-{{$i}}">
-                                                <input type="text" maxlength="1" value="0" pattern="[0-9]+" class="w-32 h-58 ml-2 mr-2 text-center ticket-number-input fw-700 bg-color-fff" data-position="1" data-target="ticket-{{$i}}">
-                                                <input type="text" maxlength="1" value="0" pattern="[0-9]+" class="w-32 h-58 ml-2 mr-2 text-center ticket-number-input fw-700 bg-color-fff" data-position="2" data-target="ticket-{{$i}}">
+                                    <form action="{{route('theme.buyticket.post')}}" method="post" class="ticket-wrapper d-flex justify-center align-center" id="form-buy-ticket">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="limitTicket" value="{{$limitTicket}}">
+                                        @for($i = 1; $i <= $limitTicket; $i++)
+                                            <div class="ticket-item w-130 h-200 d-flex justify-center align-center pa-5 ml-5 mr-5" data-ticket-number="ticket-{{$i}}">
+                                                <input type="hidden" id="ticket-{{$i}}" class="tickets-value" value="000" name="tickets[]" disabled>
+                                                <img src="{{asset('themes/doantat/lib/images/logo-blank.png')}}" alt="" class="img-responsive">
+                                                <div class="ticket-face-up-wrapper d-flex justify-center align-center">
+                                                    <p class="fz-10 fw-700">Nhập số bạn chọn</p>
+                                                    <div class="ticket-number-wrapper d-flex justify-center">
+                                                        <input type="text" maxlength="1" value="0" pattern="[0-9]+" class="w-32 h-58 ml-2 mr-2 text-center ticket-number-input fw-700 bg-color-fff" data-position="0" data-target="ticket-{{$i}}">
+                                                        <input type="text" maxlength="1" value="0" pattern="[0-9]+" class="w-32 h-58 ml-2 mr-2 text-center ticket-number-input fw-700 bg-color-fff" data-position="1" data-target="ticket-{{$i}}">
+                                                        <input type="text" maxlength="1" value="0" pattern="[0-9]+" class="w-32 h-58 ml-2 mr-2 text-center ticket-number-input fw-700 bg-color-fff" data-position="2" data-target="ticket-{{$i}}">
+                                                    </div>
+                                                    <p class="ticket-facedown mt-15">Bỏ vé</p>
+                                                </div>
                                             </div>
-                                            <p class="ticket-facedown mt-15">Bỏ vé</p>
-                                        </div>
-                                    </div>
-                                @endfor
+                                        @endfor
 
-                                <div class="submit-wrapper w-100p">
-                                    <button type="submit" class="site-button center-block mt-35">
-                                        <span class="button-blue button-inner d-flex justify-center">Mua vé</span>
-                                    </button>
-                                </div>
-                            </form>
+                                        <div class="submit-wrapper w-100p">
+                                            <button type="submit" class="site-button center-block mt-35">
+                                                <span class="button-blue button-inner d-flex justify-center">Mua vé</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                @else
+                                    <p class="text-center mt-75 mb-25 fw-700 fz-16">Bạn đã mua đủ số lượng vé cho kỳ quay thưởng này !</p>
+                                    <div class="submit-wrapper d-flex">
+                                        <a href="{{route('theme.history.get')}}" class="site-button center-block mt-35">
+                                            <span class="button-blue button-inner d-flex justify-center">Xem lịch sử</span>
+                                        </a>
+                                    </div>
+                                @endif
                             @else
-                                <p class="text-center mt-75 mb-25 fw-700 fz-16">Bạn đã mua đủ số lượng vé cho kỳ quay thưởng này !</p>
-                                <div class="submit-wrapper d-flex">
-                                    <a href="{{route('theme.history.get')}}" class="site-button center-block mt-35">
-                                        <span class="button-blue button-inner d-flex justify-center">Xem lịch sử</span>
-                                    </a>
-                                </div>
+                                <p class="text-center mt-75 mb-25 fw-700 fz-16">Đã hết giờ mua vé</p>
                             @endif
+
                         </div>
                     </div>
                 </div>

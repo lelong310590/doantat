@@ -15,6 +15,7 @@ use AluCMS\Lottery\Repositories\TicketRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ThemeHistoryController extends BaseController
 {

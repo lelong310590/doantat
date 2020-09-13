@@ -11,7 +11,6 @@ namespace AluCMS\Lottery\Console\Commands;
 use AluCMS\Lottery\Models\Lottery;
 use Goutte\Client;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpClient\HttpClient;
 
 class LotteryGetResult extends Command

@@ -27,6 +27,22 @@ jQuery(document).ready(($) => {
     const ticketPopup = $('#buy-ticket-popup');
     const ticketResult = $('#buy-ticket-result');
 
+    function getdate() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        if(s<10){
+            s = "0"+s;
+        }
+        $('#timer').text(h+" : "+m+" : "+s);
+        setTimeout(function( ){
+            getdate();
+        }, 500);
+    }
+
+    getdate();
+
     body.on('click', '.popup-content-close, #reject-buy-ticket', function () {
         popupBackdrop.hide();
         popupContent.hide();

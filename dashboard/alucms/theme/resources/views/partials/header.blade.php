@@ -9,10 +9,12 @@
 <header class="header" id="header">
     <div class="container">
         <div class="main-navigation d-flex justify-space align-center pt-10 pb-10">
-            <div class="logo">
+            <div class="logo d-flex justify-start align-center">
                 <a href="{{route('theme::home.get')}}">
                     <img src="{{asset('themes/doantat/lib/images/logo-blank.png')}}" alt="" class="img-responsive w-222 site-logo">
                 </a>
+
+                <div id="timer" class="timer color-fff font-vt fz-25 ml-15"></div>
             </div>
 
             @if (auth()->check())

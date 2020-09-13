@@ -7,7 +7,7 @@
  */
 ?>
 
-<footer id="footer" class="footer mt-50 pt-30 pb-30">
+<footer id="footer" class="footer mt-40 pt-30 pb-30">
     <div class="container">
         <div class="footer-menu d-flex justify-center">
             <a href="">Điều khoản & Bảo mật</a>

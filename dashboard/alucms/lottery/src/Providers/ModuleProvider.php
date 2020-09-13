@@ -10,6 +10,7 @@
 namespace AluCMS\Lottery\Providers;
 
 use AluCMS\Lottery\Console\Commands\LotteryGetResult;
+use AluCMS\Lottery\Console\Commands\CheckAward;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 
@@ -23,17 +24,23 @@ class ModuleProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                LotteryGetResult::class
+                LotteryGetResult::class,
+                CheckAward::class
             ]);
         }
 
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
+
             $schedule->command('get_lottery_result')
                     ->weekdays()
                     ->everyMinute()
                     ->timezone(config('app.timezone'))
-                    ->between('18:00', '18:05');
+                    ->between('18:15', '18:20');
+
+            $schedule->command('check_award')
+                ->dailyAt('18:30')
+                ->timezone(config('app.timezone'));
         });
     }
 

@@ -13,6 +13,7 @@ use AluCMS\Lottery\Models\Ticket;
 use AluCMS\Lottery\Models\TicketDetail;
 use AluCMS\Wallet\Models\Wallet;
 use AluCMS\Wallet\Repositories\WalletRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -35,11 +36,16 @@ class TicketRepository extends BaseRepository
 
     public function countAvaiableTicket($userId)
     {
-        $ticket = $this->with('ticketDetail')->scopeQuery(function ($q) use ($userId) {
-            return $q->where('user_id', $userId)->whereDate('created_at', date('Y-m-d'));
+        //$now = Carbon::now();
+        $date = Carbon::now()->format('Y/m/d');
+        $dateStart = Carbon::parse($date.' 00:00:00');
+        $dateEnd = Carbon::parse($date.' 18:00:00');
+
+        $ticket = $this->with('ticketDetail')->scopeQuery(function ($q) use ($userId, $dateStart, $dateEnd) {
+            return $q->where('user_id', $userId)->whereBetween('created_at', [$dateStart, $dateEnd]);
         })->first();
 
-        if ($ticket == null) {
+        if ($ticket == null || Carbon::now()->greaterThan($dateEnd)) {
             return 0;
         }
 

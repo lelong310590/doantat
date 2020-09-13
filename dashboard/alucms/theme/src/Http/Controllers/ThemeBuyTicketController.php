@@ -29,11 +29,13 @@ class ThemeBuyTicketController extends BaseController
         $boughtTicket = $ticketRepository->countAvaiableTicket($userId);
 
         $maxTicket = config('core.limit_ticket');
+        $checkAllowTime = $this->checkAllowTime();
 
         return view('theme::layouts.buyticket_index', [
             'currentAward' => $currentAward->value,
             'valueFromStartToNow' => $valueFromStartToNow,
-            'limitTicket' => $maxTicket - $boughtTicket
+            'limitTicket' => $maxTicket - $boughtTicket,
+            'checkAllowTime' => $checkAllowTime
         ]);
     }
 
@@ -49,5 +51,14 @@ class ThemeBuyTicketController extends BaseController
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Có lỗi xẩy ra trong quá trình thực thi');
         }
+    }
+
+    public function checkAllowTime()
+    {
+        $date = Carbon::now();
+        $dateStart = $date->startOfDay();
+        $dateEnd = $dateStart->addHours(18);
+
+        return $date->lessThanOrEqualTo($dateEnd);
     }
 }
