@@ -42,4 +42,8 @@ Route::group(['prefix' => 'user'], function (Router $router) {
     $router->post('pay', 'ThemePayController@postPay')
         ->name('theme.pay.post')
         ->middleware('auth');
+
+    $router->get('history', 'ThemeHistoryController@getIndex')
+        ->name('theme.history.get')
+        ->middleware('auth');
 });

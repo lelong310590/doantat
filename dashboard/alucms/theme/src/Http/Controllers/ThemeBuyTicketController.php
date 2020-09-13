@@ -27,6 +27,7 @@ class ThemeBuyTicketController extends BaseController
         $valueFromStartToNow = $ticketFromStartToNow * config('core.price_per_ticket');
 
         $boughtTicket = $ticketRepository->countAvaiableTicket($userId);
+
         $maxTicket = config('core.limit_ticket');
 
         return view('theme::layouts.buyticket_index', [

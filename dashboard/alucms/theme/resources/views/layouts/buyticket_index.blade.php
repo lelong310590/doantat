@@ -43,6 +43,8 @@
                                 </div>
                             </div>
 
+
+                            @if ($limitTicket > 0)
                             <p class="text-center mt-75 mb-25 fw-700 fz-16">Click vào vé để đặt mua</p>
 
                             <form action="{{route('theme.buyticket.post')}}" method="post" class="ticket-wrapper d-flex justify-center align-center" id="form-buy-ticket">
@@ -70,6 +72,14 @@
                                     </button>
                                 </div>
                             </form>
+                            @else
+                                <p class="text-center mt-75 mb-25 fw-700 fz-16">Bạn đã mua đủ số lượng vé cho kỳ quay thưởng này !</p>
+                                <div class="submit-wrapper d-flex">
+                                    <a href="{{route('theme.history.get')}}" class="site-button center-block mt-35">
+                                        <span class="button-blue button-inner d-flex justify-center">Xem lịch sử</span>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
