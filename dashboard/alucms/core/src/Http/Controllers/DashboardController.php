@@ -37,7 +37,7 @@ class DashboardController extends Controller
             $grownTicketPercent = round(($currentMonthTicket - $lastMonthTicket) % $lastMonthTicket * 100, 2);
         }
 
-        $currentAward = Award::where('status', 'active')->first(['value', 'created_at']);
+        $currentAward = Award::latest()->first();
         $ticketFromStartToNow = TicketDetail::whereBetween('created_at', [$currentAward->created_at, Carbon::now()])->count();
         $valueFromStartToNow = $ticketFromStartToNow * config('core.price_per_ticket');
 

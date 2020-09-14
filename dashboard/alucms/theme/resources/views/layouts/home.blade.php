@@ -19,6 +19,10 @@
                 </div>
             </div>
 
+            <div class="home-lottery-result">
+                Kết quả
+            </div>
+
             @auth
             <div class="d-flex justify-center align-center">
                 <a class="site-button center-block" id="reject-buy-ticket" href="{{route('theme.buyticket.get')}}">
