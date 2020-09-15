@@ -10,5 +10,29 @@ return [
     'paginate' => 20,
     'price_per_ticket' => 5000,
     'start_award' => 5000000,
-    'limit_ticket' => 4
+    'limit_ticket' => 4,
+    'bank_lists' => [
+        "MB Bank",
+        "Ngân Hàng Á Châu (ACB)",
+        "Agribank",
+        "BIDV",
+        "Đông Á",
+        "EximBank",
+        "Sacombank",
+        "Techcombank",
+        "Vietinbank",
+        "Vietcombank",
+        "VIB",
+        "VPBank",
+        "MaritimeBank",
+        "SHB",
+        "MB Bank",
+        "LienViet Post Bank",
+        "Ocean Bank",
+        "TP Bank",
+        "SeaBank",
+        "BacA Bank",
+    ]
 ];
+
+

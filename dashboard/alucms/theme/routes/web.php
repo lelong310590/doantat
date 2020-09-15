@@ -50,8 +50,20 @@ Route::group(['prefix' => 'user'], function (Router $router) {
         ->name('theme.withdrawal.post')
         ->middleware('auth');
 
-
     $router->get('history', 'ThemeHistoryController@getIndex')
         ->name('theme.history.get')
+        ->middleware('auth');
+});
+
+Route::group(['prefix' => 'bank'], function (Router $router) {
+    $router->get('index', 'ThemeBankController@getIndex')
+        ->name('theme.bank_index.get')
+        ->middleware('auth');
+
+    $router->get('create', 'ThemeBankController@getCreate')
+        ->name('theme.bank_create.get')
+        ->middleware('auth');
+    $router->post('create', 'ThemeBankController@postCreate')
+        ->name('theme.bank_create.post')
         ->middleware('auth');
 });

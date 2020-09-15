@@ -25,7 +25,7 @@
                                     {{csrf_field()}}
                                     <legend class="fz-15 color-fff">Thông tin tài khoản</legend>
                                     <div class="row">
-                                        <div class="col-xs-12 col-md-6">
+                                        <div class="col-xs-12 col-md-8 col-md-push-2">
                                             <div class="form-group">
                                                 <label for="">Tên đăng nhập</label>
                                                 <input type="text" class="form-control" name="username" value="{{auth()->user()->username}}" disabled>
@@ -51,18 +51,53 @@
                                                 <input type="text" class="form-control" name="address" value="{{auth()->user()->address}}">
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-xs-12 col-md-6">
-                                            <div class="user-avatar w-150 h-150 center-block d-flex justify-center align-center">
-                                                <a data-fancybox data-type="iframe" data-src="{{config('app.url')}}/filemanager/dialog.php?type=1&fldr={{auth()->user()->username}}&field_id=preview" href="javascript:;">
-                                                    @if (auth()->user()->thumbnail != '')
-                                                        <img src="{{auth()->user()->thumbnail}}" alt="" class="img-responsive w-150 center-block">
-                                                    @else
-                                                        <img src="https://via.placeholder.com/150x150?text={{auth()->user()->username}}" alt="" class="img-responsive w-150 center-block">
-                                                    @endif
-                                                </a>
+                                    <legend class="fz-15 color-fff">Mật khẩu</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-8 col-md-push-2">
+                                            <div class="form-group">
+                                                <label for="">Mật khẩu cũ</label>
+                                                <input type="password" class="form-control" name="password" value="">
                                             </div>
-                                            <p class="text-center mt-15 color-fff fw-700 mt-15">Ảnh đại diện</p>
+                                            <div class="form-group">
+                                                <label for="">Mật khẩu mới</label>
+                                                <input type="password" class="form-control" name="new_password" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Nhập lại mật khẩu mới</label>
+                                                <input type="password" class="form-control" name="new_password_check" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <legend class="fz-15 color-fff">Mật khẩu thanh toán</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-8 col-md-push-2">
+                                            @if (auth()->user()->pay_password != null)
+                                            <div class="form-group">
+                                                <label for="">Mật khẩu cũ</label>
+                                                <input type="password" class="form-control" name="pay_password" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Mật khẩu mới</label>
+                                                <input type="password" class="form-control" name="new_paypassword" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Nhập lại mật khẩu mới</label>
+                                                <input type="password" class="form-control" name="new_paypassword_check" value="">
+                                            </div>
+                                            @else
+                                                <p>Bạn chưa tạo mật khẩu thanh toán, hãy khởi tạo mật khẩu thanh toán lần đầu tiên</p>
+                                                <div class="form-group">
+                                                    <label for="">Tạo Mật khẩu</label>
+                                                    <input type="password" class="form-control" name="pay_password" value="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Nhập lại mật khẩu</label>
+                                                    <input type="password" class="form-control" name="pay_password_check" value="">
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 

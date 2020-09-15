@@ -37,6 +37,13 @@
             </a>
         </div>
 
+        <div class="sidebar-item {{Route::currentRouteName() == 'theme.bank_index.get' ? 'active' : ''}}">
+            <a href="{{route('theme.bank_index.get')}}" class="d-flex justify-start align-center">
+                <img src="{{asset('themes/doantat/lib/images/bank-account.png')}}" alt="" class="img-responsive w-28 mr-10">
+                <span class="fz-14">Tài khoản ngân hàng</span>
+            </a>
+        </div>
+
         <div class="sidebar-item {{Route::currentRouteName() == 'theme.history.get' ? 'active' : ''}}">
             <a href="{{route('theme.history.get')}}" class="d-flex justify-start align-center">
                 <img src="{{asset('themes/doantat/lib/images/bill.png')}}" alt="" class="img-responsive w-28 mr-10">

@@ -9,10 +9,13 @@
 namespace AluCMS\Theme\Http\Controllers;
 
 use AluCMS\Core\Supports\FlashMessages;
+use AluCMS\Theme\Http\Requests\EditUserRequest;
 use AluCMS\User\Repositories\UserRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Barryvdh\Debugbar\LaravelDebugbar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class ThemeUserController extends BaseController
@@ -33,17 +36,38 @@ class ThemeUserController extends BaseController
         return view('theme::layouts.user_index');
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    public function postIndex(Request $request)
+
+    public function postIndex(EditUserRequest $request)
     {
-        $data = $request->except(['_token', 'email', 'username']);
+        $password = $request->get('password');
+        $newPassword = $request->get('new_password');
+        $payPassword = $request->get('pay_password');
+        $newPayPassword = $request->get('new_paypassword');
+        $user = Auth::user();
+        $data = $request->except(['_token', 'email', 'username', 'password', 'pay_password']);
+
+        if ($password != '' && $newPassword != '') {
+            $oldPassword = $user->getAuthPassword();
+            if (!Hash::check($password, $oldPassword)) {
+                return redirect()->back()->withErrors('Mật khẩu cũ không chính xác');
+            }
+
+            $data['password'] = $newPassword;
+        }
+
+        if ($payPassword != '' || $newPayPassword != '') {
+            if ($user->pay_password == null) {
+                $data['pay_password'] = $payPassword;
+            } else {
+                if (!Hash::check($payPassword, $user->pay_password)) {
+                    return redirect()->back()->withErrors('Mật khẩu thanh toán cũ không chính xác');
+                }
+
+                $data['pay_password'] = $newPayPassword;
+            }
+        }
+
         $this->user->update($data, auth()->id());
         return redirect()->back()->with(FlashMessages::returnMessage('edit'));
     }
-
-
 }
