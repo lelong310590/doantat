@@ -16,6 +16,7 @@
     <meta content="@lang('auth::auth.title') | Doantat CMS" name="description" />
     <meta content="Doantat JSC" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name=”robots” content=”noindex”>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
