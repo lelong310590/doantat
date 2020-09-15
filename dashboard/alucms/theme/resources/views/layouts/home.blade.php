@@ -19,8 +19,8 @@
                 </div>
             </div>
 
-            <div class="home-lottery-result">
-                Kết quả
+            <div class="home-lottery-result text-center color-fff fw-700 fz-20">
+                Kết quả kỳ quay {{$latestResult->result_date}} : <span class="fz-25">{{$latestResult->result_value}}</span>
             </div>
 
             @auth

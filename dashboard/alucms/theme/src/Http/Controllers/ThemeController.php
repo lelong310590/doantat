@@ -10,6 +10,7 @@
 namespace AluCMS\Theme\Http\Controllers;
 
 use AluCMS\Award\Models\Award;
+use AluCMS\Lottery\Models\Lottery;
 use AluCMS\Lottery\Models\TicketDetail;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Carbon\Carbon;
@@ -21,10 +22,12 @@ class ThemeController extends BaseController
         $currentAward = Award::latest()->first();
         $ticketFromStartToNow = TicketDetail::whereBetween('created_at', [$currentAward->created_at, Carbon::now()])->count();
         $valueFromStartToNow = $ticketFromStartToNow * config('core.price_per_ticket');
+        $latestResult = Lottery::latest()->first();
 
         return view('theme::layouts.home', [
             'currentAward' => $currentAward->value,
-            'valueFromStartToNow' => $valueFromStartToNow
+            'valueFromStartToNow' => $valueFromStartToNow,
+            'latestResult' => $latestResult
         ]);
     }
 }
