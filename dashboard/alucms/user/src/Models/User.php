@@ -23,12 +23,12 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'username', 'email', 'password', 'thumbnail', 'full_name', 'phone', 'address', 'identify_card', 'status',
+        'username', 'email', 'password', 'pay_password', 'thumbnail', 'full_name', 'phone', 'address', 'identify_card', 'status',
         'created_at', 'updated_at', 'created_by', 'edited_by', 'description', 'deleted_at'
     ];
 
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token', 'pay_password'
     ];
 
     protected static function boot()
@@ -47,6 +47,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function setPayPasswordAttribute($value)
+    {
+        $this->attributes['pay_password'] = bcrypt($value);
     }
 
     public function wallet()

@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/theme/src" isTestSource="false" packagePrefix="AluCMS\Theme\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/acl/src" isTestSource="false" packagePrefix="AluCMS\Acl\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/bank/src" isTestSource="false" packagePrefix="AluCMS\Bank\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/lottery/src" isTestSource="false" packagePrefix="AluCMS\Lottery\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/user/src" isTestSource="false" packagePrefix="AluCMS\User\" />
       <sourceFolder url="file://$MODULE_DIR$/dashboard/alucms/core/src" isTestSource="false" packagePrefix="AluCMS\Core\" />

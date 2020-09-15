@@ -50,6 +50,7 @@
             "AluCMS\\Wallet\\": "alucms/wallet/src",
             "AluCMS\\Award\\": "alucms/award/src",
             "AluCMS\\Notification\\": "alucms/notification/src",
+            "AluCMS\\Bank\\": "alucms/bank/src",
             "AluCMS\\Theme\\": "alucms/theme/src"
         },
         "classmap": [
