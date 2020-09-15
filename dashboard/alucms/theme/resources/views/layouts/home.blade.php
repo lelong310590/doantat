@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="home-lottery-result text-center color-fff fw-700 fz-20">
+            <div class="home-lottery-result text-center color-fff fw-700 fz-20 @auth mb-25 @endauth">
                 Kết quả kỳ quay {{$latestResult->result_date}} : <span class="fz-25">{{$latestResult->result_value}}</span>
             </div>
 
