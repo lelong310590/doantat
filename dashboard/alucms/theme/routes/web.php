@@ -43,6 +43,14 @@ Route::group(['prefix' => 'user'], function (Router $router) {
         ->name('theme.pay.post')
         ->middleware('auth');
 
+    $router->get('withdrawal', 'ThemeWithdrawalController@getIndex')
+        ->name('theme.withdrawal.get')
+        ->middleware('auth');
+    $router->post('withdrawal', 'ThemeWithdrawalController@postIndex')
+        ->name('theme.withdrawal.post')
+        ->middleware('auth');
+
+
     $router->get('history', 'ThemeHistoryController@getIndex')
         ->name('theme.history.get')
         ->middleware('auth');

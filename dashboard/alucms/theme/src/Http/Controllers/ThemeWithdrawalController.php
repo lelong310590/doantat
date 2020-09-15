@@ -9,8 +9,17 @@
 
 namespace AluCMS\Theme\Http\Controllers;
 
+use Barryvdh\Debugbar\Controllers\BaseController;
 
-class ThemeWithdrawalController
+class ThemeWithdrawalController extends BaseController
 {
+    public function getIndex()
+    {
+        return view('theme::layouts.withdrawal');
+    }
 
+    public function postIndex()
+    {
+
+    }
 }
