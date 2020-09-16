@@ -10,6 +10,7 @@
 namespace AluCMS\Theme\Http\Controllers;
 
 use AluCMS\Bank\Repositories\BankRepository;
+use AluCMS\Core\Supports\FlashMessages;
 use AluCMS\Theme\Http\Requests\CreateBankRequest;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Barryvdh\Debugbar\LaravelDebugbar;
@@ -75,5 +76,11 @@ class ThemeBankController extends BaseController
         return redirect()->route('theme.bank_index.get')->with([
             'message' => 'Thêm tài khoản ngân hàng thành công'
         ]);
+    }
+
+    public function getDelete($id)
+    {
+        $this->bank->delete($id);
+        return redirect()->back()->with(FlashMessages::returnMessage('delete'));
     }
 }

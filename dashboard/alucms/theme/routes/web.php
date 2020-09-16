@@ -66,4 +66,8 @@ Route::group(['prefix' => 'bank'], function (Router $router) {
     $router->post('create', 'ThemeBankController@postCreate')
         ->name('theme.bank_create.post')
         ->middleware('auth');
+
+    $router->get('delete/{id}', 'ThemeBankController@getDelete')
+        ->name('theme.bank_delete.get')
+        ->middleware('auth');
 });

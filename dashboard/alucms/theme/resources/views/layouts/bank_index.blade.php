@@ -40,6 +40,7 @@
                                         <th width="200">Tên ngân hàng</th>
                                         <th width="200">Số tài khoản</th>
                                         <th width="150">Ngày thêm</th>
+                                        <th width="50"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -49,10 +50,15 @@
                                             <td>{{$b->bank_name}}</td>
                                             <td>{{$b->bank_number}}</td>
                                             <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $b->created_at)->format('Y-m-d')}}</td>
+                                            <td class="text-center">
+                                                <a href="{{route('theme.bank_delete.get', $b->id)}}" class="table-button">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </a>
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="4">Chưa có tài khoản nào</td>
+                                            <td colspan="5">Chưa có tài khoản nào</td>
                                         </tr>
                                     @endforelse
                                     </tbody>

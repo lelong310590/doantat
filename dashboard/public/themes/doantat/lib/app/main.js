@@ -147,6 +147,11 @@ jQuery(document).ready(($) => {
         $('#form-buy-ticket').submit();
     })
 
+    body.on('keyup', 'input[name=bank_holder]', function () {
+        let value = $(this).val();
+        $(this).val(value.toUpperCase());
+    });
+
     $('a[href*="#"]')
         // Remove links that don't actually link to anything
         .not('[href="#"]')
