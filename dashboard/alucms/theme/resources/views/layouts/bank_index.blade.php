@@ -24,7 +24,7 @@
                                 <legend class="fz-15 color-fff">Tải khoản ngân hàng</legend>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <p>- Bạn có thể thêm tối đa 5 tài khoản ngân hàng. Hiện tại bạn đang có 0 tài khoản.</p>
+                                        <p>- Bạn có thể thêm tối đa 5 tài khoản ngân hàng. Hiện tại bạn đang có {{$bank->count()}} tài khoản.</p>
                                         <p>- Từ tài khoản ngân hàng thứ 2 trở đi phải trùng tên chủ tài khoản với tài khoản đầu tiên</p>
                                         <p>- Nếu bạn khoá danh sách tài khoản, bạn sẽ không thể thêm mới hoặc xoá tài khoản ngân hàng</p>
                                         <p>- Doantat không hỗ trợ rút tiền về số thẻ ATM và Viettel Pay</p>
@@ -40,7 +40,7 @@
                                         <th width="200">Tên ngân hàng</th>
                                         <th width="200">Số tài khoản</th>
                                         <th width="150">Ngày thêm</th>
-                                        <th width="50"></th>
+{{--                                        <th width="50"></th>--}}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -50,15 +50,15 @@
                                             <td>{{$b->bank_name}}</td>
                                             <td>{{$b->bank_number}}</td>
                                             <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $b->created_at)->format('Y-m-d')}}</td>
-                                            <td class="text-center">
-                                                <a href="{{route('theme.bank_delete.get', $b->id)}}" class="table-button">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </a>
-                                            </td>
+{{--                                            <td class="text-center">--}}
+{{--                                                <a href="{{route('theme.bank_delete.get', $b->id)}}" class="table-button">--}}
+{{--                                                    <span class="glyphicon glyphicon-trash"></span>--}}
+{{--                                                </a>--}}
+{{--                                            </td>--}}
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5">Chưa có tài khoản nào</td>
+                                            <td colspan="4">Chưa có tài khoản nào</td>
                                         </tr>
                                     @endforelse
                                     </tbody>
@@ -66,9 +66,11 @@
                             </div>
 
                             <div class="bank-list-action d-flex justify-center align-center">
+                                @if ($bank->count() < 5)
                                 <a href="{{route('theme.bank_create.get')}}" class="site-button center-block mt-35">
                                     <span class="button-blue button-inner d-flex justify-center">Thêm tài khoản</span>
                                 </a>
+                                @endif
 
                                 <a class="site-button center-block mt-35">
                                     <span class="button-red button-inner d-flex justify-center">Khoá danh sách</span>

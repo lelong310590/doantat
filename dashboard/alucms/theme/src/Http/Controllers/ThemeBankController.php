@@ -37,6 +37,7 @@ class ThemeBankController extends BaseController
         $banks = $this->bank->findWhere([
             'user_id' => Auth::id()
         ]);
+
         return view('theme::layouts.bank_index', [
             'bank' => $banks
         ]);
@@ -61,11 +62,27 @@ class ThemeBankController extends BaseController
     public function postCreate(CreateBankRequest $request)
     {
         $user = Auth::user();
+        $countBank = $this->bank->findWhere([
+            'user_id' => $user->id
+        ])->count();
+
         $userPayPassword = $user->pay_password;
         $payPassword = $request->get('pay_password');
 
         if (!Hash::check($payPassword, $userPayPassword)) {
             return redirect()->back()->withErrors('Mật khẩu thanh toán không chính xác');
+        }
+
+        if ($countBank == 4) {
+            return redirect()->back()->withErrors('Bạn đã tạo đủ giới hạn tài khoản ngân hàng');
+        }
+
+        if ($countBank > 1) {
+            $lastestBank = $this->bank->first();
+            $lastestBankHolder = $lastestBank->bank_holder;
+            if ($lastestBankHolder != $request->get('bank_holder')) {
+                return redirect()->back()->withErrors('Tên chủ tài khoản không giống nhau');
+            }
         }
 
         $data = $request->except('_token', 'bank_number_check', 'pay_password');
@@ -78,6 +95,10 @@ class ThemeBankController extends BaseController
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getDelete($id)
     {
         $this->bank->delete($id);
