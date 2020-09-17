@@ -48,9 +48,8 @@ class CheckAward extends Command
         $dateStart = Carbon::parse($date.' 00:00:00');
         $dateEnd = Carbon::parse($date.' 18:00:00');
         $todayAward = Award::latest()->first();
-
         $todayBingo = Lottery::whereDate('created_at', $date)->first();
-        //$ticketDetailWinners = TicketDetail::with('ticket')->whereBetween('created_at', [$dateStart, $dateEnd])->where('value', $todayBingo->result_value)->get()->groupBy('');
+        //dd($todayBingo);
         $ticketDetailWinners = DB::table('lottery_tickets')
                                 ->join('ticket_details', 'lottery_tickets.id', '=', 'ticket_details.ticket_id')
                                 ->select('lottery_tickets.user_id')
@@ -65,6 +64,8 @@ class CheckAward extends Command
         }
 
         $winnerUser = User::whereIn('id', $winnerId)->get();
+
+
 
         $this->info($winnerUser);
     }

@@ -52,15 +52,21 @@ class LotteryGetResult extends Command
         $crawler = $client->request('GET', $url);
 
         $resultDate = $crawler->filter('span#result_date')->text();
-
         $check = $lottery->where('result_date', $resultDate);
 
-        if ($check->count() < 1 || $check->result_value == null) {
-            $result6 = $crawler->filter('td#rs_0_0')->text();
-            $result3 = substr($result6, 2);
+        $result6 = $crawler->filter('td#rs_0_0')->text();
+        $result3 = substr($result6, 2);
+
+        if ($check->count() < 1 ) {
             $lottery->result_date = $resultDate;
             $lottery->result_value = $result3;
             $lottery->save();
+        } else {
+            if ($check->first()->result_value == '') {
+                $lottery = $check->first();
+                $lottery->result_value = $result3;
+                $lottery->save();
+            }
         }
 
         return false;
