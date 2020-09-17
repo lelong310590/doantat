@@ -13,6 +13,7 @@ use AluCMS\Auth\Http\Request\AuthRequest;
 use AluCMS\Auth\Supports\Auth;
 use AluCMS\User\Http\Requests\UserCreateRequest;
 use AluCMS\User\Repositories\UserRepository;
+use AluCMS\Wallet\Repositories\WalletRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
@@ -34,10 +35,15 @@ class ThemeAuthController extends BaseController
         return redirect()->intended($this->redirectTo);
     }
 
-    public function postRegister(UserCreateRequest $request, UserRepository $userRepository)
+    public function postRegister(UserCreateRequest $request, UserRepository $userRepository, WalletRepository $walletRepository)
     {
-        $newUser = $userRepository->create($request->all());
+        $newUser = $userRepository->create($request->all() + ['status' => 'active']);
         $newUser->syncRoles('player');
+        $walletRepository->create([
+            'user_id' => $newUser->id,
+            'user_name' => $newUser->username,
+            'status' => 'active'
+        ]);
         auth()->loginUsingId($newUser->id);
         return redirect()->route('theme::home.get');
     }

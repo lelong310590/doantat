@@ -9,7 +9,7 @@
 
 namespace AluCMS\Theme\Http\Controllers;
 
-use AluCMS\Core\Supports\FlashMessages;
+use Illuminate\Support\Facades\Auth;
 use AluCMS\Notification\Repositories\NotificationRepository;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Barryvdh\Debugbar\LaravelDebugbar;
@@ -31,7 +31,8 @@ class ThemePayController extends BaseController
             'notification' => $this->notification->scopeQuery(function ($q) {
                 return $q->where([
                     ['status', '!=', 'rejected'],
-                    'type' => 'cash_in'
+                    ['type', '=', 'cash_in'],
+                    ['user_id', '=', Auth::id()]
                 ]);
             })->paginate(10)
         ]);

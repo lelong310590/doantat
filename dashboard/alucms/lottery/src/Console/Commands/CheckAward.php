@@ -49,24 +49,53 @@ class CheckAward extends Command
         $dateEnd = Carbon::parse($date.' 18:00:00');
         $todayAward = Award::latest()->first();
         $todayBingo = Lottery::whereDate('created_at', $date)->first();
-        //dd($todayBingo);
-        $ticketDetailWinners = DB::table('lottery_tickets')
-                                ->join('ticket_details', 'lottery_tickets.id', '=', 'ticket_details.ticket_id')
-                                ->select('lottery_tickets.user_id')
-                                ->whereBetween('lottery_tickets.created_at', [$dateStart, $dateEnd])
-                                ->where('ticket_details.value', $todayBingo->result_value)
-                                ->get()
-                                ->groupBy('lottery_tickets.user_id');
+        if ($todayBingo != null) {
 
-        $winnerId = [];
-        foreach ($ticketDetailWinners as $w) {
-            $winnerId[] = $w[0]->user_id;
+            $allticketWin = DB::table('ticket_details')
+                ->where('value',$todayBingo->result_value)
+                ->count();
+
+            $awardPerUser = floor($todayAward->value / $allticketWin);
+
+            $ticketDetailWinners = DB::table('lottery_tickets')
+                ->join('ticket_details', 'lottery_tickets.id', '=', 'ticket_details.ticket_id')
+                ->select('lottery_tickets.user_id')
+                ->whereBetween('lottery_tickets.created_at', [$dateStart, $dateEnd])
+                ->where('ticket_details.value', $todayBingo->result_value)
+                ->get()
+                ->groupBy('lottery_tickets.user_id');
+
+            $winner = [];
+
+            foreach ($ticketDetailWinners as $w) {
+                //send notification to winner
+                DB::table('notification')
+                    ->insert([
+                        'type' => 'win',
+                        'amount' => $awardPerUser,
+                        'status' => 'processed',
+                        'user_id' => $w[0]->user_id,
+                        'content' => '
+                            <p>Xin chúc mừng bạn đã thằng giải kỳ quay '.$todayBingo->result_date.': <b>'.$todayBingo->result_value.'</b></p>
+                            <p>Số tiền thắng giải: <b>'.$awardPerUser.'</b></p>
+                        '
+                    ]);
+
+                // Change money to user
+//                DB::table('wallets')
+//                    ->
+            }
+
+            $i = 1;
+            foreach ($ticketDetailWinners as $w) {
+                $winner['user_'.$i]['id'] = $w[0]->user_id;
+                $winner['user_'.$i]['time'] = count($w);
+                $i++;
+            }
+
+            //$winnerUser = User::whereIn('id', $winnerId)->get();
+
+            dd($ticketDetailWinners);
         }
-
-        $winnerUser = User::whereIn('id', $winnerId)->get();
-
-
-
-        $this->info($winnerUser);
     }
 }
