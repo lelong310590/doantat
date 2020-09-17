@@ -59,43 +59,29 @@ class CheckAward extends Command
 
             $ticketDetailWinners = DB::table('lottery_tickets')
                 ->join('ticket_details', 'lottery_tickets.id', '=', 'ticket_details.ticket_id')
-                ->select('lottery_tickets.user_id')
+                ->select(DB::raw('count(*) as count, lottery_tickets.user_id'))
                 ->whereBetween('lottery_tickets.created_at', [$dateStart, $dateEnd])
                 ->where('ticket_details.value', $todayBingo->result_value)
-                ->get()
-                ->groupBy('lottery_tickets.user_id');
-
-            $winner = [];
-
+                ->groupBy('lottery_tickets.user_id')
+                ->get();
             foreach ($ticketDetailWinners as $w) {
-                //send notification to winner
+//                send notification to winner
                 DB::table('notification')
                     ->insert([
                         'type' => 'win',
                         'amount' => $awardPerUser,
                         'status' => 'processed',
-                        'user_id' => $w[0]->user_id,
+                        'user_id' => $w->user_id,
                         'content' => '
                             <p>Xin chúc mừng bạn đã thằng giải kỳ quay '.$todayBingo->result_date.': <b>'.$todayBingo->result_value.'</b></p>
                             <p>Số tiền thắng giải: <b>'.$awardPerUser.'</b></p>
                         '
                     ]);
 
-                // Change money to user
-//                DB::table('wallets')
-//                    ->
+//                 Change money to user
+                $moneyGetByBoughtSameTicket = $w->count * $awardPerUser;
+                DB::table('wallets')->increment('amount', (float) $moneyGetByBoughtSameTicket, ['user_id' => $w->user_id]);
             }
-
-            $i = 1;
-            foreach ($ticketDetailWinners as $w) {
-                $winner['user_'.$i]['id'] = $w[0]->user_id;
-                $winner['user_'.$i]['time'] = count($w);
-                $i++;
-            }
-
-            //$winnerUser = User::whereIn('id', $winnerId)->get();
-
-            dd($ticketDetailWinners);
         }
     }
 }

@@ -11,6 +11,7 @@ return [
     'price_per_ticket' => 5000,
     'start_award' => 5000000,
     'limit_ticket' => 4,
+    'rate_award' => 75,
     'bank_lists' => [
         "MB Bank",
         "Ngân Hàng Á Châu (ACB)",

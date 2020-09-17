@@ -19,14 +19,13 @@ class ThemeController extends BaseController
 {
     public function getHome()
     {
+//        $rating = config('core.rate_award');
+//        $startAwar
         $currentAward = Award::latest()->first();
-        $ticketFromStartToNow = TicketDetail::whereBetween('created_at', [$currentAward->created_at, Carbon::now()])->count();
-        $valueFromStartToNow = $ticketFromStartToNow * config('core.price_per_ticket');
         $latestResult = Lottery::latest()->first();
 
         return view('theme::layouts.home', [
             'currentAward' => $currentAward->value,
-            'valueFromStartToNow' => $valueFromStartToNow,
             'latestResult' => $latestResult
         ]);
     }
