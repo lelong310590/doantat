@@ -23,7 +23,7 @@ class ThemeController extends BaseController
         $startAward = config('core.start_award');
         $currentAward = Award::latest()->first();
         $realProfitAward = $currentAward->value - $startAward;
-        $showProfitAward = round(ceil($realProfitAward*$rating/100), 3);
+        $showProfitAward = round(ceil($realProfitAward*$rating/100), -4);
 
         $showAward = $startAward + $showProfitAward;
 
