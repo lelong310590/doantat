@@ -15,6 +15,7 @@ use AluCMS\Theme\Http\Requests\CreateBankRequest;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Barryvdh\Debugbar\LaravelDebugbar;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,10 +45,15 @@ class ThemeBankController extends BaseController
     }
 
     /**
-     * @return View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function getCreate() : View
+    public function getCreate()
     {
+        $user = Auth::user();
+        $payPassword = $user->pay_password;
+        if ($payPassword == null) {
+            return redirect()->route('theme.user.get')->withErrors('Bạn phải tạo mật khẩu thanh toán trước');
+        }
         $listBanks = config('core.bank_lists');
         return view('theme::layouts.bank_create', [
             'listBanks' => $listBanks

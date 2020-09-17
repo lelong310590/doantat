@@ -4,6 +4,16 @@ function checkIfDuplicateExists(w){
     return new Set(w).size !== w.length
 }
 
+function numberWithCommas(x) {
+
+    return x.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function checkInputHasLetter (inputtxt)  {
+    return !!(inputtxt.match(/[a-zA-Z]+/g));
+}
+
+
 Number.prototype.format = function(n, x) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
     return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
@@ -151,6 +161,24 @@ jQuery(document).ready(($) => {
         let value = $(this).val();
         $(this).val(value.toUpperCase());
     });
+
+    body.on('keyup', 'input#amount_withdrawal', function (e) {
+        let valIput = e.target.value.replace(/[,]/g, '');
+        let max = $(this).attr('data-max');
+        // console.log('valIput :', valIput);
+        // console.log('check :', checkInputHasLetter(valIput));
+        if (checkInputHasLetter(valIput)) {
+            $(this).val(0);
+        } else {
+            if (parseInt(valIput) >= parseInt(max)) {
+                $(this).val(numberWithCommas(max));
+            } else if (parseInt(valIput) >= 100000000) {
+                $(this).val(numberWithCommas('100000000'));
+            } else {
+                $(this).val(numberWithCommas(valIput));
+            }
+        }
+    })
 
     $('a[href*="#"]')
         // Remove links that don't actually link to anything

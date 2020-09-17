@@ -9,9 +9,13 @@
 
 @extends('dashboard::master')
 
+@php
+    $title = request()->get('type') == 'cash_in' ? 'Yêu cầu nạp tiền' : 'Yêu cầu rút tiền'
+@endphp
+
 @section('pageTitle',
     request()->get('keywords') == null ?
-    trans('notification::notification.sidebar_notification_index') : trans('notification::notification.sidebar_notification_index.search').' "'.request()->get('keywords').'"'
+    $title : $title.' với tài khoản "'.request()->get('keywords').'"'
 )
 
 @section('content')

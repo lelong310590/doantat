@@ -20,12 +20,12 @@ class NotificationRepository extends BaseRepository
         return Notification::class;
     }
 
-    public function search($keyword)
+    public function search($keyword, $type)
     {
-        return $this->scopeQuery(function ($e) use ($keyword) {
+        return $this->scopeQuery(function ($e) use ($keyword, $type) {
             return $e->whereHas('user', function ($q) use ($keyword) {
                 return $q->where('username', 'LIKE', '%'.$keyword.'%');
-            });
+            })->where('type', $type);
         })->paginate(config('core.paginate'));
     }
 }

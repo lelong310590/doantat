@@ -36,15 +36,23 @@ class WalletRepository extends BaseRepository
         $this->create($data);
     }
 
-    public function increaseAmount($userId, $amount)
+    public function changeAmount($userId, $amount, $type)
     {
         $wallet = $this->findWhere([
             'user_id' => $userId
         ])->first();
 
         $currentAmount = $wallet->amount;
+        $newAmount = $currentAmount;
+
+        if ($type == 'cash_in') {
+            $newAmount = $currentAmount + floatval($amount);
+        } elseif ($type == 'withdraw') {
+            $newAmount = $currentAmount - floatval($amount);
+        }
+
         $this->update([
-            'amount' => $currentAmount + floatval($amount)
+            'amount' => $newAmount
         ], $wallet->id);
     }
 }

@@ -128,8 +128,14 @@
                                     <td class="align-middle">
                                         @if ($d->status == 'active')
                                             <span class="badge bg-soft-success text-success">{{$d ->$value}}</span>
-                                        @else
+                                        @elseif ($d->status == 'disable')
                                             <span class="badge bg-soft-danger text-danger">{{$d ->$value}}</span>
+                                        @elseif ($d->status == 'wait')
+                                            <span class="badge bg-soft-warning text-warning">Đang đợi</span>
+                                        @elseif ($d->status == 'rejected')
+                                            <span class="badge bg-soft-danger text-danger">Từ chối</span>
+                                        @elseif ($d->status == 'processed')
+                                            <span class="badge bg-soft-success text-success">Hoàn thành</span>
                                         @endif
                                     </td>
                                     @break
@@ -181,7 +187,7 @@
 </div>
 
 @if (method_exists($tabledata, 'links'))
-    {{$tabledata->links('dashboard::pagination')}}
+    {{$tabledata->appends(request()->query())->links('dashboard::pagination')}}
 @endif
 
 @push('js')

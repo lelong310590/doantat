@@ -9,7 +9,7 @@
 
 @extends('dashboard::master')
 
-@section('pageTitle', trans('notification::notification.notification_cash_in'))
+@section('pageTitle', $notification->type == 'cash_in' ? 'Yêu cầu nạp tiền' : 'Yêu cầu rút tiền')
 
 @section('content')
 
@@ -23,16 +23,17 @@
                             <a href="javascript:;" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
                             <a data-toggle="collapse" href="#cardCollpaseLeft" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
                         </div>
-                        <h5 class="card-title mb-0 text-white">{{trans('notification::notification.notification_cash_in')}}</h5>
+                        <h5 class="card-title mb-0 text-white">Yêu cầu {{$notification->type == 'cash_in' ? 'nạp tiền' : 'rút tiền'}}</h5>
+                        <input type="hidden" name="type" value="{{$notification->type}}">
                     </div>
                     <div id="cardCollpaseLeft" class="collapse show">
                         <div class="card-body">
                             <x-alucms-component-alert/>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <!-- Reported by -->
-                                    <label class="mt-2 mb-1">Tài khoản :</label>
+                                    <label class="mt-2 mb-1">Tài khoản yêu cầu :</label>
                                     <div class="media">
                                         @php
                                             $thumbnail = ($notification->user->thumbnail != null) ? $notification->user->thumbnail : 'https://via.placeholder.com/100x100?text=image';
@@ -45,14 +46,21 @@
                                     <!-- end Reported by -->
                                 </div> <!-- end col -->
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <!-- assignee -->
                                     <label class="mt-2 mb-1">Số tiền :</label>
                                     <p>{{number_format($notification->amount)}} đ</p>
                                     <!-- end assignee -->
                                 </div> <!-- end col -->
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <!-- assignee -->
+                                    <label class="mt-2 mb-1">Loại yêu cầu :</label>
+                                    <p>{{$notification->type == 'cash_in' ? 'Nạp tiền' : 'Rút tiền'}}</p>
+                                    <!-- end assignee -->
+                                </div> <!-- end col -->
+
+                                <div class="col-md-3">
                                     <!-- assignee -->
                                     <label class="mt-2 mb-1">Ngày gửi yêu cầu :</label>
                                     <p>{{$notification->created_at}}</p>
@@ -73,7 +81,7 @@
 
                             <label class="mt-2 mb-1">Nội dung :</label>
                             <p class="text-muted mb-4">
-                                {{$notification->content}}
+                                {!! $notification->content !!}
                             </p>
 
                             @if ($notification->status == 'rejected')

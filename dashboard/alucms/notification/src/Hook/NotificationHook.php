@@ -15,9 +15,20 @@ class NotificationHook
 {
     public function handle()
     {
-        $waiting = Notification::where('status', 'wait')->count();
+        $cashInWaiting = Notification::where([
+            ['status', '=', 'wait'],
+            ['type', '=', 'cash_in'],
+        ])->count();
+
+        $withdrawWaiting = Notification::where([
+            ['status', '=', 'wait'],
+            ['type', '=', 'withdraw'],
+        ])->count();
+
+
         echo view('notification::partials.sidebar', [
-            'waiting' => $waiting
+            'cashInWaiting' => $cashInWaiting,
+            'withdrawWaiting' => $withdrawWaiting,
         ]);
     }
 }

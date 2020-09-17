@@ -33,13 +33,14 @@ class NotificationController extends BaseController
     public function getIndex(Request $request) : View
     {
         $keywords = $request->get('keywords');
+        $type = $request->get('type');
 
-        $notification = $this->notification->scopeQuery(function ($q) {
-            return $q->with('user')->where('type', 'cash_in');
+        $notification = $this->notification->scopeQuery(function ($q) use ($type) {
+            return $q->with('user')->where('type', $type);
         })->paginate(config('core.paginate'));
 
         if ($keywords) {
-            $notification = $this->notification->search($keywords);
+            $notification = $this->notification->search($keywords, $type);
         }
 
         return view('notification::index', [
@@ -67,12 +68,12 @@ class NotificationController extends BaseController
             $amount = $request->get('amount');
             $userId = $request->get('user_id');
             try {
-                $walletRepository->increaseAmount($userId, $amount);
+                $walletRepository->changeAmount($userId, $amount, $data['type']);
             } catch (\Exception $e) {
                 return redirect()->back()->withErrors(trans('dashboard::error.error.create'));
             }
         }
 
-        return redirect()->route('alucms::notification.index.get')->with(FlashMessages::returnMessage('edit'));
+        return redirect()->route('alucms::notification.index.get', ['type' => $data['type']])->with(FlashMessages::returnMessage('edit'));
     }
 }
