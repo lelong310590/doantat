@@ -19,13 +19,18 @@ class ThemeController extends BaseController
 {
     public function getHome()
     {
-//        $rating = config('core.rate_award');
-//        $startAwar
+        $rating = config('core.rate_award');
+        $startAward = config('core.start_award');
         $currentAward = Award::latest()->first();
+        $realProfitAward = $currentAward->value - $startAward;
+        $showProfitAward = round(ceil($realProfitAward*$rating/100), 3);
+
+        $showAward = $startAward + $showProfitAward;
+
         $latestResult = Lottery::latest()->first();
 
         return view('theme::layouts.home', [
-            'currentAward' => $currentAward->value,
+            'currentAward' => $showAward,
             'latestResult' => $latestResult
         ]);
     }
