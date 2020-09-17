@@ -48,6 +48,14 @@ class CheckAward extends Command
         $dateStart = Carbon::parse($date.' 00:00:00');
         $dateEnd = Carbon::parse($date.' 18:00:00');
         $todayAward = Award::latest()->first();
+
+        $rating = config('core.rate_award');
+        $startAward = config('core.start_award');
+        $realProfitAward = $todayAward->value - $startAward;
+        $showProfitAward = round(ceil($realProfitAward*$rating/100), 3);
+
+        $showAward = $startAward + $showProfitAward;
+
         $todayBingo = Lottery::whereDate('created_at', $date)->first();
         if ($todayBingo != null) {
 
@@ -55,7 +63,7 @@ class CheckAward extends Command
                 ->where('value',$todayBingo->result_value)
                 ->count();
 
-            $awardPerUser = floor($todayAward->value / $allticketWin);
+            $awardPerUser = floor($showAward / $allticketWin);
 
             $ticketDetailWinners = DB::table('lottery_tickets')
                 ->join('ticket_details', 'lottery_tickets.id', '=', 'ticket_details.ticket_id')
