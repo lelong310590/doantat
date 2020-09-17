@@ -9,6 +9,7 @@
 
 namespace AluCMS\Lottery\Repositories;
 
+use AluCMS\Award\Models\Award;
 use AluCMS\Lottery\Models\Ticket;
 use AluCMS\Lottery\Models\TicketDetail;
 use AluCMS\Wallet\Models\Wallet;
@@ -57,8 +58,8 @@ class TicketRepository extends BaseRepository
         DB::transaction(function () use ($ticketValue) {
             $basePrice = config('core.price_per_ticket');
 
-            $wallet = new Wallet();
-            $walletId = $wallet->where('user_id', Auth::id())->first();
+            $walletId = Wallet::where('user_id', Auth::id())->first();
+            $award = Award::latest()->first();
 
             $ticket = $this->scopeQuery(function ($q) {
                 return $q->where('user_id', Auth::id())->whereDate('created_at', date('Y-m-d'));
@@ -80,7 +81,10 @@ class TicketRepository extends BaseRepository
 
             //dd($basePrice * count($ticketValue));
             if ($walletId->amount >= $basePrice * count($ticketValue)) {
-                $walletId->decrement('amount', $basePrice * count($ticketValue));
+                DB::transaction(function () use ($walletId, $basePrice, $ticketValue, $award) {
+                    $walletId->decrement('amount', $basePrice * count($ticketValue));
+                    $award->increment('value', $basePrice * count($ticketValue)); // add price of tickets bought to award
+                });
             } else {
                 return 'Tài khoản của bạn không đủ tiền để thực hiện giao dịch';
             }

@@ -84,7 +84,7 @@ class CheckAward extends Command
                             'user_id' => $w->user_id,
                             'content' => '
                             <p>Xin chúc mừng bạn đã thằng giải kỳ quay '.$todayBingo->result_date.': <b>'.$todayBingo->result_value.'</b></p>
-                            <p>Số tiền thắng giải: <b>'.$awardPerUser*($w->count).'</b></p>
+                            <p>Số tiền thắng giải: <b>'.$awardPerUser*($w->count).'</b> đã được chuyển vào ví của bạn</p>
                         '
                         ]);
 
