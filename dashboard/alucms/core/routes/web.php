@@ -15,6 +15,6 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRou
     $router->group(['prefix' => $moduleRoute], function (Router $router) use ($adminRoute) {
         $router->get('index', 'DashboardController@getIndex')
                 ->name('alucms::dashboard.index.get')
-                ->middleware('dashboard_index');
+                ->middleware('permission:dashboard_index');
     });
 });
