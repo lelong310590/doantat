@@ -74,37 +74,41 @@ class CheckAward extends Command
                 ->get();
 
             foreach ($ticketDetailWinners as $w) {
-//                send notification to winner
-                DB::table('notification')
-                    ->insert([
-                        'type' => 'win',
-                        'amount' => $awardPerUser,
-                        'status' => 'wait',
-                        'user_id' => $w->user_id,
-                        'content' => '
+                DB::transaction(function () use ($awardPerUser, $w, $todayBingo) {
+//                    send notification to winner
+                    DB::table('notification')
+                        ->insert([
+                            'type' => 'win',
+                            'amount' => $awardPerUser,
+                            'status' => 'wait',
+                            'user_id' => $w->user_id,
+                            'content' => '
                             <p>Xin chúc mừng bạn đã thằng giải kỳ quay '.$todayBingo->result_date.': <b>'.$todayBingo->result_value.'</b></p>
                             <p>Số tiền thắng giải: <b>'.$awardPerUser*($w->count).'</b></p>
                         '
-                    ]);
+                        ]);
 
-//                 Change money to user
-                $moneyGetByBoughtSameTicket = ($w->count) * $awardPerUser;
-                $wallet = DB::table('wallets')->select('id', 'user_id', 'amount')->where('user_id', '=', $w->user_id)->first();
-                DB::table('wallets')->where('id', $wallet->id)->update([
-                    'amount' => $wallet->amount + $moneyGetByBoughtSameTicket
-                ]);
+//                  Change money to user
+                    $moneyGetByBoughtSameTicket = ($w->count) * $awardPerUser;
+                    $wallet = DB::table('wallets')->select('id', 'user_id', 'amount')->where('user_id', '=', $w->user_id)->first();
+                    DB::table('wallets')->where('id', $wallet->id)->update([
+                        'amount' => $wallet->amount + $moneyGetByBoughtSameTicket
+                    ]);
+                });
             }
 
-            //reset award
-            DB::table('awards')->where('id', $todayAward->id)->update([
-                'status' => 'disable'
-            ]);
-            DB::table('awards')->insert([
-                'status' => 'active',
-                'value' => config('core.start_award'),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]);
+            DB::transaction(function () use ($todayAward) {
+                //reset award
+                DB::table('awards')->where('id', $todayAward->id)->update([
+                    'status' => 'disable'
+                ]);
+                DB::table('awards')->insert([
+                    'status' => 'active',
+                    'value' => config('core.start_award'),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+            });
         }
     }
 }
