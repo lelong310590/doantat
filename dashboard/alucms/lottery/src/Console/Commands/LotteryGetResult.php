@@ -47,7 +47,7 @@ class LotteryGetResult extends Command
     public function handle()
     {
         $url = 'http://ketqua.net';
-        $client = new Client(HttpClient::create(['timeout' => 60]));
+        $client = new Client(HttpClient::create(['timeout' => 3000]));
         $lottery = new Lottery();
         $crawler = $client->request('GET', $url);
 

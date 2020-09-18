@@ -8,7 +8,9 @@
 
 namespace AluCMS\Billboard\Repositories;
 
+use AluCMS\Award\Models\Award;
 use AluCMS\Billboard\Models\Billboard;
+use Carbon\Carbon;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class BillboardRepository extends BaseRepository
@@ -17,5 +19,18 @@ class BillboardRepository extends BaseRepository
     {
         // TODO: Implement model() method.
         return Billboard::class;
+    }
+
+    public function getWinner()
+    {
+        $lastAwardHasWinner = Award::where('status', 'disable')->latest()->first();
+        $billboards = [];
+        if ($lastAwardHasWinner) {
+            $billboards = $this->with('user')->findWhere([
+                'result_id' => $lastAwardHasWinner->id
+            ]);
+        }
+
+        return $billboards;
     }
 }

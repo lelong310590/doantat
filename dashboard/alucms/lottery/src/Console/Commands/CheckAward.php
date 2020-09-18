@@ -74,7 +74,7 @@ class CheckAward extends Command
                 ->get();
 
             foreach ($ticketDetailWinners as $w) {
-                DB::transaction(function () use ($awardPerUser, $w, $todayBingo) {
+                DB::transaction(function () use ($awardPerUser, $w, $todayBingo, $todayAward) {
 //                    send notification to winner
                     DB::table('notification')
                         ->insert([
@@ -100,6 +100,8 @@ class CheckAward extends Command
                         ->insert([
                             'user_id' => $w->user_id,
                             'game' => 'doantat',
+                            'result_id' => $todayAward->id,
+                            'result_date' => $todayBingo->result_date,
                             'created_at' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);

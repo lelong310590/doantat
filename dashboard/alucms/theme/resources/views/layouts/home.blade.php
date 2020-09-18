@@ -30,6 +30,35 @@
                 </a>
             </div>
             @endauth
+
+            <div class="billboard-wrapper color-fff col-xs-12 col-md-6 col-md-push-3 mt-50">
+                <p class="text-center color-fff fw-700">Danh sách trúng thưởng kỳ gần nhất</p>
+                <table class="table table-hover table-bordered main-table">
+                    <thead>
+                    <tr>
+                        <th width="50">#</th>
+                        <th width="200">Tài khoản</th>
+                        <th width="150">SĐT</th>
+                        <th width="150">Kỳ trúng thưởng</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($billBoard as $b)
+                        <tr>
+                            <td></td>
+                            <td>{{$b->user->username}}</td>
+                            <td>{{$b->user->phone}}</td>
+                            <td>{{$b->result_date}}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4">Chưa có người trúng giải</td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 @endsection

@@ -10,6 +10,8 @@
 namespace AluCMS\Theme\Http\Controllers;
 
 use AluCMS\Award\Models\Award;
+use AluCMS\Billboard\Models\Billboard;
+use AluCMS\Billboard\Repositories\BillboardRepository;
 use AluCMS\Lottery\Models\Lottery;
 use AluCMS\Lottery\Models\TicketDetail;
 use Barryvdh\Debugbar\Controllers\BaseController;
@@ -17,7 +19,7 @@ use Carbon\Carbon;
 
 class ThemeController extends BaseController
 {
-    public function getHome()
+    public function getHome(BillboardRepository $billboardRepository)
     {
         $rating = config('core.rate_award');
         $startAward = config('core.start_award');
@@ -29,9 +31,12 @@ class ThemeController extends BaseController
 
         $latestResult = Lottery::latest()->first();
 
+        $billBoard = $billboardRepository->getWinner();
+
         return view('theme::layouts.home', [
             'currentAward' => $showAward,
-            'latestResult' => $latestResult
+            'latestResult' => $latestResult,
+            'billBoard' => $billBoard
         ]);
     }
 }
