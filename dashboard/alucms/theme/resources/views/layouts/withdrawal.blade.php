@@ -68,7 +68,40 @@
 
                             <div class="payment-list mt-30">
                                 <legend class="fz-15 color-fff">Lịch sử rút tiền</legend>
+                                <table class="table table-hover table-bordered main-table">
+                                    <thead>
+                                    <tr>
+                                        <th width="30">#</th>
+                                        <th width="200">Ngày khởi tạo</th>
+                                        <th width="100">Trạng thái</th>
+                                        <th width="150">Số tiền</th>
 
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($notification as $n)
+                                        <tr>
+                                            <td>{{$loop->iteration}} </td>
+                                            <td>
+                                                <div class="d-flex justify-start align-center">
+                                                    {{$n->created_at}} <a href="javascript:;" class="label label-primary withdraw-expand ml-10"> Xem chi tiết</a>
+                                                </div>
+                                                <div class="withdraw-content mt-8">
+                                                    {!! $n->content !!}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="label label-warning">{{$n->status}}</span>
+                                            </td>
+                                            <td>{{number_format($n->amount)}} VNĐ</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                                <div class="text-center">
+                                    {{$notification->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>

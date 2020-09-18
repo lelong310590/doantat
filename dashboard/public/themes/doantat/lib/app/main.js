@@ -178,7 +178,12 @@ jQuery(document).ready(($) => {
                 $(this).val(numberWithCommas(valIput));
             }
         }
-    })
+    });
+
+    body.on('click', '.withdraw-expand', function (e) {
+        console.log($(this).parent().next());
+        $(this).parent().next().slideToggle();
+    });
 
     $('a[href*="#"]')
         // Remove links that don't actually link to anything

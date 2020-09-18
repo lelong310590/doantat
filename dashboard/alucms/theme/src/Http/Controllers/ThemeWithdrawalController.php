@@ -51,10 +51,19 @@ class ThemeWithdrawalController extends BaseController
             'user_id' => Auth::id()
         ],  ['amount'])->first();
 
+        $notification = $notificationRepository->scopeQuery(function ($q) {
+            return $q->where([
+                ['status', '!=', 'rejected'],
+                ['type', '=', 'withdraw'],
+                ['user_id', '=', Auth::id()]
+            ]);
+        })->paginate(10);
+
         return view('theme::layouts.withdrawal', [
             'successWithdrawal' => $successWithdrawal,
             'balance' => $balance->amount,
-            'banks' => $banks
+            'banks' => $banks,
+            'notification' => $notification
         ]);
     }
 
