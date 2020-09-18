@@ -94,6 +94,15 @@ class CheckAward extends Command
                     DB::table('wallets')->where('id', $wallet->id)->update([
                         'amount' => $wallet->amount + $moneyGetByBoughtSameTicket
                     ]);
+
+//                    Save winner to billboard
+                    DB::table('billboard')
+                        ->insert([
+                            'user_id' => $w->user_id,
+                            'game' => 'doantat',
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
                 });
             }
 

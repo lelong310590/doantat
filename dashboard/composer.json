@@ -51,6 +51,7 @@
             "AluCMS\\Award\\": "alucms/award/src",
             "AluCMS\\Notification\\": "alucms/notification/src",
             "AluCMS\\Bank\\": "alucms/bank/src",
+            "AluCMS\\Billboard\\": "alucms/billboard/src",
             "AluCMS\\Theme\\": "alucms/theme/src"
         },
         "classmap": [
