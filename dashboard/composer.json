@@ -46,6 +46,7 @@
             "AluCMS\\Auth\\": "alucms/auth/src",
             "AluCMS\\User\\": "alucms/user/src",
             "AluCMS\\Acl\\": "alucms/acl/src",
+            "AluCMS\\Post\\": "alucms/post/src",
             "AluCMS\\Lottery\\": "alucms/lottery/src",
             "AluCMS\\Wallet\\": "alucms/wallet/src",
             "AluCMS\\Award\\": "alucms/award/src",

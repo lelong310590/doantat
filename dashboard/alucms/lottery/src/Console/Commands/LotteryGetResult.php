@@ -54,7 +54,7 @@ class LotteryGetResult extends Command
         $resultDate = $crawler->filter('span#result_date')->text();
         $check = $lottery->where('result_date', $resultDate);
 
-        $result6 = $crawler->filter('td#rs_0_0')->text();
+        $result6 = $crawler->filter('#rs_0_0')->text();
         $result3 = substr($result6, 2);
 
         if ($check->count() < 1 ) {
