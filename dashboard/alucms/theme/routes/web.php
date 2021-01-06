@@ -20,6 +20,11 @@ Route::group(['prefix' => ''], function (Router $router) {
             ->name('theme::logout.get');
 });
 
+Route::group(['prefix' => 'lode'], function (Router $router) {
+    $router->get('/', 'LodeController@getIndex')
+            ->name('theme::lode.index')
+            ->middleware('auth');;
+});
 
 Route::group(['prefix' => 'user'], function (Router $router) {
     $router->get('buy-ticket', 'ThemeBuyTicketController@getIndex')

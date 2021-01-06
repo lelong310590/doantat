@@ -12,6 +12,9 @@
 @section('content')
     <main class="main" id="main">
         <div class="container">
+            <div class="col-xs-12 col-md-6">
+
+            </div>
             <div class="main-banner mt-50 mb-50 po-relative">
                 <img src="{{asset('themes/doantat/lib/images/banner.png')}}" alt="" class="img-responsive center-block">
                 <div id="main-award" class="main-award d-flex justify-center align-center color-fff fw-900 fz-72 po-absolute po-b-90 po-l-0 w-100p lh-72">
@@ -61,4 +64,11 @@
             </div>
         </div>
     </main>
+
+    <div class="lode-icon float-icon po-fixed po-r-10 z-10">
+        <a href="{{route('theme::lode.index')}}" class="d-flex justify-center align-center dir-column">
+            <p class="text-center color-fff fz-20 fw-700">XSMB</p>
+            <img src="{{asset('themes/doantat/lib/images/mayquayso.png')}}" alt="" class="img-responsive center-block w-93">
+        </a>
+    </div>
 @endsection

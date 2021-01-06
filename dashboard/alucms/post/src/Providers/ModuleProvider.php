@@ -15,9 +15,9 @@ class ModuleProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'user');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'post');
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
-        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'user');
+        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'post');
     }
 
     public function register()
