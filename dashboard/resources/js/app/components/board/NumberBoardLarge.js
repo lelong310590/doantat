@@ -1,9 +1,10 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
+import _ from 'lodash'
 
 class NumberBoardLarge extends Component {
     render() {
-
+        let rangeArray = ['000 - 099', '100 - 199', '200 - 299', '300 - 399', '400 - 499', '500 - 599', '600 - 699', '700 - 799', '800 - 899', '900 - 999']
         let numberItem = [];
         let i = -1;
         _.times(100, () => {
@@ -20,36 +21,16 @@ class NumberBoardLarge extends Component {
         return (
             <Fragment>
                 <div className="number-board-range-select">
-                    <div className="number-board-range-item">
-                        000 - 099
-                    </div>
-                    <div className="number-board-range-item">
-                        100 - 199
-                    </div>
-                    <div className="number-board-range-item">
-                        200 - 299
-                    </div>
-                    <div className="number-board-range-item">
-                        300 - 399
-                    </div>
-                    <div className="number-board-range-item">
-                        400 - 499
-                    </div>
-                    <div className="number-board-range-item">
-                        500 - 599
-                    </div>
-                    <div className="number-board-range-item">
-                        600 - 699
-                    </div>
-                    <div className="number-board-range-item">
-                        700 - 799
-                    </div>
-                    <div className="number-board-range-item">
-                        800 - 899
-                    </div>
-                    <div className="number-board-range-item">
-                        900 - 999
-                    </div>
+                    {_.map(rangeArray, (v, i) => {
+                        return (
+                            <div className="number-board-range-item" key={i}>
+                                <div className="number-board-range-item-inner">
+                                    {v}
+                                </div>
+                            </div>
+                        )
+                    })}
+
                 </div>
                 <div className="number-board-wrapper">
                     {numberItem}
