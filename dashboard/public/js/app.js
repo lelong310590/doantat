@@ -69278,13 +69278,14 @@ if (document.getElementById('lode-elem')) {
 /*!*******************************************!*\
   !*** ./resources/js/app/actions/Index.js ***!
   \*******************************************/
-/*! exports provided: handleChangeGameType, handleChangeGameSubType */
+/*! exports provided: handleChangeGameType, handleChangeGameSubType, handlePickNumber */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleChangeGameType", function() { return handleChangeGameType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleChangeGameSubType", function() { return handleChangeGameSubType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handlePickNumber", function() { return handlePickNumber; });
 /* harmony import */ var _const_ActionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../const/ActionTypes */ "./resources/js/app/const/ActionTypes.js");
 
 var handleChangeGameType = function handleChangeGameType(value) {
@@ -69296,6 +69297,12 @@ var handleChangeGameType = function handleChangeGameType(value) {
 var handleChangeGameSubType = function handleChangeGameSubType(value) {
   return {
     type: _const_ActionTypes__WEBPACK_IMPORTED_MODULE_0__["CHANGE_GAME_SUB_TYPE"],
+    payload: value
+  };
+};
+var handlePickNumber = function handlePickNumber(value) {
+  return {
+    type: _const_ActionTypes__WEBPACK_IMPORTED_MODULE_0__["PICK_NUMBER"],
     payload: value
   };
 };
@@ -69398,9 +69405,19 @@ var Board = /*#__PURE__*/function (_Component) {
       var _this$state = this.state,
           gameType = _this$state.gameType,
           gameSubType = _this$state.gameSubType;
+      var board = null;
+
+      if (gameType === 'lo' & gameSubType === 'lo3so') {
+        board = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_NumberBoardLarge__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+      } else if (gameType === '3cang') {
+        board = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_NumberBoardLarge__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+      } else {
+        board = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_NumberBoard__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-board"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_Tabs__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_SubTabs__WEBPACK_IMPORTED_MODULE_3__["default"], null), gameType === 'lo' & gameSubType === 'lo3so' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_NumberBoardLarge__WEBPACK_IMPORTED_MODULE_5__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_NumberBoard__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_Description__WEBPACK_IMPORTED_MODULE_6__["default"], null));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_Tabs__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_SubTabs__WEBPACK_IMPORTED_MODULE_3__["default"], null), board, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_board_Description__WEBPACK_IMPORTED_MODULE_6__["default"], null));
     }
   }]);
 
@@ -69502,6 +69519,7 @@ var Main = /*#__PURE__*/function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69524,6 +69542,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 var Sidebar = /*#__PURE__*/function (_Component) {
@@ -69531,44 +69552,154 @@ var Sidebar = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Sidebar);
 
-  function Sidebar() {
+  function Sidebar(props) {
+    var _this;
+
     _classCallCheck(this, Sidebar);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "changePrice", function (e) {
+      // console.log('e: ', e.target.value)
+      // console.log('valid: ', e.target.validity.valid)
+      var price = e.target.validity.valid ? e.target.value : 0;
+
+      _this.setState({
+        price: price
+      });
+    });
+
+    _this.state = {
+      gameType: 'lo',
+      gameSubType: 'lo2so',
+      selectedNumber: [],
+      price: 0
+    };
+    return _this;
   }
 
   _createClass(Sidebar, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        gameType: this.props.AppReducer.gameType,
+        gameSubType: this.props.AppReducer.gameSubType,
+        selectedNumber: this.props.AppReducer.selectedNumber
+      });
+    }
+  }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props.AppReducer.gameType !== nextProps.AppReducer.gameType) {
+        this.setState({
+          gameType: nextProps.AppReducer.gameType
+        });
+      }
+
+      if (this.props.AppReducer.gameSubType !== nextProps.AppReducer.gameSubType) {
+        this.setState({
+          gameSubType: nextProps.AppReducer.gameSubType
+        });
+      }
+
+      if (this.props.AppReducer.selectedNumber !== nextProps.AppReducer.selectedNumber) {
+        this.setState({
+          selectedNumber: nextProps.AppReducer.selectedNumber
+        });
+      }
+
+      return true;
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this$state = this.state,
+          gameType = _this$state.gameType,
+          gameSubType = _this$state.gameSubType,
+          selectedNumber = _this$state.selectedNumber,
+          price = _this$state.price;
+      var constPrice = 1;
+
+      if (gameType === 'lo' || gameType === 'loxien') {
+        constPrice = 23000;
+      }
+
+      var translateGameType = 'Đánh đề';
+      var translateGameSubType = '';
+
+      switch (gameType) {
+        case 'lo':
+          translateGameType = 'Đánh lô';
+          break;
+
+        case '3cang':
+          translateGameType = '3 Càng';
+          break;
+
+        case 'loxien':
+          translateGameType = 'Lô Xiên';
+          break;
+
+        default:
+          translateGameType = 'Đánh đề';
+      }
+
+      switch (gameSubType) {
+        case 'lo2so':
+          translateGameSubType = 'Lô 2 số';
+          break;
+
+        case 'lo3so':
+          translateGameSubType = 'Lô 3 số';
+          break;
+
+        case 'loxien2':
+          translateGameSubType = 'Lô Xiên 2';
+          break;
+
+        case 'loxien3':
+          translateGameSubType = 'Lô Xiên 3';
+          break;
+
+        case 'loxien4':
+          translateGameSubType = 'Lô Xiên 4';
+          break;
+
+        default:
+          translateGameSubType = '';
+      }
+
+      var total = selectedNumber.length * price * constPrice;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "right-panel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "head-panel"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u0110\xE1nh \u0111\u1EC1")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, translateGameType)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content-panel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "cat-lode"
-      }, "\u0110\xE1nh l\xF4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, translateGameSubType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "picked-number d-flex justify-start align-center"
+      }, _.map(selectedNumber, function (v, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "picked-number-item",
+          key: i
+        }, v);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "info-amount"
-      }, "S\u1ED1 ti\u1EC1n tr\xEAn 1 con (K)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "S\u1ED1 ", gameType === 'lo' || gameType === 'loxien' ? 'điểm' : 'tiền', " tr\xEAn 1 con"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        id: "tienmotcon",
         className: "tienmotcon form-new-2 form-control",
-        placeholder: "0"
+        value: price,
+        pattern: "[0-9]*",
+        onChange: this.changePrice
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "info-amount"
-      }, "T\u1ED5ng ti\u1EC1n \u0111\xE1nh (K)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        name: "amount",
-        placeholder: "0",
-        onKeyUp: "FormatNumber(this)",
-        className: "format_currency tongtiendanh form-new-2 form-control",
-        id: "tongtiendanh"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "T\u1ED5ng ti\u1EC1n \u0111\xE1nh (\u0111)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, total))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, "S\u1ED1 ti\u1EC1n th\u1EAFng / 1 con")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "submit text-uppercase"
@@ -69579,7 +69710,15 @@ var Sidebar = /*#__PURE__*/function (_Component) {
   return Sidebar;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Sidebar);
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Sidebar));
 
 /***/ }),
 
@@ -69737,6 +69876,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_Index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/Index */ "./resources/js/app/actions/Index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69759,6 +69900,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -69767,37 +69912,121 @@ var NumberBoard = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(NumberBoard);
 
-  function NumberBoard() {
+  function NumberBoard(props) {
+    var _this;
+
     _classCallCheck(this, NumberBoard);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "pickNumber", function (value) {
+      var _this$state = _this.state,
+          limitNumber = _this$state.limitNumber,
+          selectedNumber = _this$state.selectedNumber;
+
+      var idx = lodash__WEBPACK_IMPORTED_MODULE_1___default.a.findIndex(selectedNumber, function (o) {
+        return o === value;
+      });
+
+      if (idx >= 0) {
+        lodash__WEBPACK_IMPORTED_MODULE_1___default.a.remove(selectedNumber, function (n) {
+          return n === value;
+        });
+      } else {
+        if (selectedNumber.length === limitNumber) {
+          alert('Bạn chỉ được  chọn tối đa ' + limitNumber + ' số');
+          return false;
+        }
+
+        selectedNumber.push(value);
+      }
+
+      _this.props.handlePickNumber(selectedNumber);
+    });
+
+    _this.state = {
+      limitNumber: 10,
+      selectedNumber: []
+    };
+    return _this;
   }
 
   _createClass(NumberBoard, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        limitNumber: this.props.AppReducer.limitNumber,
+        selectedNumber: this.props.AppReducer.selectedNumber
+      });
+    }
+  }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props.AppReducer.limitNumber !== nextProps.AppReducer.limitNumber) {
+        this.setState({
+          limitNumber: nextProps.AppReducer.limitNumber
+        });
+      }
+
+      if (this.props.AppReducer.selectedNumber !== nextProps.AppReducer.selectedNumber) {
+        this.setState({
+          selectedNumber: nextProps.AppReducer.selectedNumber
+        });
+      }
+
+      return true;
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var selectedNumber = this.state.selectedNumber;
       var numberItem = [];
       var i = -1;
 
       lodash__WEBPACK_IMPORTED_MODULE_1___default.a.times(100, function () {
         i++;
-        numberItem.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "number-item"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "number-item-inner"
-        }, i < 10 ? '0' + i.toString() : i.toString())));
+        numberItem.push(i);
       });
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "number-board-wrapper"
-      }, numberItem);
+      }, lodash__WEBPACK_IMPORTED_MODULE_1___default.a.map(numberItem, function (i, v) {
+        var idx = lodash__WEBPACK_IMPORTED_MODULE_1___default.a.findIndex(selectedNumber, function (o) {
+          var value = i < 10 ? '0' + i.toString() : i.toString();
+          return o === value;
+        });
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: idx >= 0 ? 'number-item active' : 'number-item',
+          key: i,
+          onClick: function onClick() {
+            return _this2.pickNumber(i < 10 ? '0' + i.toString() : i.toString());
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "number-item-inner"
+        }, i < 10 ? '0' + i.toString() : i.toString()));
+      }));
     }
   }]);
 
   return NumberBoard;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (NumberBoard);
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    handlePickNumber: function handlePickNumber(value) {
+      dispatch(_actions_Index__WEBPACK_IMPORTED_MODULE_3__["handlePickNumber"](value));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(NumberBoard));
 
 /***/ }),
 
@@ -69815,6 +70044,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_Index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/Index */ "./resources/js/app/actions/Index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69837,6 +70067,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -69846,26 +70079,93 @@ var NumberBoardLarge = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(NumberBoardLarge);
 
-  function NumberBoardLarge() {
+  function NumberBoardLarge(props) {
+    var _this;
+
     _classCallCheck(this, NumberBoardLarge);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "changeRange", function (start) {
+      _this.setState({
+        start: start
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "pickNumber", function (value) {
+      var _this$state = _this.state,
+          limitNumber = _this$state.limitNumber,
+          selectedNumber = _this$state.selectedNumber;
+
+      var idx = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.findIndex(selectedNumber, function (o) {
+        return o === value;
+      });
+
+      if (idx >= 0) {
+        lodash__WEBPACK_IMPORTED_MODULE_2___default.a.remove(selectedNumber, function (n) {
+          return n === value;
+        });
+      } else {
+        if (selectedNumber.length === limitNumber) {
+          alert('Bạn chỉ được  chọn tối đa ' + limitNumber + ' số');
+          return false;
+        }
+
+        selectedNumber.push(value);
+      }
+
+      _this.props.handlePickNumber(selectedNumber);
+    });
+
+    _this.state = {
+      rangeArray: ['000 - 099', '100 - 199', '200 - 299', '300 - 399', '400 - 499', '500 - 599', '600 - 699', '700 - 799', '800 - 899', '900 - 999'],
+      start: -1,
+      limitNumber: 10,
+      selectedNumber: []
+    };
+    return _this;
   }
 
   _createClass(NumberBoardLarge, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        limitNumber: this.props.AppReducer.limitNumber,
+        selectedNumber: this.props.AppReducer.selectedNumber
+      });
+    }
+  }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props.AppReducer.limitNumber !== nextProps.AppReducer.limitNumber) {
+        this.setState({
+          limitNumber: nextProps.AppReducer.limitNumber
+        });
+      }
+
+      if (this.props.AppReducer.selectedNumber !== nextProps.AppReducer.selectedNumber) {
+        this.setState({
+          selectedNumber: nextProps.AppReducer.selectedNumber
+        });
+      }
+
+      return true;
+    }
+  }, {
     key: "render",
     value: function render() {
-      var rangeArray = ['000 - 099', '100 - 199', '200 - 299', '300 - 399', '400 - 499', '500 - 599', '600 - 699', '700 - 799', '800 - 899', '900 - 999'];
+      var _this2 = this;
+
+      var _this$state2 = this.state,
+          rangeArray = _this$state2.rangeArray,
+          start = _this$state2.start,
+          selectedNumber = _this$state2.selectedNumber;
       var numberItem = [];
-      var i = -1;
+      var i = start;
 
       lodash__WEBPACK_IMPORTED_MODULE_2___default.a.times(100, function () {
         i++;
-        numberItem.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "number-item"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "number-item-inner"
-        }, i < 10 ? '0' + i.toString() : i.toString())));
+        numberItem.push(i);
       });
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69873,13 +70173,40 @@ var NumberBoardLarge = /*#__PURE__*/function (_Component) {
       }, lodash__WEBPACK_IMPORTED_MODULE_2___default.a.map(rangeArray, function (v, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "number-board-range-item",
-          key: i
+          key: i,
+          onClick: function onClick() {
+            return _this2.changeRange(i * 100 - 1);
+          }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "number-board-range-item-inner"
+          className: i * 100 - 1 === start ? 'number-board-range-item-inner active' : 'number-board-range-item-inner'
         }, v));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "number-board-wrapper"
-      }, numberItem));
+      }, lodash__WEBPACK_IMPORTED_MODULE_2___default.a.map(numberItem, function (i, v) {
+        var render = '';
+
+        if (i < 10) {
+          render = '00' + i.toString();
+        } else if (i >= 10 && i < 100) {
+          render = '0' + i.toString();
+        } else {
+          render = i.toString();
+        }
+
+        var idx = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.findIndex(selectedNumber, function (o) {
+          return o === render;
+        });
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: idx >= 0 ? 'number-item active' : 'number-item',
+          key: v,
+          onClick: function onClick() {
+            return _this2.pickNumber(render);
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "number-item-inner"
+        }, render));
+      })));
     }
   }]);
 
@@ -69891,7 +70218,11 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    handlePickNumber: function handlePickNumber(value) {
+      dispatch(_actions_Index__WEBPACK_IMPORTED_MODULE_3__["handlePickNumber"](value));
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(NumberBoardLarge));
@@ -70185,15 +70516,19 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!***********************************************!*\
   !*** ./resources/js/app/const/ActionTypes.js ***!
   \***********************************************/
-/*! exports provided: CHANGE_GAME_TYPE, CHANGE_GAME_SUB_TYPE */
+/*! exports provided: CHANGE_GAME_TYPE, CHANGE_GAME_SUB_TYPE, PICK_NUMBER, REMOVE_PICKED_NUMBER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_GAME_TYPE", function() { return CHANGE_GAME_TYPE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_GAME_SUB_TYPE", function() { return CHANGE_GAME_SUB_TYPE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PICK_NUMBER", function() { return PICK_NUMBER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_PICKED_NUMBER", function() { return REMOVE_PICKED_NUMBER; });
 var CHANGE_GAME_TYPE = 'CHANGE_GAME_TYPE';
 var CHANGE_GAME_SUB_TYPE = 'CHANGE_GAME_SUB_TYPE';
+var PICK_NUMBER = 'PICK_NUMBER';
+var REMOVE_PICKED_NUMBER = 'REMOVE_PICKED_NUMBER';
 
 /***/ }),
 
@@ -70218,6 +70553,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
+  selectedNumber: [],
   gameType: 'lo',
   gameSubType: 'lo2so',
   limitNumber: 10
@@ -70226,33 +70562,36 @@ var initialState = {
 var AppReducer = function AppReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  var payload = action.payload;
+  var gameType = action.payload;
+  var gameSubType = state.gameSubType;
+  var limitNumber = state.limitNumber;
 
   switch (action.type) {
     case _const_ActionTypes__WEBPACK_IMPORTED_MODULE_1__["CHANGE_GAME_TYPE"]:
-      var gameType = action.payload;
-      var gameSubType = state.gameSubType;
-      var limitNumber = state.limitNumber;
-
       if (gameType === 'lo') {
         gameSubType = 'lo2so';
         limitNumber = 10;
       } else if (gameType === 'loxien') {
         gameSubType = 'loxien2';
         limitNumber = 2;
+      } else {
+        gameSubType = '';
       }
 
       return _objectSpread(_objectSpread({}, state), {}, {
         gameType: gameType,
         gameSubType: gameSubType,
-        limitNumber: limitNumber
+        limitNumber: limitNumber,
+        selectedNumber: []
       });
 
     case _const_ActionTypes__WEBPACK_IMPORTED_MODULE_1__["CHANGE_GAME_SUB_TYPE"]:
-      if (action.payload == 'loxien2') {
+      if (payload === 'loxien2') {
         limitNumber = 2;
-      } else if (action.payload == 'loxien3') {
+      } else if (payload === 'loxien3') {
         limitNumber = 3;
-      } else if (action.payload == 'loxien4') {
+      } else if (payload === 'loxien4') {
         limitNumber = 4;
       } else {
         limitNumber = 10;
@@ -70260,7 +70599,13 @@ var AppReducer = function AppReducer() {
 
       return _objectSpread(_objectSpread({}, state), {}, {
         gameSubType: action.payload,
-        limitNumber: limitNumber
+        limitNumber: limitNumber,
+        selectedNumber: []
+      });
+
+    case _const_ActionTypes__WEBPACK_IMPORTED_MODULE_1__["PICK_NUMBER"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        selectedNumber: action.payload
       });
 
     default:

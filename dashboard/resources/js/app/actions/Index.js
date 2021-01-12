@@ -9,3 +9,8 @@ export const handleChangeGameSubType = (value) => ({
     type: types.CHANGE_GAME_SUB_TYPE,
     payload: value
 })
+
+export const handlePickNumber = (value) => ({
+    type: types.PICK_NUMBER,
+    payload: value
+})

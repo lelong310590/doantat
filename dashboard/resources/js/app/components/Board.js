@@ -44,15 +44,21 @@ class Board extends Component {
 
         let {gameType, gameSubType} = this.state
 
+        let board = null
+
+        if (gameType === 'lo' & gameSubType === 'lo3so') {
+            board = <NumberBoardLarge/>
+        } else if (gameType === '3cang') {
+            board = <NumberBoardLarge/>
+        }else {
+            board = <NumberBoard/>
+        }
+
         return (
             <div className="main-board">
                 <Tabs/>
                 <SubTabs/>
-                {(gameType === 'lo' & gameSubType === 'lo3so') ? (
-                    <NumberBoardLarge/>
-                ) : (
-                    <NumberBoard/>
-                )}
+                {board}
                 <Description/>
             </div>
         );
