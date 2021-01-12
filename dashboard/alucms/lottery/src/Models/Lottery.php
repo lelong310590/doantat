@@ -16,7 +16,7 @@ class Lottery extends Model
 {
     protected $table = 'lottery_results';
 
-    protected $fillable = ['result_value', 'result_date' ,'created_at', 'deleted_at'];
+    protected $guarded = [];
 
     protected static function boot()
     {

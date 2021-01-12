@@ -23,7 +23,84 @@
             </div>
 
             <div class="home-lottery-result text-center color-fff fw-700 fz-20 @auth mb-25 @endauth">
-                Kết quả kỳ quay {{$latestResult->result_date}} : <span class="fz-25">{{$latestResult->result_value}}</span>
+                Kết quả kỳ quay {{$latestResult->result_date}} :
+                <div class="home-lottery-table-result">
+                    <table class="table fz-14">
+                        <tbody>
+                            <tr>
+                                <td>Đặt biệt</td>
+                                <td class="table-result"><div class="fz-25">{{$latestResult->result_value}}</div></td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhất</td>
+                                <td class="table-result"><div class="fz-25">{{$latestResult->rs_1_0}}</div></td>
+                            </tr>
+                            <tr>
+                                <td>Giải nhì</td>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_2_0}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_2_1}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Giải ba</td>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_3_0}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_3_1}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_3_2}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_3_0}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_3_1}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_3_2}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Giải tư</td>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_4_0}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_4_1}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_4_2}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_4_3}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Giải năm</td>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_5_0}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_5_1}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_5_2}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_5_3}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_5_4}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_5_5}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Giải sáu</td>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_6_0}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_6_1}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_6_2}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Giải bảy</td>
+                                <td class="table-result">
+                                    <div class="fz-25">{{$latestResult->rs_7_0}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_7_1}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_7_2}}</div>
+                                    <div class="fz-25">{{$latestResult->rs_7_3}}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             @auth
