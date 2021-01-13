@@ -9,6 +9,7 @@
 
 namespace AluCMS\Core\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use AluCMS\Core\Supports\Helper;
 use AluCMS\Core\View\Components\Button;
 use AluCMS\Core\View\Components\Editor;
@@ -23,6 +24,7 @@ class ModuleProvider extends ServiceProvider
 {
     public function boot()
     {
+        Schema::defaultStringLength(191);
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'dashboard');
         $this->loadViewComponentsAs('alucms-component', [
             Input::class,

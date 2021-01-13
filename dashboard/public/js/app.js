@@ -69620,8 +69620,26 @@ var Sidebar = /*#__PURE__*/function (_Component) {
           price = _this$state.price;
       var constPrice = 1;
 
-      if (gameType === 'lo' || gameType === 'loxien') {
+      if (gameType === 'lo') {
         constPrice = 23000;
+      }
+
+      var constPrize = 0;
+
+      if (gameType === 'lo' && gameSubType === 'lo2so') {
+        constPrize = 81000;
+      } else if (gameType === 'lo' && gameSubType === 'lo3so') {
+        constPrize = 900000;
+      } else if (gameType === 'de') {
+        constPrize = 95;
+      } else if (gameType === '3cang') {
+        constPrize = 900;
+      } else if (gameType === 'loxien' && gameSubType === 'loxien2') {
+        constPrize = 17;
+      } else if (gameType === 'loxien' && gameSubType === 'loxien3') {
+        constPrize = 65;
+      } else if (gameType === 'loxien' && gameSubType === 'loxien4') {
+        constPrize = 250;
       }
 
       var translateGameType = 'Đánh đề';
@@ -69670,6 +69688,7 @@ var Sidebar = /*#__PURE__*/function (_Component) {
       }
 
       var total = selectedNumber.length * price * constPrice;
+      var prize = selectedNumber.length === 0 ? 0 : constPrize * price;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "right-panel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69701,7 +69720,7 @@ var Sidebar = /*#__PURE__*/function (_Component) {
         className: "info-amount"
       }, "T\u1ED5ng ti\u1EC1n \u0111\xE1nh (\u0111)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, total))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, "S\u1ED1 ti\u1EC1n th\u1EAFng / 1 con")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "S\u1ED1 ti\u1EC1n th\u1EAFng / 1 con", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, prize)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "submit text-uppercase"
       }, "\u0110\u1EB7t c\u01B0\u1EE3c"));
     }

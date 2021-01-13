@@ -58,8 +58,25 @@ class Sidebar extends Component {
         let {gameType, gameSubType, selectedNumber, price} = this.state
 
         let constPrice = 1;
-        if (gameType === 'lo' || gameType === 'loxien') {
+        if (gameType === 'lo') {
             constPrice = 23000
+        }
+
+        let constPrize = 0;
+        if (gameType === 'lo' && gameSubType === 'lo2so') {
+            constPrize = 81000
+        } else if (gameType === 'lo' && gameSubType === 'lo3so') {
+            constPrize = 900000
+        } else if (gameType === 'de') {
+            constPrize = 95
+        } else if (gameType === '3cang') {
+            constPrize = 900
+        } else if (gameType === 'loxien' && gameSubType === 'loxien2') {
+            constPrize = 17
+        } else if (gameType === 'loxien' && gameSubType === 'loxien3') {
+            constPrize = 65
+        } else if (gameType === 'loxien' && gameSubType === 'loxien4') {
+            constPrize = 250
         }
 
         let translateGameType = 'Đánh đề'
@@ -100,6 +117,7 @@ class Sidebar extends Component {
         }
 
         let total = selectedNumber.length * price * constPrice
+        let prize = selectedNumber.length === 0 ? 0 : constPrize*price
 
         return (
             <div className="right-panel">
@@ -134,6 +152,7 @@ class Sidebar extends Component {
                         </div>
                         <div className="form-group">
                             Số tiền thắng / 1 con
+                            <p><b>{prize}</b></p>
                         </div>
                     </div>
                     <button className="submit text-uppercase">
