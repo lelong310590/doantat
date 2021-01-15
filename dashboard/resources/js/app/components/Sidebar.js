@@ -9,7 +9,8 @@ class Sidebar extends Component {
             gameType: 'lo',
             gameSubType: 'lo2so',
             selectedNumber: [],
-            price: 0
+            price: 0,
+            alert: []
         }
     }
 
@@ -53,9 +54,27 @@ class Sidebar extends Component {
         })
     }
 
+    onSubmit = () => {
+        let {price, selectedNumber, alert} = this.state
+        if (selectedNumber.length === 0) {
+            alert.push('Số đánh chưa được khai báo.')
+            this.setState({alert})
+            return false
+        }
+
+        if (price === 0) {
+            alert.push('Số tiền chưa được khai báo.')
+            this.setState({alert})
+            return false
+        }
+
+        alert = []
+        this.setState({alert})
+    }
+
     render() {
 
-        let {gameType, gameSubType, selectedNumber, price} = this.state
+        let {gameType, gameSubType, selectedNumber, price, alert} = this.state
 
         let constPrice = 1;
         if (gameType === 'lo') {
@@ -122,43 +141,57 @@ class Sidebar extends Component {
         return (
             <div className="right-panel">
                     <div className="head-panel">
-                        <p>{translateGameType}</p>
-                    </div>
-                    <div className="content-panel">
-                        <p className="cat-lode">{translateGameSubType}</p>
-
-                        <div className="picked-number d-flex justify-start align-center">
-                            {_.map(selectedNumber, (v, i) => (
-                                <div className="picked-number-item" key={i}>
-                                    {v}
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="form-group">
-                            <div className="info-amount">Số {gameType ===  'lo' || gameType === 'loxien' ? 'điểm' : 'tiền'} trên 1 con</div>
-                            <input type="text"
-                                   className="tienmotcon form-new-2 form-control"
-                                   value={price}
-                                   pattern="[0-9]*"
-                                   onChange={this.changePrice}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <div className="info-amount">Tổng tiền đánh (đ)</div>
-                            <p>
-                                <b>{total}</b>
-                            </p>
-                        </div>
-                        <div className="form-group">
-                            Số tiền thắng / 1 con
-                            <p><b>{prize}</b></p>
-                        </div>
-                    </div>
-                    <button className="submit text-uppercase">
-                        Đặt cược
-                    </button>
+                    <p>{translateGameType}</p>
                 </div>
+                <div className="content-panel">
+                    <p className="cat-lode">{translateGameSubType}</p>
+
+                    <div className="picked-number d-flex justify-start align-center">
+                        {_.map(selectedNumber, (v, i) => (
+                            <div className="picked-number-item" key={i}>
+                                {v}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="form-group">
+                        <div className="info-amount">Số {gameType ===  'lo' || gameType === 'loxien' ? 'điểm' : 'tiền'} trên 1 con</div>
+                        <input type="text"
+                               className="tienmotcon form-new-2 form-control"
+                               value={price}
+                               pattern="[0-9]*"
+                               onChange={this.changePrice}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <div className="info-amount">Tổng tiền đánh (đ)</div>
+                        <p>
+                            <b>{total}</b>
+                        </p>
+                    </div>
+                    <div className="form-group">
+                        Số tiền thắng / 1 con
+                        <p><b>{prize}</b></p>
+                    </div>
+                </div>
+
+                {!_.isEmpty(alert) && (
+                    <div className="alert alert-danger">
+                        <ul>
+                            {_.map(alert, (v, i) => (
+                                <li key={i}>{v}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                <button
+                    className="submit text-uppercase"
+                    onClick={() => this.onSubmit()}
+                >
+                    Đặt cược
+                </button>
+            </div>
         );
     }
 }

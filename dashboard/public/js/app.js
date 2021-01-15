@@ -69569,11 +69569,45 @@ var Sidebar = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "onSubmit", function () {
+      var _this$state = _this.state,
+          price = _this$state.price,
+          selectedNumber = _this$state.selectedNumber,
+          alert = _this$state.alert;
+
+      if (selectedNumber.length === 0) {
+        alert.push('Số đánh chưa được khai báo.');
+
+        _this.setState({
+          alert: alert
+        });
+
+        return false;
+      }
+
+      if (price === 0) {
+        alert.push('Số tiền chưa được khai báo.');
+
+        _this.setState({
+          alert: alert
+        });
+
+        return false;
+      }
+
+      alert = [];
+
+      _this.setState({
+        alert: alert
+      });
+    });
+
     _this.state = {
       gameType: 'lo',
       gameSubType: 'lo2so',
       selectedNumber: [],
-      price: 0
+      price: 0,
+      alert: []
     };
     return _this;
   }
@@ -69613,11 +69647,14 @@ var Sidebar = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$state = this.state,
-          gameType = _this$state.gameType,
-          gameSubType = _this$state.gameSubType,
-          selectedNumber = _this$state.selectedNumber,
-          price = _this$state.price;
+      var _this2 = this;
+
+      var _this$state2 = this.state,
+          gameType = _this$state2.gameType,
+          gameSubType = _this$state2.gameSubType,
+          selectedNumber = _this$state2.selectedNumber,
+          price = _this$state2.price,
+          alert = _this$state2.alert;
       var constPrice = 1;
 
       if (gameType === 'lo') {
@@ -69720,8 +69757,17 @@ var Sidebar = /*#__PURE__*/function (_Component) {
         className: "info-amount"
       }, "T\u1ED5ng ti\u1EC1n \u0111\xE1nh (\u0111)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, total))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, "S\u1ED1 ti\u1EC1n th\u1EAFng / 1 con", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, prize)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "submit text-uppercase"
+      }, "S\u1ED1 ti\u1EC1n th\u1EAFng / 1 con", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, prize)))), !_.isEmpty(alert) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "alert alert-danger"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, _.map(alert, function (v, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: i
+        }, v);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "submit text-uppercase",
+        onClick: function onClick() {
+          return _this2.onSubmit();
+        }
       }, "\u0110\u1EB7t c\u01B0\u1EE3c"));
     }
   }]);

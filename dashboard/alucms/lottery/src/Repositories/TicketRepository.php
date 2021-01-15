@@ -53,9 +53,9 @@ class TicketRepository extends BaseRepository
         return count($ticket->ticketDetail);
     }
 
-    public function boughtTicket($ticketValue)
+    public function boughtTicket($ticketValue, $gameType = 'ga3so')
     {
-        DB::transaction(function () use ($ticketValue) {
+        DB::transaction(function () use ($ticketValue, $gameType) {
             $basePrice = config('core.price_per_ticket');
 
             $walletId = Wallet::where('user_id', Auth::id())->first();
@@ -68,7 +68,8 @@ class TicketRepository extends BaseRepository
             if ($ticket == null) {
                 $ticket = $this->create([
                     'user_id' => Auth::id(),
-                    'username' => Auth::user()->username
+                    'username' => Auth::user()->username,
+                    'game_type' => $gameType
                 ]);
             }
 

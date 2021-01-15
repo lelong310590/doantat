@@ -18,7 +18,7 @@ class Ticket extends Model
     protected $table = 'lottery_tickets';
 
     protected $fillable = [
-        'user_id', 'username', 'date', 'created_at', 'deleted_at'
+        'user_id', 'username', 'date', 'game_type', 'created_at', 'deleted_at'
     ];
 
     protected static function boot()

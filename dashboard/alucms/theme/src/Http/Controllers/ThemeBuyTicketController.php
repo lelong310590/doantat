@@ -42,9 +42,10 @@ class ThemeBuyTicketController extends BaseController
     public function postIndex(BuyTicketRequest $request, TicketRepository $ticketRepository)
     {
         $ticketValue = $request->get('tickets');
+        $gameType = $request->get('game_type');
 
         try {
-            $bought = $ticketRepository->boughtTicket($ticketValue);
+            $bought = $ticketRepository->boughtTicket($ticketValue, $gameType);
             return redirect()->route('theme::home.get')->with([
                 'message' => $bought
             ]);

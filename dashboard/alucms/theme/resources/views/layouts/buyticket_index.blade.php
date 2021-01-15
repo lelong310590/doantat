@@ -51,6 +51,7 @@
                                     <form action="{{route('theme.buyticket.post')}}" method="post" class="ticket-wrapper d-flex justify-center align-center" id="form-buy-ticket">
                                         {{csrf_field()}}
                                         <input type="hidden" name="limitTicket" value="{{$limitTicket}}">
+                                        <input type="hidden" name="game_type" value="ga3so">
                                         @for($i = 1; $i <= $limitTicket; $i++)
                                             <div class="ticket-item w-130 h-200 d-flex justify-center align-center pa-5 ml-5 mr-5" data-ticket-number="ticket-{{$i}}">
                                                 <input type="hidden" id="ticket-{{$i}}" class="tickets-value" value="000" name="tickets[]" disabled>
