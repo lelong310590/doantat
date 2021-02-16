@@ -7,11 +7,11 @@ class Main extends Component {
         return (
             <div className="app-wrapper">
                 <div className="row">
-                    <div className="col-xs-3">
-                        <Sidebar/>
-                    </div>
-                    <div className="col-xs-9">
+                    <div className="col-xs-12 col-md-9 col-md-push-3">
                         <Board/>
+                    </div>
+                    <div className="col-xs-12 col-md-3 col-md-pull-9">
+                        <Sidebar/>
                     </div>
                 </div>
             </div>

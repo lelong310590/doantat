@@ -139,7 +139,7 @@ class Sidebar extends Component {
         let prize = selectedNumber.length === 0 ? 0 : constPrize*price
 
         return (
-            <div className="right-panel">
+            <div className="right-panel m-mt-20">
                     <div className="head-panel">
                     <p>{translateGameType}</p>
                 </div>

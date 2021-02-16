@@ -41,7 +41,7 @@
             <div class="footer-bottom-inner color-fff">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <div class="footer-text d-flex justify-center align-center h-100">
+                        <div class="footer-text d-flex justify-center align-center h-100 m-mt-20">
                             <img src="{{asset('themes/doantat/lib/images/logo-pagcor.png')}}" alt="" class="img-responsive">
                             <p>
                                 Trang mạng cá cược <a href="/" class="color-f49e1d txt-uper">Doantat</a> hoạt động hợp pháp tại Philippines
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-6">
-                        <div class="footer-text d-flex justify-center align-center h-100">
+                        <div class="footer-text m-mt-70 d-flex justify-center align-center h-100">
                             <img src="{{asset('themes/doantat/lib/images/18+.png')}}" alt="" class="img-responsive mr-20">
                             <p class="lh-20 text-justify">
                                 Chúng tôi tích cực đẩy mạnh cá cược có trách
@@ -67,3 +67,11 @@
 
 </footer>
 
+@if (Agent::isMobile())
+    @auth
+        <div class="fixed-footer">
+            <a href="tel:0979498888" class="fixed-hotline"><i class="fas fa-phone"></i> 0979.49.8888</a>
+            <a href="" class="fixed-live-chat"><i class="far fa-comment-dots"></i> Livechat</a>
+        </div>
+    @endauth
+@endif

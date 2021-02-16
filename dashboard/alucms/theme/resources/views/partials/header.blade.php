@@ -25,7 +25,7 @@
                         @endphp
 
                         @if ($wallet)
-                            <span class="mr-15 fz-20 lh-20 color-fff fw-700">{{number_format($wallet->amount)}}</span><img src="{{asset('themes/doantat/lib/images/coin.png')}}" alt="" class="img-responsive w-25">
+                            <span class="mr-15 fz-20 lh-20 color-fff fw-700 m-fz-13 m-mr-5">{{number_format($wallet->amount)}}</span><img src="{{asset('themes/doantat/lib/images/coin.png')}}" alt="" class="img-responsive w-25">
                         @else
                             <a href="javascript:;" class="site-button mr-5">
                                 <div class="button-red button-inner d-flex justify-center align-center">
@@ -36,7 +36,7 @@
                         @endif
                     </div>
 
-                    <a href="{{route('theme.user.get')}}" class="site-button mr-15">
+                    <a href="{{route('theme.user.get')}}" class="site-button mr-15 hidden-xs hidden-sm">
                         <div class="button-blue button-inner d-flex justify-center align-center">
                             @if (auth()->user()->thumbnail != '')
                                 <img src="{{auth()->user()->thumbnail}}" alt="" class="img-responsive w-35">
@@ -95,7 +95,7 @@
             </div>
 
             <div class="popup-content-inner">
-                <img src="{{asset('themes/doantat/lib/images/logo.png')}}" alt="" class="img-responsive center-block w-200 mb-20">
+                <img src="{{asset('themes/doantat/lib/images/logo.png')}}" alt="" class="img-responsive center-block w-200 mb-20 m-w-100">
                 <form action="{{route('theme::login.post')}}" method="post" role="form">
                     {{csrf_field()}}
                     <div class="form-group">
@@ -121,7 +121,7 @@
             </div>
 
             <div class="popup-content-inner">
-                <img src="{{asset('themes/doantat/lib/images/logo.png')}}" alt="" class="img-responsive center-block w-200 mb-20">
+                <img src="{{asset('themes/doantat/lib/images/logo.png')}}" alt="" class="img-responsive center-block w-200 mb-20 m-w-100">
                 <form action="{{route('theme::register.post')}}" method="post" role="form">
                     {{csrf_field()}}
                     <div class="form-group">

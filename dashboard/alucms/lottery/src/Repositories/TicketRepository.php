@@ -93,4 +93,8 @@ class TicketRepository extends BaseRepository
 
         return 'Bạn đã mua vé thành công, chúc bạn may mắn ! Cập nhật kết quả sau 18h30 ';
     }
+
+    public function boughtLode($ticketValue, $gametype) {
+
+    }
 }

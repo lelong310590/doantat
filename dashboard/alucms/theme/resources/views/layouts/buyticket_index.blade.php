@@ -39,7 +39,7 @@
 
                             <div class="main-banner po-relative mt-30">
                                 <img src="{{asset('themes/doantat/lib/images/banner.png')}}" alt="" class="img-responsive center-block">
-                                <div id="main-award" class="main-award d-flex justify-center align-center color-fff fw-900 fz-35 po-absolute po-b-60 po-l-0 w-100p lh-35">
+                                <div id="main-award" class="main-award d-flex justify-center align-center color-fff fw-900 fz-35 po-absolute po-b-60 po-l-0 w-100p lh-35 m-fz-21 m-po-b-21">
                                     {{number_format($currentAward + $valueFromStartToNow)}}
                                 </div>
                             </div>
