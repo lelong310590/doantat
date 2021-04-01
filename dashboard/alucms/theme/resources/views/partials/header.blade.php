@@ -11,10 +11,10 @@
         <div class="main-navigation d-flex justify-space align-center pt-10 pb-10">
             <div class="logo d-flex justify-start align-center">
                 <a href="{{route('theme::home.get')}}">
-                    <img src="{{asset('themes/doantat/lib/images/logo-blank.png')}}" alt="" class="img-responsive w-222 site-logo">
+                    <img src="{{asset('themes/doantat/lib/images/logo-blank.png')}}" alt="" class="img-responsive w-180 site-logo">
                 </a>
 
-                <div id="timer" class="timer color-fff font-vt fz-25 ml-15"></div>
+                <div id="timer" class="timer font-vt fz-20 ml-15"></div>
             </div>
 
             @if (auth()->check())
@@ -25,7 +25,7 @@
                         @endphp
 
                         @if ($wallet)
-                            <span class="mr-15 fz-20 lh-20 color-fff fw-700 m-fz-13 m-mr-5">{{number_format($wallet->amount)}}</span><img src="{{asset('themes/doantat/lib/images/coin.png')}}" alt="" class="img-responsive w-25">
+                            <span class="mr-15 fz-16 lh-16 fw-700 m-fz-13 m-mr-5">{{number_format($wallet->amount)}}</span><img src="{{asset('themes/doantat/lib/images/coin.png')}}" alt="" class="img-responsive w-25">
                         @else
                             <a href="javascript:;" class="site-button mr-5">
                                 <div class="button-red button-inner d-flex justify-center align-center">

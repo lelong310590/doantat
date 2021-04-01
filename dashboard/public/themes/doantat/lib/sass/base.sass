@@ -3,6 +3,8 @@ body
     font-size: 14px
     font-weight: 400
     line-height: 23px
+    background-color: #fff
+.main-banner
     background-image: url('../images/background.jpg')
     background-size: cover
 .font-vt
@@ -27,7 +29,7 @@ form
     padding: 5px
     background: rgb(255,229,126)
     background: linear-gradient(180deg, rgba(255,229,126,1) 0%, rgba(252,234,165,1) 42%, rgba(234,184,126,1) 100%)
-    min-width: 190px
+    min-width: 140px
     text-align: center
     &:hover
         color: #fff
@@ -199,14 +201,18 @@ form
         background: rgb(1,43,74)
         box-shadow: none
         border: none
+.footer-partner
+    background-color: $primary
+    padding: 15px
 .footer-partner, .footer-bank
     flex-wrap: wrap
     justify-content: space-evenly
     img
         object-fit: contain
+        margin: 10px 0
 
 .footer-bottom
-    background: rgba(0,0,0,.6)
+    background: #222
 
 .table-button
     background: rgb(1,43,74)

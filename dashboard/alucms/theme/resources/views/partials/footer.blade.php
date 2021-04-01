@@ -7,19 +7,17 @@
  */
 ?>
 
-<footer id="footer" class="footer mt-40 pt-30">
-    <div class="container">
-        <div class="footer-partner d-flex align-center">
-            <img src="{{asset('themes/doantat/lib/images/partner01.svg')}}" alt="" class="img-responsive w-150">
-            <img src="{{asset('themes/doantat/lib/images/partner02.svg')}}" alt="" class="img-responsive w-150">
-            <img src="{{asset('themes/doantat/lib/images/partner03.svg')}}" alt="" class="img-responsive w-150">
-            <img src="{{asset('themes/doantat/lib/images/partner04.svg')}}" alt="" class="img-responsive w-150">
-            <img src="{{asset('themes/doantat/lib/images/partner05.svg')}}" alt="" class="img-responsive w-150">
-            <img src="{{asset('themes/doantat/lib/images/partner06.svg')}}" alt="" class="img-responsive w-150">
-        </div>
+<footer id="footer" class="footer">
+    <div class="footer-partner d-flex align-center">
+        <img src="{{asset('themes/doantat/lib/images/partner01.svg')}}" alt="" class="img-responsive w-150">
+        <img src="{{asset('themes/doantat/lib/images/partner02.svg')}}" alt="" class="img-responsive w-150">
+        <img src="{{asset('themes/doantat/lib/images/partner03.svg')}}" alt="" class="img-responsive w-150">
+        <img src="{{asset('themes/doantat/lib/images/partner04.svg')}}" alt="" class="img-responsive w-150">
+        <img src="{{asset('themes/doantat/lib/images/partner05.svg')}}" alt="" class="img-responsive w-150">
+        <img src="{{asset('themes/doantat/lib/images/partner06.svg')}}" alt="" class="img-responsive w-150">
     </div>
 
-    <div class="footer-bottom mt-30 pt-50 pb-30">
+    <div class="footer-bottom pt-50 pb-30">
         <div class="container">
             <div class="footer-menu d-flex justify-center">
                 <a href="">Điều khoản & Quy định</a>
@@ -64,14 +62,11 @@
             </div>
         </div>
     </div>
-
 </footer>
 
-@if (Agent::isMobile())
-    @auth
-        <div class="fixed-footer">
-            <a href="tel:0979498888" class="fixed-hotline"><i class="fas fa-phone"></i> 0979.49.8888</a>
-            <a href="" class="fixed-live-chat"><i class="far fa-comment-dots"></i> Livechat</a>
-        </div>
-    @endauth
-@endif
+@auth
+    <div class="fixed-footer">
+        <a href="tel:0979498888" class="fixed-hotline"><i class="fas fa-phone"></i> 0979.49.8888</a>
+        <a href="" class="fixed-live-chat"><i class="far fa-comment-dots"></i> Livechat</a>
+    </div>
+@endauth
